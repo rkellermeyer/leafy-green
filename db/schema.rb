@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211230821) do
+ActiveRecord::Schema.define(:version => 20120212034944) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.decimal  "score"
+    t.integer  "rate_up"
+    t.integer  "rate_down"
+    t.integer  "votes"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.boolean  "visible"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -19,6 +40,9 @@ ActiveRecord::Schema.define(:version => 20120211230821) do
     t.string   "password_salt"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "zipcode"
   end
 
 end
