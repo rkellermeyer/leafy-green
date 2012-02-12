@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @post.score %>
+</p>
+
+<p>
+  <b>Rate up:</b>
+  <%= @post.rate_up %>
+</p>
+
+<p>
+  <b>Rate down:</b>
+  <%= @post.rate_down %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= @post.votes %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @post.user_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @post.category_id %>
+</p>
+
+<p>
+  <b>Visible:</b>
+  <%= @post.visible %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
