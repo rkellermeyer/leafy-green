@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  respond_to :json, :html
   # GET /posts
   # GET /posts.json
   def index
@@ -78,6 +79,40 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+    end
+  end
+
+  def rate_up
+    @post = Post.find(params[:id])
+    rate_down = @post.rate_down.to_f
+    rate_up = @post.rate_up.to_f + 1
+    votes = rate_up + rate_down
+    score = (rate_up / votes)
+    respond_to do |format|
+      if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+        #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.json { render json: @post }
+      else
+        #format.html { render action: "edit" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def rate_down
+    @post = Post.find(params[:id])
+    rate_down = @post.rate_down.to_f + 1
+    rate_up = @post.rate_up.to_f
+    votes = rate_up + rate_down
+    score = (rate_up / votes)
+    respond_to do |format|
+      if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+        #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.json { render json: @post }
+      else
+        #format.html { render action: "edit" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.categories = params[:categories]
     if @user.save
       respond_with(@user, :notice => "Signed Up!")
     else

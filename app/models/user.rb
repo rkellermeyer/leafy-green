@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :zipcode
+  attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :zipcode, :categories
   attr_accessor :password
   before_save :encrypt_password
-  
+  serialize :categories
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
@@ -60,6 +60,18 @@ class User < ActiveRecord::Base
   # number of users being followed
   def following_count
     $redis.scard(self.redis_key(:following))
+  end
+
+  # follow a category
+  def fcategory(category)
+    #c = Category.find(category)
+    #cats = $redis.sadd(self.redis_key(:categories), c.to_json)
+    #self.categories = cats.to_json
+  end
+
+  # follows categories
+  def cfollows
+    #category_ids = $redis.smembers(self.redis_key(:categories))
   end
 
   # helper method to generate redis keys

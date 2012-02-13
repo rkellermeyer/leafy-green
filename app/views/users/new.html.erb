@@ -34,5 +34,10 @@
     <%= f.label :zipcode %><br />
     <%= f.text_field :zipcode %>
   </p>
+  <ul id="category_select">
+    <% Category.all.map do |category| %>
+      <li class="category_box"><label for="checkbox"><%= category.name %></label><input type="checkbox" name="categories[]" value="<%= category.id %>" /></li>
+    <%	end  %>
+  </ul>
   <p class="button"><%= f.submit %></p>
 <% end %>
