@@ -12,4 +12,5 @@
 //
 //= require jquery-1.7/jquery-1.7.1.js
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .

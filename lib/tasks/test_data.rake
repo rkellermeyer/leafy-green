@@ -10,7 +10,7 @@ task :create_posts_for_categories => :environment do
       rate_up = postIt.sample(1).first.to_f
       votes = rate_up + rate_down
       score = (rate_up / votes)
-      post = Post.create(:title => Faker::Company.bs, :category_id => category.id, :user_id => 1, :votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+      post = Post.create(:title => Faker::Company.bs, :category_id => category.id, :user_id => 1, :votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4), :content => Faker::Lorem.paragraphs(paragraph_number = 2))
       #puts score.round(4).to_s
       puts "."
     end
