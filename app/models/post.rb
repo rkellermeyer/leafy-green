@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
-
+  attribute_accessible :title, :content, :category_id, :visible
+  validate-presence_of :title, :content, :category_id
+  serialize :content
   belongs_to :user
   
   # log high score
