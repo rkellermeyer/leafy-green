@@ -1,30 +1,13 @@
 class Post < ActiveRecord::Base
+<<<<<<< HEAD
   attribute_accessible :title, :content, :category_id, :visible
   validate-presence_of :title, :content, :category_id
+=======
+  #attr_accessible :title, :content, :category_id, :visible
+  validates_presence_of :title, :content, :category_id
+>>>>>>> ece7e9f0ae11afbc4ed625dc17ae4932c23badb8
   serialize :content
   belongs_to :user
-  
-  # log high score
-  def scored(score)
-    if score < self.score
-      $redis.zadd("highscores", score, self.id)
-    end
-  end
-
-  # table rank
-  def rank
-    $redis.zrevrank("highscores", self.id) + 1
-  end
-
-  # high score
-  def high_score
-    $redis.zscore("highscores", self.id).to_i
-  end
-
-  # load top 100 posts
-  def self.top_100
-    $redis.zrevrange("highscores", 0, 99).map{|id| Post.find(id)}
-  end
 
   #build top 20 by category
   def self.build_top_20(category)

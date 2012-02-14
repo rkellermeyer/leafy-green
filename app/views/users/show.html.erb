@@ -2,6 +2,7 @@
 <% @user.categories.each do |category| %>
   <li class="rateMyCategoriesList">
     <ul class="rateMyCategory">
+      <li>Category</li>
       <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
         <li class="rateMyCategoryItem"><%= post.title %> <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span> Like this!</li>
         <ul>

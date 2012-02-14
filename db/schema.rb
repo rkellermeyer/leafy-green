@@ -23,13 +23,13 @@ ActiveRecord::Schema.define(:version => 20120213024509) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.decimal  "score", :default => 0
-    t.integer  "rate_up", :default => 0
-    t.integer  "rate_down", :default => 0
-    t.integer  "votes", :default => 0
+    t.decimal  "score"
+    t.integer  "rate_up"
+    t.integer  "rate_down"
+    t.integer  "votes"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.boolean  "visible", :default => 1
+    t.boolean  "visible"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
