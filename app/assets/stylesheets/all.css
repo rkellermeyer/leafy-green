@@ -1,0 +1,17 @@
+#category_select {
+  height: 300px;
+  width: 500px;
+}
+
+#category_select li {
+  display: inline-block;
+  test-align: right;
+}
+
+.category_box {
+  float: left;
+  padding: 3px 5px;
+}
+
+.category_box_label {
+}

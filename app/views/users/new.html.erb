@@ -19,8 +19,25 @@
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "Confirm Password" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :zipcode %><br />
+    <%= f.text_field :zipcode %>
+  </p>
+  <ul id="category_select">
+    <% Category.all.map do |category| %>
+      <li class="category_box"><label for="checkbox"><%= category.name %></label><input type="checkbox" name="categories[]" value="<%= category.id %>" /></li>
+    <%	end  %>
+  </ul>
   <p class="button"><%= f.submit %></p>
 <% end %>
