@@ -42,7 +42,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-
+    @post.category_id = params[:category_id]
+    @post.user_id = params[:user_id]
+    logger.debug "Debug: #{params}"
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }

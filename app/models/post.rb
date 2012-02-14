@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+
+  belongs_to :user
+  
   # log high score
   def scored(score)
     if score < self.score

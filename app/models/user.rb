@@ -2,7 +2,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name, :zipcode, :categories
   attr_accessor :password
   before_save :encrypt_password
+  
   serialize :categories
+  
+  has_many :posts, :dependent => :destroy
+  accepts_nested_attributes_for :posts, :allow_destroy => true, :reject_if => :all_blank
+  
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
