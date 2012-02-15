@@ -944,7 +944,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-merging change set" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jqueryui&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -963,6 +963,7 @@
     <MESSAGE value="Built RateMy Acceptance and delivery system" />
     <MESSAGE value="Added post content view" />
     <MESSAGE value="Re-merging change set" />
+    <MESSAGE value="added jqueryui&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
