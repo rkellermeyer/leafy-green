@@ -1,11 +1,6 @@
 class Post < ActiveRecord::Base
-<<<<<<< HEAD
-  attribute_accessible :title, :content, :category_id, :visible
-  validate-presence_of :title, :content, :category_id
-=======
   #attr_accessible :title, :content, :category_id, :visible
   validates_presence_of :title, :content, :category_id
->>>>>>> ece7e9f0ae11afbc4ed625dc17ae4932c23badb8
   serialize :content
   belongs_to :user
 
