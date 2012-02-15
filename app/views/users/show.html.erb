@@ -6,6 +6,11 @@
       <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
         <li class="rateMyCategoryItem"><%= post.title %> <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span> Like this!</li>
         <ul>
+          <li>
+            <% if !post.image.nil? %>
+              <%= post.image %>
+            <% end %>
+          </li>
           <li><%= post.content %></li>
           <li><%= post.score %></li>
           <li><%=	link_to "Like!", "posts/rate_up/#{post.id}.json", 'data-source' => "posts/rate_up/#{post.id}.json", :class => "rate_up" %></li>

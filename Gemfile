@@ -24,6 +24,7 @@ gem 'jquery-rails'
 # Experimental
 # Groupon
 gem 'groupon'
+gem 'carrierwave'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', :require => 'bcrypt'
 

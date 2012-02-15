@@ -1,8 +1,9 @@
 class Post < ActiveRecord::Base
-  #attr_accessible :title, :content, :category_id, :visible
+  #attr_accessible :title, :content, :category_id, :visible, :image
   validates_presence_of :title, :content, :category_id
-  serialize :content
+  #serialize :content
   belongs_to :user
+  mount_uploader :image, ImageUploader
 
   #build top 20 by category
   def self.build_top_20(category)
