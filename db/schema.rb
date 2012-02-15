@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120213024509) do
+ActiveRecord::Schema.define(:version => 20120215041324) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -37,8 +37,14 @@ ActiveRecord::Schema.define(:version => 20120213024509) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "visible"
+<<<<<<< HEAD
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
+=======
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "image"
+>>>>>>> 53c48abe600c01d034ce1ddc158903a53b1bf2ec
   end
 
   create_table "users", :force => true do |t|
@@ -50,7 +56,12 @@ ActiveRecord::Schema.define(:version => 20120213024509) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "zipcode"
+<<<<<<< HEAD
     t.text     "categories"
+=======
+    t.text     "categories",    :limit => 255
+    t.string   "image"
+>>>>>>> 53c48abe600c01d034ce1ddc158903a53b1bf2ec
   end
 
 end

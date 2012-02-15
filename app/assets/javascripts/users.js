@@ -1,6 +1,6 @@
 $(function() {
   $(".rateMyTabs").tabs();
-  $('a.rate_up').on({
+  $('a.rate_up, a.rate_down').on({
     click: function(event) {
       event.preventDefault();
       console.log();
@@ -8,7 +8,9 @@ $(function() {
         console.log(data);
         $('span.post_' + data.id + '.score').text(parseFloat(data.score * 100).toFixed(1) + "%");
       });
-      $(this).text("You Like This!")
+      if($(this).text() == "Like"){
+      	console.log($(this));
+      }
     }
   });
 });
