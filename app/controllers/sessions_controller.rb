@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+ include Authentication
   def new
   end
   
@@ -15,6 +16,10 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    if  current_user
+     unauthenticate
+    end
+    
     redirect_to root_url, :notice => "Logged out!"
   end
 end

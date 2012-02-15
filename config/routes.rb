@@ -10,4 +10,14 @@ Ratemy::Application.routes.draw do
   match "users/posts/rate_up/:id" => "posts#rate_up"
   match "users/posts/rate_down/:id" => "posts#rate_down"
   resources :categories
+  
+  resource :facebook, :except => :create do
+  get :callback, :to => :create
+  end
+  resource :dashboard, :only => :show
+  resource :profile, :only => :show
+  resource :timeline, :only => [:show, :create]
+  
+   
+  
 end

@@ -1,17 +1,33 @@
+
+
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: ratemy_development
   pool: 5
-  timeout: 5000
+  username: root
+  password: indian
+  host: localhost
+
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: ratemy_test
   pool: 5
-  timeout: 5000
+  username: root
+  password: indian
+  host: localhost
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: ratemy_production
   pool: 5
-  timeout: 5000
+  username: root
+  password: indian
+  host: localhost
+

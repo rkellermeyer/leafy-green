@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 
+gem 'fb_graph'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'redis'
-gem 'sqlite3'
+gem 'mysql'
 gem 'faker'
+gem 'rack-oauth2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

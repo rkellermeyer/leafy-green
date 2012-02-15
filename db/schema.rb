@@ -20,30 +20,37 @@ ActiveRecord::Schema.define(:version => 20120213024509) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "facebooks", :force => true do |t|
+    t.string   "identifier",   :limit => 20
+    t.string   "access_token"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.decimal  "score"
+    t.decimal  "score",       :precision => 10, :scale => 0
     t.integer  "rate_up"
     t.integer  "rate_down"
     t.integer  "votes"
     t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "visible"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "zipcode"
-    t.text     "categories",    :limit => 255
+    t.text     "categories"
   end
 
 end

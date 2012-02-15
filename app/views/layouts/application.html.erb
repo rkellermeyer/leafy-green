@@ -1,26 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
   <title>Auth</title>
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag :application %>
+  <%= stylesheet_link_tag 'base', 'layout', 'gritter', controller_name %>
   <%= csrf_meta_tag %>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <%= javascript_include_tag 'rails', 'jquery.gritter' %>
 </head>
 <body>
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash#{name}" %>
   <% end %>
 
-<%= yield %>
-<div id="user_nav">
-<% if current_user %>
-  Logged in as <%= current_user.email %>
-  <%= link_to "Log out", log_out_path %><br />
-  <%= session %>
-<% else %>
-  <%= link_to "Sign up", sign_up_path %> or
-  <%= link_to "Log in", log_in_path %>
-<% end %>
-</div>
+   <div id="yield" style="margin-top:130px;margin-bottom:40px;">
+    <%= yield %>
+   </div>
+   
+   <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+	     <% if current_user1 %>
+	         Logged in as <%= current_user1.email %>
+	         <%= link_to "Log out", log_out_path %><br />
+	  
+	         <div id="fb-root"></div>
+	   
+		         <div class="container" style="padding-top:20px;">
+		           FaceBook Details <br/>
+		           <aside class="sidebar">
+		           <%= render :partial => 'layouts/sidebar' %>
+		           </aside>
+		         </div>
+	         <%= render 'layouts/footer' %>
+	    
+	         <script src="http://connect.facebook.net/en_US/all.js"></script>
+	         <script>
+	            FB.init({
+	            appId: "<%= Facebook.config[:client_id] %>",
+	            cookie: true,
+	            oauth: true,
+	            xfbml: true
+	            });
+	         </script>
+	         <script type="text/javascript">
+	      
+	         </script> 
+	  
+   		<% else %>
+	         <%= link_to "Sign up", sign_up_path %> or
+	         <%= link_to "Log in", log_in_path %>
+        <% end %>
+  </div>
 </body>
 </html>

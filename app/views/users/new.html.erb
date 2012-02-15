@@ -1,3 +1,7 @@
+<% if current_user1 %>
+
+  <%else%>
+
 <h1>Welcome To Green Chat</h1>
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
@@ -41,3 +45,5 @@
   </ul>
   <p class="button"><%= f.submit %></p>
 <% end %>
+
+<%end %>

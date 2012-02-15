@@ -1,0 +1,15 @@
+<div class="avatar">
+  <fb:profile-pic uid="<%= current_user.try(:identifier) %>" size="normal" facebook-logo="true"></fb:profile-pic>
+</div>
+
+<% if authenticated? %>
+  <p><%= link_to "Logout", facebook_path, :method => :delete %></p>
+<% else %>
+  <dl>
+    <dt>JavaScript</dt>
+    <dd><fb:login-button length="long" onlogin="location.href = '<%= facebook_path %>'" scope="<%= Facebook.config[:scope] %>"></fb:login-button></dd>
+    <dt>Log in with OAuth</dt>
+    <dd><%= link_to "Start", new_facebook_path %></dd>
+  </dl>
+<% end %>
+
