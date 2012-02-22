@@ -1,25 +1,30 @@
 class SessionsController < ApplicationController
- include Authentication
   def new
   end
   
-  def create
-    user = User.authenticate(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
-      redirect_to root_url, :notice => "Logged in!"
-    else
-      flash.now.alert = "Invalid email or password"
-      render "new"
-    end
+  
+  
+ 
+
+def create
+#puts env["omniauth.auth"]
+    user = User.from_omniauth(env["omniauth.auth"])
+    
+    #puts "user" + user.uid
+    session[:user_id] = user.uid
+    redirect_to root_url
   end
 
-  def destroy
+ def destroy
+ 
     session[:user_id] = nil
-    if  current_user
-     unauthenticate
-    end
-    
+    session[:current_identity] = nil
     redirect_to root_url, :notice => "Logged out!"
   end
+  
+  
+  def failure
+    redirect_to root_url, alert: "Authentication failed, please try again."
+  end
+  
 end

@@ -1,13 +1,38 @@
-<h1>Log in</h1>
+<% if current_user1 %>
+<% else %>
+  
 
-<%= form_tag sessions_path do %>
+  <p><strong>Sign in through one of these services:</strong></p>
+
+  <div class="auth_providers">
+    <a href="/auth/twitter" class="auth_provider">
+      <%= image_tag "twitter_64.png", size: "64x64", alt: "Twitter" %>
+      Twitter
+    </a>
+    <a href="/auth/facebook" class="auth_provider">
+      <%= image_tag "facebook_64.png", size: "64x64", alt: "Facebook" %>
+      Facebook
+    </a>
+    <a href="/auth/google_apps" class="auth_provider">
+      <%= image_tag "google_apps_64.png", size: "64x64", alt: "Google" %>
+      Google
+    </a>
+  </div>
+  
   <p>
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
+    <strong>Don't use these services?</strong>
+    <%= link_to "Create an account", new_identity_path %> or login below.
   </p>
-  <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </p>
-  <p class="button"><%= submit_tag "Login" %></p>
+  
+  <%= form_tag "/auth/identity/callback" do %>
+    <div class="field">
+      <%= label_tag :auth_key, "Email" %><br>
+      <%= text_field_tag :auth_key %>
+    </div>
+    <div class="field">
+      <%= label_tag :password %><br>
+      <%= password_field_tag :password %>
+    </div><br/>
+    <div class="actions"><%= submit_tag "Login" %></div><br/>
+  <% end %>
 <% end %>

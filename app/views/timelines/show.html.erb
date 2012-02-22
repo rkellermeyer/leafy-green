@@ -1,10 +1,10 @@
 <section class="timeline">
   <%= form_tag timeline_url do %>
     <%= text_area_tag :message, nil, :placeholder => 'Message here.' %>
-    <%= submit_tag 'Update', :disable_with => 'Updating...' %>
+    <%= submit_tag 'Update Facebook Status', :disable_with => 'Updating...' %>
   <% end %>
   <br/>
-  Friends Statuses<br/>
+ <b> Friends Statuses<br/></b>
   <% @posts.each do |post| %>
     <article class="clearfix">
       <div class="avatar">
@@ -16,4 +16,5 @@
       </p>
     </article>
   <% end %>
+
 </section>

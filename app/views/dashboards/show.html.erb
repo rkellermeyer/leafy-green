@@ -1,5 +1,5 @@
 <section class='dashboard'>
-  <h2>Hello  <fb:name uid='<%= current_user.identifier %>' useyou='false'></fb:name>!</h2>
+  <h2>Hello  <fb:name uid='<%= current_identity.identifier %>' useyou='false'></fb:name>!</h2>
   <article>
     <h3><%= link_to 'Profile Details', profile_path %></h3>
     <p>Facebook profile.</p>
@@ -18,7 +18,7 @@
 </nav>
 
 <script>
-$(function () {
+$(function() {
   $('#app_request').click(function () {
     FB.ui({
       method: 'apprequests',

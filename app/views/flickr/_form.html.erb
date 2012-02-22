@@ -1,0 +1,6 @@
+
+<%= form_tag(:flickrshow, :id => 'flickr_form') do %>
+<%= label_tag(:url, "Enter Your Flickr Name:") %>
+<%= text_field_tag(:url) %>
+<%= submit_tag "Enter",  :onclick => "javascript:flick()" %>
+<% end %>

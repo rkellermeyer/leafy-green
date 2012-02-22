@@ -1,0 +1,48 @@
+
+
+ <table><tr>
+
+
+   <td>
+
+    <table>
+
+
+      <% for user in @identities %>
+
+      <tr>
+
+        
+
+        <td>
+          <table width="100%">
+
+             <tr>
+               <td>Name:</td>
+               <td><%=  user.name  %></td>
+             </tr>
+
+              <tr>
+                <td>Email:</td>
+                <td class="email"><%= user.email %></td>
+              </tr>
+
+             
+
+
+
+          </table>
+        </td>
+
+      
+
+      </tr>
+
+      <% end %>
+
+
+  </table>
+  </td>
+
+
+ </tr></table>

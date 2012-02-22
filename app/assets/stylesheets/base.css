@@ -8,6 +8,7 @@ body {
   font-family: Verdana;
   color: #333;
   background: #FFFCF5 url('/assets/images/body_back.png') repeat-x left -60px;
+
 }
 h1,
 h2,
@@ -66,3 +67,11 @@ section {
   line-height: 0;
   height: 0;
 }
+.container{
+ border:1px solid black;
+ margin-top:20px;
+ padding:3px; 
+}
+ 
+  
+

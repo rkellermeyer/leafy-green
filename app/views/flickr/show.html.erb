@@ -1,0 +1,12 @@
+<div id="demo">
+<ul title="My Gallery">
+<% @photos.each do |photo| %>
+
+<li>
+<a href="http://farm<%=photo.farm%>.static.flickr.com/<%=photo.server%>/<%=photo.id%>_<%=photo.secret%>.jpg"><%= image_tag("http://farm#{photo.farm}.static.flickr.com/#{photo.server}/#{photo.id}_#{photo.secret}.jpg",:size => "72x48",:alt =>"#{photo.title}" ) %></a>
+</li>
+
+<% end %>
+
+</ul>
+</div>

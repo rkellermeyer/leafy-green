@@ -3,36 +3,293 @@
 <head>
   <title>Auth</title>
   <%= stylesheet_link_tag :application %>
+   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
   <%= javascript_include_tag :application %>
   <%= stylesheet_link_tag 'base', 'layout', 'gritter', controller_name %>
   <%= csrf_meta_tag %>
+  <%= javascript_include_tag :jqGalViewII %>
+  <%= stylesheet_link_tag :jqGalViewII %>
+ 
+	  
+
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <%= javascript_include_tag 'rails', 'jquery.gritter' %>
+  <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+ <script type="text/javascript">
+	$(function() {
+	    var apiKey = '1e327eadb60c60b16219f705db8dd5be';
+	    var userId = '76738653@N02';
+	    var tag = '<COMMA SEPERATED LIST OF TAGS>';
+	    var perPage = '25';
+	    var showOnPage = '6';
+	    
+	   /* $.getJSON('http://api.flickr.com/services/rest/?format=json&method='+
+	        'flickr.people.getPublicPhotos&api_key=' + apiKey + '&user_id=' + userId + 
+	        '&tags=' + tag + '&per_page=' + perPage + '&jsoncallback=?', 
+	    function(data){
+	        var classShown = 'class="lightbox"';
+	        var classHidden = 'class="lightbox hidden"';
+	        $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
+	        $.each(data.photos.photo, function(i, rPhoto){
+	          var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
+	            + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;            
+	            
+	            var thumbPhotoURL = basePhotoURL + '_s.jpg';
+	            var mediumPhotoURL = basePhotoURL + '.jpg';
+	            
+	            var photoStringStart = '<li><a ';
+	            var photoStringEnd = 'title="' + rPhoto.title + '" href="'+ 
+	                mediumPhotoURL +'"><img src="' + thumbPhotoURL + '" alt="' + 
+	                rPhoto.title + '"/></a></li>;'                
+	            var photoString = (i < showOnPage) ? 
+	                photoStringStart + classShown + photoStringEnd : 
+	                photoStringStart + classHidden + photoStringEnd;
+	                                        
+	            $(photoString).appendTo("#flickr_ul");
+	        });
+			$('#flickr_ul').jqGalViewII();
+	        //$("a.lightbox").lightBox();
+	    });*/
+	});
+	
+	
+	function flick()
+	{
+	 var username = document.getElementById('url').value;
+	 
+	}
+	
+		$(function() {
+			 $('#flickr_form').submit(function () {
+					console.log("test");
+					var perPage = '25';
+	   				var showOnPage = '6';
+	   				$("#flickr").empty();
+				    $.get(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+					    	var classShown = 'class="lightbox"';
+					        var classHidden = 'class="lightbox hidden"';
+					        $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
+					        $.each(data, function(i, rPhoto){
+					          var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
+					            + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;            
+					            
+					            var thumbPhotoURL = basePhotoURL + '_s.jpg';
+					            var mediumPhotoURL = basePhotoURL + '.jpg';
+					            
+					            var photoStringStart = '<li><a ';
+					            var photoStringEnd = 'title="' + rPhoto.title + '" href="'+ 
+					                mediumPhotoURL +'"><img src="' + thumbPhotoURL + '" alt="' + 
+					                rPhoto.title + '"/></a></li>;'                
+					            var photoString = (i < showOnPage) ? 
+					                photoStringStart + classShown + photoStringEnd : 
+					                photoStringStart + classHidden + photoStringEnd;
+					                                        
+					            $(photoString).appendTo("#flickr_ul");
+					        });
+							$('#flickr_ul').jqGalViewII();
+					    }, 'json');
+			    		return false;
+	  			});
+		});
+
+    </script>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+});
+
+function getDealsOnDivision(){
+	  // https://api.groupon.com/v2/deals.json?division_id=austin&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f
+  	var division = document.getElementById('division_id').value;
+  /* 	$.get('https://api.groupon.com/v2/deals.json?division_id='+division+'&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f', 
+	    function(data){
+			$('#myDeals').append('Deals Response'+data);
+	});*/
+	
+	$.getJSON('https://api.groupon.com/v2/deals.json?division_id='+division+'&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f', function(data) {         
+		    $.each(data, function(key, val) {
+		        console.log("key=" + key + " " + "val=" + val);
+		    });
+	});
+}
+
+</script>
+    
+   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: titzvdcmcaot
+  authorize: true
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>  
+
+<script type="text/javascript">
+
+function loadData() {
+IN.API.Profile("me")
+   .result(function(result) { 
+      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+      IN.parse(document.getElementById("profile"))
+   })
+}
+
+</script>
+   
+      
+	    <%= stylesheet_link_tag :jdgallery %>
+   
+            <%= javascript_include_tag :jdgallery %>
+        <%= javascript_include_tag :picasa1 %>
+	
+	     
+
+
+    <script type="text/javascript">
+
+       
+	/* $(document).ready(function(){
+           var user = 'rahulindia25';
+    var album = 'apple';
+    var maxres = 5; 
+ 
+    var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
+ 
+    if (maxres != 0) {
+        url = url + '&max-results=' + maxres;
+    }
+    loadJS(url);
+      }); */
+        
+
+	function picasaImages(){
+		   var user = document.getElementById('urlname').value;
+		   var album = document.getElementById('album').value;
+		   var maxres = 5; 
+		 
+		   var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
+		   if (maxres != 0) {
+		        url = url + '&max-results=' + maxres;
+		   }
+		   $("#myGallery").empty();
+		   loadJS(url);
+	}
+    </script> 
+  
+   
+  
 </head>
 <body>
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash#{name}" %>
   <% end %>
-
-   <div id="yield" style="margin-top:130px;margin-bottom:40px;">
+<div>
+   <div id="yield" style="margin-top:130px;margin-bottom:40px; margin-left: 400px;float:left;width:600px;">
     <%= yield %>
    </div>
    
-   <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+   <div id="leftdiv" style="float:left;width:300px;margin-top:130px;margin-left: 120px;">
+     <% if current_user1 %>
+     <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+     <%else%>
+     <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+     <%end%>
 	     <% if current_user1 %>
-	         Logged in as <%= current_user1.email %>
+	         Logged in as <%= current_identity1.name %>
 	         <%= link_to "Log out", log_out_path %><br />
+	         		<% else %>
+	         <%= link_to "Sign up", sign_up_path %> or
+	         <%= link_to "Log in", log_in_path %>
+        <% end %>
+        </div>
+	  
+   <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+	     <% if current_user1 %>
+	
 	  
 	         <div id="fb-root"></div>
 	   
-		         <div class="container" style="padding-top:20px;">
+		         <div class="container" >
 		           FaceBook Details <br/>
 		           <aside class="sidebar">
 		           <%= render :partial => 'layouts/sidebar' %>
 		           </aside>
 		         </div>
-	         <%= render 'layouts/footer' %>
+		         
+		         <div class="container" >
+		            
+		           <%= render :partial => 'twitter/form' %>
+		        
+		               <iframe allowtransparency="true" frameborder="0" scrolling="no"
+				            src="http://platform.twitter.com/widgets/tweet_button.html"
+				            style="width:130px; height:20px;">
+				       </iframe>
+				    <br/>
+				    <div id="twiter1" style="display:none;">
+				    My Tweets <br/>
+				    
+					<script>
+				
+						MyTwitterWidget = new TWTR.Widget({
+							  version: 2,
+							  type: 'profile',
+							  rpp: 4,
+							  interval: 30000,
+							  width: 250,
+							  height: 300,
+							  theme: {
+							    shell: {
+							      background: '#333333',
+							      color: '#ffffff'
+							    },
+							    tweets: {
+							      background: '#000000',
+							      color: '#ffffff',
+							      links: '#4aed05'
+							    }
+							  },
+							  features: {
+							    scrollbar: false,
+							    loop: false,
+							    live: false,
+							    behavior: 'all'
+							  }
+							}).render().setUser('twitter').start();
+						
+						
+						function twitter()
+						{
+						   var user = document.getElementById('username').value;
+						   if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
+						    alert(_("Not a valid username"));
+						    return false;
+						   }
+						    MyTwitterWidget
+						    .destroy()
+						    .setUser(user).render().start();
+							document.getElementById('twiter1').style.display="block";
+						}
+						
+						
+					</script>
+					</div>
+		         </div>
+		         
+		         <div class="container" >
+		  
+		    
+		         <%= render :partial => 'flickr/form' %>
+		         <div id="flickr" ></div> 
+		         <div class="container">
+		          <div id="profile"></div>
+         <script type="IN/Login" data-onAuth="loadData"></script>
+		         </div>
+		         
+	         
 	    
 	         <script src="http://connect.facebook.net/en_US/all.js"></script>
 	         <script>
@@ -42,15 +299,24 @@
 	            oauth: true,
 	            xfbml: true
 	            });
+	                FB.Canvas.setAutoGrow();
 	         </script>
 	         <script type="text/javascript">
 	      
 	         </script> 
-	  
-   		<% else %>
-	         <%= link_to "Sign up", sign_up_path %> or
-	         <%= link_to "Log in", log_in_path %>
+	         </div>
+	             
+         Deals: <br/>
+         Division: <input type="text" name="division" id="division_id"/> <input type="button" name="submit" value="submit" onclick="getDealsOnDivision()"/><br/>
+         <div id="myDeals"> </div>
+          <br/><br/>
+   	      <%= render :partial => 'picasa/form' %>
+		Picasa Photos:<br/>
+   	   	<div id="myGallery"> </div>
         <% end %>
+
+  </div>
+  </div>
   </div>
 </body>
 </html>

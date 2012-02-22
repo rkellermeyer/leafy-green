@@ -2,11 +2,14 @@ class TimelinesController < ApplicationController
   include Authentication
 
   def show
-    @posts = current_user.profile.home
+    puts "Session obj ==&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%% = "+session[:current_user].to_s
+    	puts "Session obj1 ==&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%% = "+session[:current_user1].to_s
+    @posts = current_identity.profile.home
+    
   end
 
   def create
-    current_user.profile.feed!(
+    current_identity.profile.feed!(
       :message => params[:message]
     )
     redirect_to timeline_url

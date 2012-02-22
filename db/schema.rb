@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215041324) do
+ActiveRecord::Schema.define(:version => 20120216164310) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(:version => 20120215041324) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "identities", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.string   "last_name"
+    t.decimal  "zipcode",         :precision => 10, :scale => 0
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -37,31 +47,17 @@ ActiveRecord::Schema.define(:version => 20120215041324) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "visible"
-<<<<<<< HEAD
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
-=======
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
     t.string   "image"
->>>>>>> 53c48abe600c01d034ce1ddc158903a53b1bf2ec
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "zipcode"
-<<<<<<< HEAD
-    t.text     "categories"
-=======
-    t.text     "categories",    :limit => 255
-    t.string   "image"
->>>>>>> 53c48abe600c01d034ce1ddc158903a53b1bf2ec
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

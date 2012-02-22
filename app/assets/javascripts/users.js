@@ -1,3 +1,4 @@
+/*
 $(function() {
   $(".rateMyTabs").tabs();
   $('a.rate_up, a.rate_down').on({
@@ -14,3 +15,4 @@ $(function() {
     }
   });
 });
+*/
