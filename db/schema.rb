@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "categories"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
     t.string   "last_name"
     t.decimal  "zipcode",         :precision => 10, :scale => 0
+    t.string   "image"
   end
 
   create_table "posts", :force => true do |t|

@@ -6,7 +6,7 @@ development:
   database: ratemy_development
   pool: 5
   username: root
-  password: indian
+  password: Dillinger420 
   host: localhost
 
 
@@ -17,7 +17,7 @@ test:
   database: ratemy_test
   pool: 5
   username: root
-  password: indian
+  password: Dillinger420
   host: localhost
 
 production:
@@ -27,6 +27,6 @@ production:
   database: ratemy_production
   pool: 5
   username: root
-  password: indian
+  password: Dillinger420
   host: localhost
 
