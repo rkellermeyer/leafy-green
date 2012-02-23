@@ -1,8 +1,6 @@
 <% if current_user1 %>
 <% else %>
-  
-
-  <p><strong>Sign in through one of these services:</strong></p>
+    <p><strong>Sign in through one of these services:</strong></p>
 
   <div class="auth_providers">
     <a href="/auth/twitter" class="auth_provider">
@@ -24,15 +22,15 @@
     <%= link_to "Create an account", new_identity_path %> or login below.
   </p>
   
-  <%= form_tag "/auth/identity/callback" do %>
-    <div class="field">
-      <%= label_tag :auth_key, "Email" %><br>
-      <%= text_field_tag :auth_key %>
-    </div>
-    <div class="field">
-      <%= label_tag :password %><br>
-      <%= password_field_tag :password %>
-    </div><br/>
-    <div class="actions"><%= submit_tag "Login" %></div><br/>
-  <% end %>
+	  <%= form_tag "/auth/identity/callback" do %>
+	    <div class="field">
+	      <%= label_tag :auth_key, "Email" %><br>
+	      <%= text_field_tag :auth_key %>
+	    </div>
+	    <div class="field">
+	      <%= label_tag :password %><br>
+	      <%= password_field_tag :password %>
+	    </div><br/>
+	    <div class="actions"><%= submit_tag "Login" %></div><br/>
+	  <% end %>
 <% end %>

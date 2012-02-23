@@ -8,13 +8,10 @@ module Authentication
   end
 
   module HelperMethods
-
     def current_identity
-    	puts "Session obj ==&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%% = "+session[:current_identity].to_s
-    	puts "Session obj1 ==&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%% = "+session[:current_identity1].to_s
-      @current_identity ||= Facebook.find(session[:current_identity])
-    rescue ActiveRecord::RecordNotFound
-      nil
+    	@current_identity ||= Facebook.find(session[:current_identity])
+        rescue ActiveRecord::RecordNotFound
+        nil
     end
 
     def authenticated?
@@ -27,7 +24,7 @@ module Authentication
 
     def require_authentication
       authenticate Facebook.find_by_id(session[:current_identity])
-    rescue Unauthorized => e
+      rescue Unauthorized => e
       redirect_to root_url and return false
     end
 
@@ -40,7 +37,5 @@ module Authentication
       current_identity.destroy
       @current_identity = session[:current_identity] = nil
     end
-
   end
-
 end

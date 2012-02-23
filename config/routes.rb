@@ -22,11 +22,11 @@ Ratemy::Application.routes.draw do
   resource :timeline, :only => [:show, :create]
   resources :flickr
   resources :twitter
-   resources :picasa
- # match "flickrshow" => "flickr#show",:as => :flickrshow
+  resources :picasa
+  # match "flickrshow" => "flickr#show",:as => :flickrshow
     match "/flickrshow", to: "flickr#flickrphotos"
     match "/picasashow", to: "picasa#show"
-  match "twittershow" => "twitter#show",:as => :twittershow
-   resources :identities
+    match "twittershow" => "twitter#show",:as => :twittershow
+  resources :identities
   
 end

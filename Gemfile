@@ -1,52 +1,35 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+	gem 'rails', '3.2.1'
+	gem 'fb_graph'
 
-gem 'fb_graph'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'redis'
-gem 'mysql'
-gem 'faker'
-gem 'rack-oauth2'
-# Gems used only for assets and not required
-# in production environments by default.
+	gem 'redis'
+	gem 'mysql'
+	gem 'faker'
+	gem 'rack-oauth2'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'flickraw'
-gem  'twitter'
+	gem 'jquery-rails'
+	gem 'flickraw'
+	gem  'twitter'
+	
+	gem 'omniauth'
+	gem 'omniauth-twitter'
+	gem 'omniauth-facebook'
+	gem 'omniauth-google-oauth2'
+	gem 'omniauth-identity'
+	gem 'execjs'
 
-gem 'omniauth'
-gem 'omniauth-twitter'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-identity'
-gem 'execjs'
+    gem 'groupon'
+    gem 'carrierwave'
+ 
+	gem 'bcrypt-ruby', :require => 'bcrypt'
+		
+	# Deploy with Capistrano
+	gem 'capistrano'
 
-# Experimental
-# Groupon
-gem 'groupon'
-gem 'carrierwave'
-# To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', :require => 'bcrypt'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

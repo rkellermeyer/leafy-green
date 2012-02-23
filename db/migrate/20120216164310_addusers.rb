@@ -5,7 +5,7 @@ class Addusers < ActiveRecord::Migration
        t.string   :uid
        t.string   :name
        
-      t.timestamps
+       t.timestamps
       end
   end
 end

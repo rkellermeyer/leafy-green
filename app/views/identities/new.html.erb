@@ -26,22 +26,18 @@ If you have account already <a href="http://localhost:3000/log_in">Login</a><br/
     <%= password_field_tag :password_confirmation %>
   </div>
   
-  
-    
-     <div class="field">
-   <%= label_tag :zipcode %><br>
+  <div class="field">
+    <%= label_tag :zipcode %><br>
     <%= text_field_tag :zipcode, @identity.try(:zipcode) %>
   </div>
   
-      <ul id="category_select">
-    <% Category.all.map do |category| %>
-      <li class="category_box"><label for="checkbox"><%= category.name %></label><input type="checkbox" name="categories[]" value="<%= category.id %>" /></li>
-    <%	end  %>
-  </ul>
+    <ul id="category_select">
+	    <% Category.all.map do |category| %>
+	      <li class="category_box"><label for="checkbox"><%= category.name %></label><input type="checkbox" name="categories[]" value="<%= category.id %>" /></li>
+	    <%	end  %>
+    </ul>
   
   <br/>
- 
-
-  <div class="actions"><%= submit_tag "Register" %></div>
+   <div class="actions"><%= submit_tag "Register" %></div>
 <% end %>
 

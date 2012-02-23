@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-attr_accessible  :categories
+  attr_accessible  :categories
   #attr_accessor :password
   #before_save :encrypt_password
   
@@ -101,21 +101,16 @@ attr_accessible  :categories
   end
   
   def self.from_omniauth(auth)
-  
-  #puts  "user new --- "+ User.find_by_provider_and_uid(auth["provider"], auth["uid"])
-    find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
+      find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
   end
 
   def self.create_with_omniauth(auth)
-    create! do |user|
-    puts "user new --- "+auth.to_s
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.id=auth["uid"]
-     
-           
-    end
+	    create! do |user|
+	      user.provider = auth["provider"]
+	      user.uid = auth["uid"]
+	      user.name = auth["info"]["name"]
+	      user.id=auth["uid"]
+	    end
   end
   
 end

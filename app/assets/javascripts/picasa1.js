@@ -1,5 +1,7 @@
 function startGallery() {
+
 document.getElementById('myGallery').style.display="block";
+
 }
 
 function renderer(data)
@@ -10,6 +12,7 @@ function renderer(data)
 	}
 	//window.addEvent('domready', startGallery);
 	//window.onDomReady(startGallery);
+
 	startGallery();
 }
 
@@ -59,6 +62,7 @@ function addDiv (item) {
 	newDiv = document.createElement("DIV");
 	newDiv.className = "imageElement";
 	newDiv.innerHTML = HTML;
+	
 	
 	$('#myGallery').append(newDiv);
 }

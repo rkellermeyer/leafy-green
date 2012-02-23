@@ -1,6 +1,6 @@
 class Identity < OmniAuth::Identity::Models::ActiveRecord
 
- #attr_accessible  :categories
+  #attr_accessible  :categories
   #attr_accessor :password
   #before_save :encrypt_password
   
@@ -85,8 +85,5 @@ class Identity < OmniAuth::Identity::Models::ActiveRecord
     "identity:#{self.id}:#{str}"
   end
  
-  
-
-  
 end
 
