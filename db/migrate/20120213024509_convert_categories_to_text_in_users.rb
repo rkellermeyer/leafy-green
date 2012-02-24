@@ -1,5 +1,5 @@
 class ConvertCategoriesToTextInUsers < ActiveRecord::Migration
   def change
-    change_column :users, :categories, :text
+    change_column :identities, :categories, :text
   end
 end

@@ -1,13 +1,14 @@
 require "authentication"
 require 'twitter'
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+ # protect_from_forgery
   helper_method :current_user1
   helper_method :flickr
- 
+
+  
   private
   def current_user1
-    @current_user1 ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user1 ||= User.find_by_uid(session[:user_id]) if session[:user_id]
   end
 
   

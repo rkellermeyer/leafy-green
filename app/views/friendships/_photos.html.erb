@@ -1,0 +1,8 @@
+<% photos.each do |photo| %>
+  
+   Name: <%= photo.photo_file_name %><br/>
+   Photo: <%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:thumb) , :size => '50x50') : image_tag("/assets/images/upload.jpg", :size => '50x50') %><br/>
+   
+   
+<hr/>
+<% end %>

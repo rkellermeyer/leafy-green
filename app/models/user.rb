@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
       $redis.sadd(user.redis_key(:followers), self.id)
     end
   end
+  
+  def is_friend? friendships
+    friend = friendships.where(:friend_id => self.id) unless friendships.nil? and friendships.empty?
+    !friend.nil? and friend.empty?  ? false : true
+  end
 
   # unfollow a user
   def unfollow!(user)
@@ -111,6 +116,17 @@ class User < ActiveRecord::Base
 	      user.name = auth["info"]["name"]
 	      user.id=auth["uid"]
 	    end
+  end
+  
+   has_many :friendships  
+  has_many :friends, :through => :friendships
+
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  
+  
+ def self.search(query)
+    where("name like ?", "%#{query}%")
   end
   
 end

@@ -3,7 +3,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: ratemy_development
+  database: newratemy_development
   pool: 5
   username: root
   password: indian
@@ -14,7 +14,7 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: ratemy_test
+  database: newratemy_test
   pool: 5
   username: root
   password: indian
@@ -24,7 +24,7 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: ratemy_production
+  database: newratemy_production
   pool: 5
   username: root
   password: indian

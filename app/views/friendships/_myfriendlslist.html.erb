@@ -1,0 +1,12 @@
+
+<% friendslist.each do |friend| %>
+    
+  Friend Name:  <%= friend.name %><br/>
+  <% if f_type == "direct"%>
+   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.friend_id, :currUserId => current_user1.id })} %>
+   <% else %>
+   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.user_id, :currUserId => current_user1.id })} %>
+   <% end %>
+
+<% end %><br/>
+

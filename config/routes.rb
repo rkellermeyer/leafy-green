@@ -23,6 +23,27 @@ Ratemy::Application.routes.draw do
   resources :flickr
   resources :twitter
   resources :picasa
+  resources :friendships
+  
+  resources :chats
+  
+  resource :users do
+    resources :friendships
+  end
+  
+  resource :friendships do
+    member do
+    #get 'add_friend'
+    end
+  end
+
+  controller :friendships do
+    match 'save_friend', :to => :save_friend, :as => :save_friend
+    match 'remove_friend', :to => :remove_friend, :as => :remove_friend
+    match 'add_friend', :to => :add_friend  , :as => :add_friend 
+    match 'friend_photos', :to => :friend_photos  , :as => :friend_photos
+    match 'friend_albums', :to => :friend_albums  , :as => :friend_albums
+  end
   # match "flickrshow" => "flickr#show",:as => :flickrshow
     match "/flickrshow", to: "flickr#flickrphotos"
     match "/picasashow", to: "picasa#show"

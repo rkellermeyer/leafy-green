@@ -1,0 +1,5 @@
+<tr>
+               <td>Image:</td>
+               <td><%= (!user.avatar.nil? and  user.avatar.file?) ? image_tag(user.avatar.url(:thumb) , :size => '50x50') : image_tag("/assets/images/user.png", :size => '50x50') %>
+               <br/><br/></td>
+              </tr>

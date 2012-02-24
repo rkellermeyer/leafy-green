@@ -10,6 +10,7 @@
   <%= javascript_include_tag :jqGalViewII %>
   <%= stylesheet_link_tag :jqGalViewII %>
   <%= javascript_include_tag :widget %>
+  <%= stylesheet_link_tag "chat.css" %>
   
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <%= javascript_include_tag 'rails', 'jquery.gritter' %>
@@ -59,7 +60,20 @@
 	 
 	}
 	
+	
+	
 		$(function() {
+		
+		 $.getJSON("/friendships", function(data){
+        friendsData = data;
+      for(var i in data) {
+    	if ( jQuery.isPlainObject(data[i])){
+    	      		$("#friends_list1").append("<li><span id="+data[i].id+"></span> Name &nbsp;&nbsp; <a  href='javascript:void(0)' onclick=javascript:chatWith('" + data[i].name + "') >"+data[i].name +"</a></li>");
+      	     }
+      	     }
+         });
+  
+  
 			 $('#flickr_form').submit(function () {
 					console.log("test");
 					var perPage = '25';
@@ -168,6 +182,12 @@
 			   loadJS(url);
 		}
    </script> 
+   <% if current_user1 %>
+<script type="text/javascript">
+  var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
+  console.log(current_user1);
+</script>
+<%end%>
 </head>
 <body>
 	  <% flash.each do |name, msg| %>
@@ -176,6 +196,7 @@
 	  <div >
 		   <div id="yield" style="margin-top:130px;margin-bottom:40px; margin-left: 40px;float:left;width:600px;">
 		     <%= yield %>
+		     
 		    <% if current_user1 %>
 		     <div class="container" style="width: 570px;"> 
 		   	       <%= render :partial => 'picasa/form' %>
@@ -416,7 +437,15 @@
 				           <%= render :partial => 'layouts/sidebar' %>
 				           </aside>
 				      </div>
-				         
+				        <div class="container" >
+				           Add Friends <br/>
+				         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
+				       </div>
+				      <div class="container" >
+				           Chat With Friends <br/>
+				         	<ul id="friends_list1"></ul>
+				       </div>
+				       
 				      <div class="container" >
 				          <%= render :partial => 'twitter/form' %>
 				          <iframe allowtransparency="true" frameborder="0" scrolling="no"

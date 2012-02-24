@@ -20,11 +20,29 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "chats", :force => true do |t|
+    t.string   "from"
+    t.string   "to"
+    t.string   "message"
+    t.datetime "sent"
+    t.integer  "recd"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "facebooks", :force => true do |t|
     t.string   "identifier",   :limit => 20
     t.string   "access_token"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "identities", :force => true do |t|
@@ -35,6 +53,16 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.datetime "updated_at",                                     :null => false
     t.string   "last_name"
     t.decimal  "zipcode",         :precision => 10, :scale => 0
+    t.string   "image"
+    t.text     "categories"
+  end
+
+  create_table "invite_friends", :force => true do |t|
+    t.integer  "channel_id"
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|

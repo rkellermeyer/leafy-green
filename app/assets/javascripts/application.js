@@ -16,3 +16,4 @@
 //= require_tree .
 
 //= require jqGalViewII.pack
+//=require chat

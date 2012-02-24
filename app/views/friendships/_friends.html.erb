@@ -1,0 +1,56 @@
+<% !@friendships.nil? and @friendships.each_with_index do |friendships, index| %>
+            <% if (index  % 2) == 0 %>
+              <tr>
+             <% end %>
+
+                <td>
+                 <table>
+                   <tr>
+                     <td>Friend Name</td>
+                   </tr>
+
+                    <tr>
+                     <td>
+                     <% if  friendships.friend != nil %> 
+                    <%= link_to   friendships.name ,friendships.friend %>
+                    
+                     
+                     <% end %>
+                     </td>
+                   </tr>
+
+                 </table>
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <% if  (index  % 2) != 0 %>
+              </tr>
+            <% end %>
+           <% end %>
+
+            <% !@inverse_friends.nil? and @inverse_friends.each_with_index do |friendships1, index| %>
+             <% if (index  % 2) == 0 %>
+               <tr>
+              <% end %>
+
+                 <td>
+                  <table>
+                    <tr>
+                     <td>Friend Name</td>
+                    </tr>
+
+                     <tr>
+                      <td>
+                         <% if  friendships1 != nil %> 
+                    <%= link_to   friendships1.name ,friendships1%>
+                     
+                      
+                     <% end %>
+                      </td>
+                    </tr>
+                  </table>
+               </td>
+               <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+             <% if  (index  % 2) != 0 %>
+               </tr>
+             <% end %>
+            <% end %>

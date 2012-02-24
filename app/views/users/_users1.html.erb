@@ -1,0 +1,74 @@
+
+
+
+<h3 >Users List </h3><br/>
+ <table><tr>
+
+
+   <td>
+
+    <table>
+
+
+      <% for user in users %>
+
+      <tr>
+
+        
+
+        <td>
+          <table width="100%">
+<% if user.name != current_user1.name %>
+             <tr>
+               <td>Name:</td>
+               <td><%= link_to  user.name,user %>
+               <br/></td>
+              </tr>
+              <%= render :partial =>"users/image" ,:locals=>{:user=>Identity.find_by_id(user.uid)}%>
+<% end %>
+
+
+
+          </table>
+        </td>
+
+        <td>
+          <table>
+             <tr>
+                <% if user.name != current_user1.name %>
+                    <td>&nbsp;</td>
+                   <% if user.is_friend? current_user1.friendships  or  current_user1.inverse_friends.include? user  %>
+                   <td> <%=  button_to  "Already added in your friends list" , "/", :method => :put %><br/>  </td>
+                   <td>   <%= link_to "Remove Friend", remove_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/> </td>
+                   <% else %>
+                     <td>
+                       <%#= button_to "Add Friend", {:controller => "friendships", :action => "add_friend", :friend_id => user}  %>
+                       <%= link_to "Add Friend", add_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/></td>
+                 <% end %>
+               <% end %>
+             </tr>
+          </table>
+        </td>
+
+
+
+      </tr>
+      
+     
+      
+
+      <% end %>
+
+
+  </table>
+  </td>
+
+ 
+
+ </tr>
+ 
+ </table>
+
+
+
+ 

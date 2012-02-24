@@ -1,0 +1,84 @@
+<br/><br/><div class="content">
+<h3 style="margin-left:300px;">Users Search </h3><br/>
+<div id="search" style="margin-left:300px;">
+   <%= form_tag users_path, :method => 'get', :id => "users_search" do %>
+      <p>
+        <%= text_field_tag :search, params[:search] ,:value => "find new friends", :size => '50x10' %>
+        <%#= submit_tag "Search", :name => nil %>
+      </p>
+    <% end %>
+</div>
+
+<br/><br/>
+
+<h3 style="margin-left:300px;">Users List </h3><br/>
+ <table id="searchuserscontent"><tr>
+
+
+   <td>
+
+    <table>
+
+
+      <% for user in @users %>
+
+      <tr>
+
+        
+
+        <td>
+          <table width="100%">
+<% if user.name != current_user1.name %>
+             <tr>
+               <td>Name:</td>
+               <td><%= link_to  user.name,user %>
+               <br/></td>
+              </tr>
+            
+<% end %>
+
+
+
+          </table>
+        </td>
+
+        <td>
+          <table>
+             <tr>
+                <% if user.name != current_user1.name %>
+                    <td>&nbsp;</td>
+                   <% if user.is_friend? current_user1.friendships  or  current_user1.inverse_friends.include? user  %>
+                   <td> <%=  button_to  "Already added in your friends list" , "/", :method => :put %><br/>  </td>
+                   <td>   <%= link_to "Remove Friend", remove_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/> </td>
+                   <% else %>
+                     <td>
+                       <%#= button_to "Add Friend", {:controller => "friendships", :action => "add_friend", :friend_id => user}  %>
+                       <%= link_to "Add Friend", add_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/></td>
+                 <% end %>
+               <% end %>
+             </tr>
+          </table>
+        </td>
+
+
+
+      </tr>
+      
+     
+      
+
+      <% end %>
+
+
+  </table>
+  </td>
+
+ 
+
+ </tr>
+ 
+ </table>
+ </div>
+
+ 
+ 

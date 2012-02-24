@@ -1,6 +1,6 @@
 class AddCategoriesToUsers < ActiveRecord::Migration
   def change
-    add_column :users, :categories, :string
+    add_column :identities, :categories, :string
 
   end
 end
