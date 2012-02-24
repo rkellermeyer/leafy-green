@@ -70,6 +70,7 @@ class ChatsController < ApplicationController
      @chat.from = User.find_by_uid(session[:user_id]).name
      @chat.to = params[:to]
      @chat.message = params[:message]
+   
     respond_to do |format|
       if @chat.save
         format.html { redirect_to @chat, notice: 'Chat was successfully created.' }
