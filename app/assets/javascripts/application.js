@@ -17,4 +17,3 @@
 
 //= require jqGalViewII.pack
 
-//=require chat

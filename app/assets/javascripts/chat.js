@@ -337,9 +337,11 @@ function startChatSession(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle,1);
+				} else {
+					$("#chatbox_"+chatboxtitle).show(); 
 				}
 				
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span></div>');
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><span class="chatboxmessagesentdate">'+item.sent+'</span></div>');
 			}
 		}
 		
