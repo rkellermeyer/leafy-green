@@ -19,6 +19,21 @@ class ChatsController < ApplicationController
     end
   end
 
+  # GET /chats
+  # GET /chats.json
+  def oldchats
+    chatuser = params[:chatuser]
+    numofdays = params[:numofdays]
+    puts "old chats chatuser**********%%%%%%%%%%%%%% = "+chatuser
+    puts "old chats numofdays %%%%%%%%%%%%%%%%%%%%%%*************= "+numofdays
+    @chats = Chat.where(" ( (`chats`.`to` = :chatuser and `chats`.`from`= :curruser ) or (`chats`.`to` = :curruser and `chats`.`from`= :chatuser ) ) and `chats`.`sent` < date_add(NOW(),INTERVAL :numofdays DAY)",{:curruser => current_user1.name, :chatuser => chatuser, :numofdays => numofdays})
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @chats }
+    end
+  end
+  
   # GET /chats/1
   # GET /chats/1.json
   def show

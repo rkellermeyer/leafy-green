@@ -62,8 +62,69 @@ function restructureChatBoxes() {
 
 function chatWith(chatuser) {
 	createChatBox(chatuser);
+	$("#chatbox_"+chatuser+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatuser+'\',7)">show one week back messages</a></div>');
 	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
 }
+
+function getOldMessages(chatuser, numOfDays){
+	 $("#oldmsgs").empty();
+	$.ajax({
+		  url: "/oldchats?chatuser="+chatuser+"&numofdays="+numOfDays,
+		  cache: false,
+		  dataType: "json",
+		  success: function(data) {
+	
+			username = current_user1.name;
+	
+			for(i=0;i<data.length;i++) {
+				var item = data[i];
+				if (item)	{ // fix strange ie bug
+	
+					chatboxtitle = chatuser;
+	
+					if ($("#chatbox_"+chatboxtitle).length <= 0) {
+						//createChatBox(chatboxtitle,1);
+					} else {
+						$("#chatbox_"+chatboxtitle).show(); 
+					}
+					
+					var dateObj = null;
+					
+					dateObj = convertToDateObject2(item.sent);
+					var dateString = getFromatedDate(dateObj);
+					$("#oldmsgs").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
+				}
+			}
+			
+		}});
+}
+
+function convertToDateObject2(dateString){
+		//dateString = '2012-02-25T02:29:08Z';
+		var reggie = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/g;
+		var dateArray2 = reggie.exec(dateString); 
+		if (dateArray2 ==null){
+			dateArray2 = reggie.exec(dateString); 
+		}
+		var dateObject = new Date(
+		    (dateArray2[1]),
+		    (dateArray2[2])-1, // Careful, month starts at 0!
+		    (dateArray2[3]),
+		    (dateArray2[4]),
+		    (dateArray2[5]),
+		    (dateArray2[6])
+		);
+		var tz = dateObject.getTimezoneOffset();
+		var newdatems = dateObject.getTime() + ( (tz*60*1000) * (-1) );
+		var newdate = new Date(newdatems);
+		return new Date(newdate);
+		
+ }
+ 
+ function getFromatedDate(dateObj){
+ 	var dateString = $.format.date(dateObj, "dd MMM hh:mm a");;
+ 	return dateString;
+ }
 
 function createChatBox(chatboxtitle,minimizeChatBox) {
 	if ($("#chatbox_"+chatboxtitle).length > 0) {
@@ -194,6 +255,7 @@ function chatHeartbeat(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle);
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage" onclick="getOldMessages(\''+chatboxtitle+'\',7)"  id="oldmsgs">show one week back messages</div>');
 				}
 				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 					$("#chatbox_"+chatboxtitle).css('display','block');
@@ -209,7 +271,10 @@ function chatHeartbeat(){
 				} else {
 					newMessages[chatboxtitle] = true;
 					newMessagesWin[chatboxtitle] = true;
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
+					var dateObj = null;
+					dateObj = new Date();
+					var dateString = getFromatedDate(dateObj);
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
 				}
 
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
@@ -295,7 +360,9 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		if (message != '') {
 			$.post("/chats", {to: chatboxtitle, message: message} , function(data){
 				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+current_user1.name+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+				var dateObj = new Date();
+				var dateString = getFromatedDate(dateObj);
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+current_user1.name+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 			});
 		}
@@ -337,20 +404,25 @@ function startChatSession(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle,1);
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatboxtitle+'\',7)">show one week back messages</a></div>');
 				} else {
 					$("#chatbox_"+chatboxtitle).show(); 
 				}
 				
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><span class="chatboxmessagesentdate">'+item.sent+'</span></div>');
+				var dateObj = null;
+				dateObj = convertToDateObject2(item.sent);
+				var dateString = getFromatedDate(dateObj);
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
 			}
 		}
 		
-		for (i=0;i<chatBoxes.length;i++) {
-			chatboxtitle = chatBoxes[i];
-			$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
-			setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
+		if (data.length > 0){
+			for (i=0;i<chatBoxes.length;i++) {
+				chatboxtitle = chatBoxes[i];
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+				setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
+			}
 		}
-	
 	//setTimeout('chatHeartbeat();',chatHeartbeatTime);
 		
 	}});

@@ -48,6 +48,9 @@ Ratemy::Application.routes.draw do
     match "/flickrshow", to: "flickr#flickrphotos"
     match "/picasashow", to: "picasa#show"
     match "twittershow" => "twitter#show",:as => :twittershow
+    
+     match "/oldchats", to: "chats#oldchats"
+     
   resources :identities
   
 end
