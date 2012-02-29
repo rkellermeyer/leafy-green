@@ -1,0 +1,32 @@
+<%= form_for(@album) do |f| %>
+  <% if @album.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
+
+      <ul>
+      <% @album.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :identity_id ,:value=>current_user1.id%>
+  
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :caption %><br />
+    <%= f.text_field :caption %>
+  </div>
+    <div class="field"> 
+    <%= f.label :visibletype %><br />
+       <%= f.select(:visibletype, Album::CONSTANT) %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

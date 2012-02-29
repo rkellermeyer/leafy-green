@@ -1,0 +1,17 @@
+
+<% if current_user1 %>
+<% if photos1.count == 0 %>
+        No Photos uploaded for this user.
+<% end %>
+<ul id="photos_list">
+<% photos1.each do |photo| %>
+<div id='dialog<%=photo.id%>' > 
+<li><%= photo.photo_file_name %>
+  
+  <%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:thumb) , :size => '50x50' , :title => 'Click to Tag It' , :alt => photo.photo_file_name ,  :onclick => "openPhoto( '#{photo.id}' , '#{photo.photo.url(:thumb)}' )") : image_tag("/assets/images/upload.jpg", :size => '50x50') %>
+  <%= photo.caption %>
+  </div>
+  </li>
+  <% end %>
+  </ul>
+    <% end %>

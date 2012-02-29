@@ -24,7 +24,9 @@ Ratemy::Application.routes.draw do
   resources :twitter
   resources :picasa
   resources :friendships
-  
+  resources :tags
+  resources :photos
+  resources :albums
   resources :chats
   
   resource :users do
@@ -50,6 +52,10 @@ Ratemy::Application.routes.draw do
     match "twittershow" => "twitter#show",:as => :twittershow
     
      match "/oldchats", to: "chats#oldchats"
+     
+     match "/tagcreate", to: "tags#tagcreate"
+     match "/getTagsOnPhoto", to: "tags#getTagsOnPhoto"
+     match "/getNamesOnId", to: "identities#getNamesOnId"
      
   resources :identities
   

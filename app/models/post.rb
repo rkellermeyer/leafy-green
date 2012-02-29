@@ -1,4 +1,11 @@
 class Post < ActiveRecord::Base
+ before_save :default_values
+  
+  def default_values
+    self.score = 0 unless self.score
+  end
+
+
   #attr_accessible :title, :content, :category_id, :visible, :image
   validates_presence_of :title, :content, :category_id
   #serialize :content

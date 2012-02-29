@@ -13,18 +13,20 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
+    gem 'aws-s3', :require => 'aws/s3'
+    gem "paperclip"
 	gem 'jquery-rails'
 	gem 'flickraw'
 	gem  'twitter'
-	
+	gem 'aws-sdk'
 	gem 'omniauth'
 	gem 'omniauth-twitter'
 	gem 'omniauth-facebook'
 	gem 'omniauth-google-oauth2'
 	gem 'omniauth-identity'
 	gem 'execjs'
-
+    
+    
     gem 'groupon'
     gem 'carrierwave'
  

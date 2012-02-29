@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Album Name:</b>
+  <%= @album.name %>
+</p>
+
+<p>
+  <b>Caption:</b>
+  <%= @album.caption %>
+</p>
+
+<%= render :partial =>"albums/photosform" ,:locals=>{:photos=>Photo.find_all_by_album_id(@album.id)}%>
+
+
+

@@ -614,7 +614,7 @@ var gallery = {
 		this.fireEvent('onHistoryInited');
 	}
 };
-gallery = new Class(gallery);
+/*gallery = new Class(gallery);
 gallery.implement(new Events);
 gallery.implement(new Options);
 
@@ -641,7 +641,7 @@ gallery.Transitions = new Abstract ({
 		oldFx.start({opacity: 0}).chain(newFx.start.pass([{opacity: 1}], newFx));
 	}
 });
-
+*/
 /* All code copyright 2007 Jonathan Schemoul */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -649,7 +649,7 @@ gallery.Transitions = new Abstract ({
  * Simple class for preloading images with support for progress reporting
  * Copyright 2007 Tomocchino.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+/*
 var Preloader = new Class({
   
   Implements: [Events, Options],
@@ -698,6 +698,7 @@ var Preloader = new Class({
 });
 
 Preloader.implement(new Events, new Options);
+*/
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Follows: formatString (function)

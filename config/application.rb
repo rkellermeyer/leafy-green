@@ -53,7 +53,7 @@ module Ratemy
 
     # Enable the asset pipeline
     config.assets.enabled = true
-
+        LD_LIBRARY_PATH="/usr/bin/identify"
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end

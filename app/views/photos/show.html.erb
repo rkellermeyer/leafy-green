@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Identity:</b>
+  <%= @photo.identity_id %>
+</p>
+
+Image:
+  <%= (!@photo.photo.nil? and  @photo.photo.file?) ? image_tag(@photo.photo.url(:thumb) , :size => '50x50') : image_tag("/assets/images/upload.jpg", :size => '50x50') %>
+  <br/>
+
+
+

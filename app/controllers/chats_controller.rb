@@ -8,11 +8,12 @@ class ChatsController < ApplicationController
   # GET /chats
   # GET /chats.json
   def index
-   
+   if current_user1 
     @chats = Chat.where("`chats`.`to` = :toUser and `chats`.`recd`= :recieved",{:toUser => current_user1.name, :recieved => 0})
 	@chats.each do| chat1 |
 		Chat.where("`chats`.`id` = :chatId",{:chatId => chat1.id}).update_all(" `chats`.`recd`= 1 ")
 	end
+	end 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @chats }
@@ -24,8 +25,7 @@ class ChatsController < ApplicationController
   def oldchats
     chatuser = params[:chatuser]
     numofdays = params[:numofdays]
-    puts "old chats chatuser**********%%%%%%%%%%%%%% = "+chatuser
-    puts "old chats numofdays %%%%%%%%%%%%%%%%%%%%%%*************= "+numofdays
+    
     @chats = Chat.where(" ( (`chats`.`to` = :chatuser and `chats`.`from`= :curruser ) or (`chats`.`to` = :curruser and `chats`.`from`= :chatuser ) ) and `chats`.`sent` < date_add(NOW(),INTERVAL :numofdays DAY)",{:curruser => current_user1.name, :chatuser => chatuser, :numofdays => numofdays})
 
     respond_to do |format|
@@ -37,7 +37,7 @@ class ChatsController < ApplicationController
   # GET /chats/1
   # GET /chats/1.json
   def show
-  	puts "*******************%%%%%%%%%%%%%%%% id =="+params[:id]
+  	
     @chat = Chat.find_by_id(params[:id])
 
     respond_to do |format|

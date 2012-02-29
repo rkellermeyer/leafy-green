@@ -38,6 +38,16 @@ class IdentitiesController < ApplicationController
 	    end    
   end
     
+    def getNamesOnId
+ 
+   @identities = Identity.find_all_by_id(params[:id])
+    
+    respond_to do |format|
+
+      format.json { render json: @identities }
+    end
+  end
+  
   def show
     @identity = Identity.find(params[:id])
     respond_to do |format|

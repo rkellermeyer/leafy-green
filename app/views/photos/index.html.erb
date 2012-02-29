@@ -1,0 +1,31 @@
+<h2>Upload Photos</h2>
+
+<% if current_user1 %>
+<%= render :partial =>"form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
+
+<br/><br/>
+<h2>User Photos</h2><br/>
+
+<% if @photos1.count == 0 %>
+        No Photos uploaded for this user.
+<% end %>
+
+<% @photos1.each do |photo| %>
+  
+   Name: <%= photo.photo_file_name %><br/>
+   Photo: <%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:thumb) , :size => '50x50') : image_tag("/assets/images/upload.jpg", :size => '50x50') %><br/>
+   PublishDate (yyyy-mm-dd):<%=photo.publishdate.to_s %><br/>
+   Publish:<% if photo.visible == 1%> True <% else %> False <% end %>
+   <%if !photo.caption.nil? %> Caption :<%= photo.caption %><% end %><br/>
+    <%= link_to 'Edit', edit_photo_path(photo) %> 
+  <%= link_to 'Delete', photo, confirm: 'Are you sure?', method: :delete %><br/>
+<hr/>
+<% end %>
+
+
+
+<% end %>
+
+<br />
+
+

@@ -1,0 +1,16 @@
+
+<% if photos.count == 0 %>
+        No Photos uploaded for this user.
+<% end %>
+<br/>
+<div id="slider_<%= curr_album_id %>" class="slider">
+		<ul>		
+<% photos.each do |photo| %>
+  
+   
+ <li><a href="javascript:void(0);"><%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:original) ) : image_tag("/assets/images/upload.jpg", :size => '50x50') %></a></li>
+   
+
+<% end %>
+</ul>
+</div>

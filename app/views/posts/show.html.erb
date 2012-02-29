@@ -46,7 +46,7 @@
 </p>
 
 <% if !@post.image.nil? %>
-  <%= image_tag @post.image_url %>
+  <%= image_tag @post.image_url(:thumb) %>
 <% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

@@ -1,0 +1,15 @@
+ 
+ <% if  album.count == 0  %>
+ You have no albums
+ <%end%>
+
+ 
+ Please select your album<br />
+<% album.each do |album| %>
+  <li>
+    
+ <%= radio_button_tag 'photo[album_id]', album.id , false %>
+   <%= label_tag(album.name) %></li>
+<% end %>
+
+<br/>

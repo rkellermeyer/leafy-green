@@ -1,0 +1,39 @@
+<%= form_for(@photo)  do |f| %>
+  <% if @photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+
+      <ul>
+      <% @photo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :identity_id %>
+<%= render :partial =>"photos/albums" ,:locals=>{:album=>Album.find_all_by_identity_id(current_user1.id)}%>
+  <p>
+     <%= (!@photo.photo.nil? and  @photo.photo.file?) ? image_tag(@photo.photo.url(:thumb) , :size => '50x50') : image_tag("/assets/images/upload.jpg", :size => '50x50') %>
+      
+    </p><br />
+    
+     <p>
+    <%= f.label :caption ,'Caption:' %>
+	         <%= f.text_field :caption %>
+    </p><br />
+    
+     <div class="field">
+    <%= f.label 'Publish' %>
+   
+    <%= f.select(:visible,  Photo::CONSTANT, {:include_blank => 'Select...'}) %>
+  </div>
+        <div class="field">
+    <%= f.label :publishdate %>(yyyy-mm-dd):<br />
+    <%= f.text_field :publishdate%>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

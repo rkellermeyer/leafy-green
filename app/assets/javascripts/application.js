@@ -11,9 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery1
-//= require jquery_ujs
-//= require jquery-ui
-//= require_tree .
+
+
 
 //= require jqGalViewII.pack
+
 

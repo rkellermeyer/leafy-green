@@ -8,7 +8,7 @@ class Identity < OmniAuth::Identity::Models::ActiveRecord
   
   has_many :posts, :dependent => :destroy
   accepts_nested_attributes_for :posts, :allow_destroy => true, :reject_if => :all_blank
-  
+   has_many :photos
   #validates_confirmation_of :password
   #validates_presence_of :password, :on => :create
   #validates_presence_of :email

@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(:version => 20120216164310) do
 
+  create_table "albums", :force => true do |t|
+    t.integer  "identity_id"
+    t.string   "name"
+    t.string   "caption"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "visibletype"
+    t.string   "accessusers", :limit => 2000
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
@@ -25,9 +35,9 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.string   "to"
     t.string   "message"
     t.datetime "sent"
-    t.integer  "recd"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "recd",       :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "facebooks", :force => true do |t|
@@ -49,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "categories"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
     t.string   "last_name"
@@ -58,7 +67,28 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.text     "categories"
   end
 
+  create_table "invite_friends", :force => true do |t|
+    t.integer  "channel_id"
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
+  create_table "photos", :force => true do |t|
+    t.integer  "identity_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.integer  "visible"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "tag"
+    t.datetime "publishdate"
+    t.string   "caption"
+    t.integer  "album_id"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -73,6 +103,15 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.string   "image"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.integer  "photo_id"
+    t.string   "tag_value"
+    t.integer  "xpos"
+    t.integer  "ypos"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
