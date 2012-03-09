@@ -45,18 +45,7 @@ $(function() {
   
  
   
-  $.getJSON("/friend_photos", function(data){
-    //console.log(data);
-   
-    for(var i in data) {
-       if ( jQuery.isPlainObject(data[i])){
-         	var dat1="friend_name"+data[i].identity_id;
-         	$(dat1).append(getName( data[i].identity_id));
-    	    $("#friendphotos_list").append("<br/><li><span id="+dat1+"></span><br/>"+data[i].photo_file_name + "&nbsp;&nbsp;<img width='50' height='50' src='/system/photos/" + data[i].id + "/thumb/" + data[i].photo_file_name + " 'alt='"+data[i].photo_file_name+"'> </li>");
-      	}
-    }
-  });
-
+  
   
   $.getJSON("/photos", function(data){
     //console.log(data);

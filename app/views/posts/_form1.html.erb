@@ -1,0 +1,49 @@
+<%= form_for post, :html => {:multipart => true} do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content , :rows=>10, :cols =>20%>
+  </div>
+  <div class="field">
+    <%= f.file_field :image %>
+  </div>
+  
+   <p>
+    <%= f.label :remote_image_url, "or image URL" %><br />
+    <%= f.text_field :remote_image_url %>
+  </p>
+  
+  
+  <div class="field">
+    <select name="category_id">
+    	<% Category.all.each do |category| %>
+        <li class="post_category_option">
+          <option value="<%= category.id %>"><%= category.name.humanize %></option>
+        </li>
+      <% end %>
+    </select>
+  </div>
+  <div class="field">
+    <%= f.label :visible %><br />
+    <%= f.check_box :visible %>
+  </div>
+  <%= hidden_field_tag(:user_id, session[:user_id]) %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

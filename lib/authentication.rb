@@ -36,6 +36,8 @@ module Authentication
     def unauthenticate
       current_identity.destroy
       @current_identity = session[:current_identity] = nil
+      session[:current_identity] = nil
+      
     end
   end
 end

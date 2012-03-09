@@ -2,9 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .rateMyCategories {
-  border: 1px solid green;
-  min-height: 125px;
-  max-height: 400px;
-  overflow: hidden;
-  width: 320px;
+  padding: 5px;
+  max-height: 259px;
+  //overflow: auto;
+  width: 290px;
 }

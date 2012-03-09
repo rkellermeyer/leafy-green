@@ -3,36 +3,32 @@
 <head>
   <title>Auth</title>
   <%= stylesheet_link_tag :application %>
-   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
   <%= javascript_include_tag :application %>
   <%= stylesheet_link_tag 'base', 'layout', 'gritter', controller_name %>
   <%= csrf_meta_tag %>
   <%= javascript_include_tag :jqGalViewII %>
   <%= stylesheet_link_tag :jqGalViewII %>
   <%= javascript_include_tag :widget %>
-  <%= stylesheet_link_tag "chat.css" %>
+<%= stylesheet_link_tag "chat.css" %>
   <%= javascript_include_tag :easySlider %>
   <%= javascript_include_tag :getIt %>
     <%= stylesheet_link_tag "jqui" %>
-  
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
- 
   <%= javascript_include_tag 'rails', 'jquery.gritter' %>
   <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-    
   <script type="text/javascript">
-	$(function() {
-		$( "#tabs" ).tabs();
-		
-	    var apiKey = '1e327eadb60c60b16219f705db8dd5be';
-	    var userId = '76738653@N02';
-	    var tag = '<COMMA SEPERATED LIST OF TAGS>';
-	    var perPage = '25';
-	    var showOnPage = '6';
-	    
-	    $('#new_photo').submit(function () {
-  var myForm = $("#new_photo");
-    var x=document.forms["new_photo"]["photo_photo"].value;
+      $(function () {
+      $( "#tabs" ).tabs();
+           var apiKey = '1e327eadb60c60b16219f705db8dd5be';
+          var userId = '76738653@N02';
+          var tag = '<COMMA SEPERATED LIST OF TAGS>';
+          var perPage = '25';
+          var showOnPage = '6';
+          
+            $('#new_photo').submit(function () {
+            var myForm = $("#new_photo");
+            var x=document.forms["new_photo"]["photo_photo"].value;
  
              if (x==null || x=="")
                 {
@@ -42,62 +38,43 @@
 
 });
 
-	   /* $.getJSON('http://api.flickr.com/services/rest/?format=json&method='+
-	        'flickr.people.getPublicPhotos&api_key=' + apiKey + '&user_id=' + userId + 
-	        '&tags=' + tag + '&per_page=' + perPage + '&jsoncallback=?', 
-	    function(data){
-	        var classShown = 'class="lightbox"';
-	        var classHidden = 'class="lightbox hidden"';
-	        $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
-	        $.each(data.photos.photo, function(i, rPhoto){
-	          var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
-	            + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;            
-	            
-	            var thumbPhotoURL = basePhotoURL + '_s.jpg';
-	            var mediumPhotoURL = basePhotoURL + '.jpg';
-	            
-	            var photoStringStart = '<li><a ';
-	            var photoStringEnd = 'title="' + rPhoto.title + '" href="'+ 
-	                mediumPhotoURL +'"><img src="' + thumbPhotoURL + '" alt="' + 
-	                rPhoto.title + '"/></a></li>;'                
-	            var photoString = (i < showOnPage) ? 
-	                photoStringStart + classShown + photoStringEnd : 
-	                photoStringStart + classHidden + photoStringEnd;
-	                                        
-	            $(photoString).appendTo("#flickr_ul");
-	        });
-	       document.getElementById('#flickr').style.display="block";
-			$('#flickr_ul').jqGalViewII();
-	        //$("a.lightbox").lightBox();
-	    });*/
-	});
-	
-	
-	function flick()
-	{
-	 var username = document.getElementById('url').value;
-	 
-	}
-	
-	function getName(identitiyId){
-		console.log('name = '+identitiyId);
-		$.get('\getNamesOnId', {id: identitiyId}, function(data, textStatus, jqXHR){
-		    	
-		    	//$("#friend_name").append(data[0].name);
-		    	
-		    	for(var i in data) {
-				    	if ( jQuery.isPlainObject(data[i])){
-					    	var dat="#friend_name"+data[i].id
-					    	//console.log("val 2222 = "+ i +" = "+ dat);
-					    	$(dat).html("Photos of "+data[i].name);
-					    	break;
-				    	}
-			    	}
-		    	
-		    }, 'json');
-		
-	}
-	function getName1(identitiyId){
+          /* $.getJSON('http://api.flickr.com/services/rest/?format=json&method='+
+           'flickr.people.getPublicPhotos&api_key=' + apiKey + '&user_id=' + userId +
+           '&tags=' + tag + '&per_page=' + perPage + '&jsoncallback=?',
+           function(data){
+           var classShown = 'class="lightbox"';
+           var classHidden = 'class="lightbox hidden"';
+           $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
+           $.each(data.photos.photo, function(i, rPhoto){
+           var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
+           + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;
+
+           var thumbPhotoURL = basePhotoURL + '_s.jpg';
+           var mediumPhotoURL = basePhotoURL + '.jpg';
+
+           var photoStringStart = '<li><a ';
+           var photoStringEnd = 'title="' + rPhoto.title + '" href="'+
+           mediumPhotoURL +'"><img src="' + thumbPhotoURL + '" alt="' +
+           rPhoto.title + '"/></a></li>;'
+           var photoString = (i < showOnPage) ?
+           photoStringStart + classShown + photoStringEnd :
+           photoStringStart + classHidden + photoStringEnd;
+
+           $(photoString).appendTo("#flickr_ul");
+           });
+           document.getElementById('#flickr').style.display="block";
+           $('#flickr_ul').jqGalViewII();
+           //$("a.lightbox").lightBox();
+           });*/
+      });
+
+
+      function flick() {
+          var username = document.getElementById('url').value;
+
+      }
+
+     function getName1(identitiyId){
 		console.log('name = '+identitiyId);
 		$.get('\getNamesOnId', {id: identitiyId}, function(data, textStatus, jqXHR){
 		    	
@@ -280,120 +257,137 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       	     }
          });
   
-  
-			 $('#flickr_form').submit(function () {
-					console.log("test");
-					var perPage = '25';
-	   				var showOnPage = '6';
-	   				$("#flickr").empty();
-				    $.get(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
-					    	var classShown = 'class="lightbox"';
-					        var classHidden = 'class="lightbox hidden"';
-					        $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
-					        $.each(data, function(i, rPhoto){
-					          var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
-					            + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;            
-					            
-					            var thumbPhotoURL = basePhotoURL + '_s.jpg';
-					            var mediumPhotoURL = basePhotoURL + '.jpg';
-					            
-					            var photoStringStart = '<li><a ';
-					            var photoStringEnd = 'title="' + rPhoto.title + '" href="'+ 
-					                mediumPhotoURL +'"><img src="' + thumbPhotoURL + '" alt="' + 
-					                rPhoto.title + '"/></a></li>;'                
-					            var photoString = (i < showOnPage) ? 
-					                photoStringStart + classShown + photoStringEnd : 
-					                photoStringStart + classHidden + photoStringEnd;
-					                                        
-					            $(photoString).appendTo("#flickr_ul");
-					        });
-					           document.getElementById('flickr').style.display="block";
-							$('#flickr_ul').jqGalViewII();
-					    }, 'json');
-			    		return false;
-	  			});
-		});
+          $('#flickr_form').submit(function () {
+              console.log("test");
+              var perPage = '25';
+              var showOnPage = '6';
+              $("#flickr").empty();
+              $.get(this.action, $(this).serialize(), function (data, textStatus, jqXHR) {
+                  var classShown = 'class="lightbox"';
+                  var classHidden = 'class="lightbox hidden"';
+                  $("<ul title='My Gallery' id='flickr_ul'></ul>").appendTo("#flickr");
+                  $.each(data, function (i, rPhoto) {
+                      var basePhotoURL = 'http://farm' + rPhoto.farm + '.static.flickr.com/'
+                              + rPhoto.server + '/' + rPhoto.id + '_' + rPhoto.secret;
 
-    </script>
+                      var thumbPhotoURL = basePhotoURL + '_s.jpg';
+                      var mediumPhotoURL = basePhotoURL + '.jpg';
 
+                      var photoStringStart = '<li><a ';
+                      var photoStringEnd = 'title="' + rPhoto.title + '" href="' +
+                              mediumPhotoURL + '"><img src="' + thumbPhotoURL + '" alt="' +
+                              rPhoto.title + '"/></a></li>;'
+                      var photoString = (i < showOnPage) ?
+                              photoStringStart + classShown + photoStringEnd :
+                              photoStringStart + classHidden + photoStringEnd;
+
+                      $(photoString).appendTo("#flickr_ul");
+                  });
+                  document.getElementById('flickr').style.display = "block";
+                  $('#flickr_ul').jqGalViewII();
+              }, 'json');
+              return false;
+          });
+      });
+
+  </script>
 
 
-   <script type="text/javascript">
+  <script type="text/javascript">
 
-		$(document).ready(function(){
-			
-		});
-		
-		function getDealsOnDivision(){
-			  // https://api.groupon.com/v2/deals.json?division_id=austin&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f
-		  	var division = document.getElementById('division_id').value;
-		  /* 	$.get('https://api.groupon.com/v2/deals.json?division_id='+division+'&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f', 
-			    function(data){
-					$('#myDeals').append('Deals Response'+data);
-			});*/
-			
-			$.getJSON('https://api.groupon.com/v2/deals/'+division+'.json?client_id=fe6dfb020d0e522e065cf064327eff527cd9a702', function(data) {         
-				
-				  console.log( $.json_decode(data));
-			});
+      $(document).ready(function () {
+
+      });
+      
+       $(function () {
+       		setTimeout('callme()',2000);
+       });
+       
+       function callme(){
+       		var contentsArr = $('li[name=postscontents]');
+       		for (i=0; i<contentsArr.size();i++){
+       			console.log('content ('+i+') = '+ contentsArr.get(i).innerHTML);
+       			var content = contentsArr.get(i).innerHTML;
+       			var newContent = replaceURLWithHTMLLinks(content);
+       			contentsArr.get(i).innerHTML = newContent;
+       			console.log('content ('+i+') = '+ contentsArr.get(i).innerHTML);
+       		}
+       }
+       
+       function replaceURLWithHTMLLinks(text) {
+		    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+		    return text.replace(exp,"<iframe src='$1' width='0' height='0' style='display: none;'></iframe><br/><iframe src='$1' width='250' height='100'></iframe>"); 
 		}
 
-   </script>
-    
-   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-         api_key: titzvdcmcaot
-         authorize: true
-   </script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>  
-	
-	<script type="text/javascript">
+      function getDealsOnDivision() {
+          // https://api.groupon.com/v2/deals.json?division_id=austin&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f
+          var division = document.getElementById('division_id').value;
+          /* 	$.get('https://api.groupon.com/v2/deals.json?division_id='+division+'&client_id=e20cbbda286f1cf6a603594a75a8083dd5ede33f',
+           function(data){
+           $('#myDeals').append('Deals Response'+data);
+           });*/
 
-	function loadData() {
-	IN.API.Profile("me")
-	   .result(function(result) { 
-	      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
-	      IN.parse(document.getElementById("profile"))
-	   })
-	}
-	
-	</script>
-	 	 
-	 <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
+          $.getJSON('https://api.groupon.com/v2/deals/' + division + '.json?client_id=fe6dfb020d0e522e065cf064327eff527cd9a702', function (data) {
+
+              console.log($.json_decode(data));
+          });
+      }
+
+  </script>
+
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: titzvdcmcaot
+      authorize: true
+  </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+
+  <script type="text/javascript">
+
+      function loadData() {
+          IN.API.Profile("me")
+                  .result(function (result) {
+                      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+                      IN.parse(document.getElementById("profile"))
+                  })
+      }
+
+  </script>
+  	 <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
 	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
 	 
-    <%= stylesheet_link_tag :jdgallery %>
-    <%= javascript_include_tag :jdgallery %>
-    <%= javascript_include_tag :picasa1 %>
-    <script type="text/javascript">
-	     /* $(document).ready(function(){
-	           var user = 'rahulindia25';
-	    var album = 'apple';
-	    var maxres = 5; 
-	 
-	    var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
-	 
-	    if (maxres != 0) {
-	        url = url + '&max-results=' + maxres;
-	    }
-	    loadJS(url);
-	      }); */
-	
-		function picasaImages(){
-			   var user = document.getElementById('urlname').value;
-			   var album = document.getElementById('album').value;
-			   var maxres = 5; 
-			 
-			   var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
-			   if (maxres != 0) {
-			        url = url + '&max-results=' + maxres;
-			   }
-			   $("#myGallery").empty();
-			   loadJS(url);
-		}
-   </script> 
-   <% if current_user1 %>
+  <%= stylesheet_link_tag :jdgallery %>
+  <%= javascript_include_tag :jdgallery %>
+  <%= javascript_include_tag :picasa1 %>
+  <script type="text/javascript">
+      /* $(document).ready(function(){
+       var user = 'rahulindia25';
+       var album = 'apple';
+       var maxres = 5;
+
+       var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
+
+       if (maxres != 0) {
+       url = url + '&max-results=' + maxres;
+       }
+       loadJS(url);
+       }); */
+
+      function picasaImages() {
+          var user = document.getElementById('urlname').value;
+          var album = document.getElementById('album').value;
+          var maxres = 5;
+
+          var url = 'http://picasaweb.google.com/data/feed/api/user/' + user + '/album/' + album + '?kind=photo&alt=json-in-script&callback=renderer&access=public&start-index=1';
+          if (maxres != 0) {
+              url = url + '&max-results=' + maxres;
+          }
+          $("#myGallery").empty();
+          loadJS(url);
+      }
+  </script>
+  <% if current_user1 %>
 <script type="text/javascript">
   var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
   console.log(current_user1);
@@ -401,374 +395,416 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 <%end%>
 </head>
 <body>
-	  <% flash.each do |name, msg| %>
-	    <%= content_tag :div, msg, :id => "flash#{name}" %>
-	  <% end %>
-	  <div >
-		   <div id="yield" style="margin-top:130px;margin-bottom:40px; margin-left: 40px;float:left;width:600px;">
-		     <%= yield %>
-		     
-		    <% if current_user1 %>
-		     <div class="container" style="width: 570px;"> 
-		   	       <%= render :partial => 'picasa/form' %>
-	              <div id="myGallery" > </div>
-		   	 </div>
-		   	 <div class="container" style="width: 570px;">
-				 <%= render :partial => 'flickr/form' %>
-			     <div id="flickr" style="overflow-y:scroll;display:none;"></div> 
-		     </div>
-			<div class="container" style="width: 570px;">
-				 <div id="profile" style="width: 400px;">
-				 </div>
-		           <script type="IN/Login" data-onAuth="loadData"></script>
-			</div>
-			<div class="container" style="width: 570px;height:300px;">
-			 <h4>Photos</h4>
 
-                  <div class="demo">
+<header id="mainHeader">
+  <aside class="headerNav">
+    <% if current_user1 %>
+        <%= current_identity1.name %> <%= current_identity1.last_name %>
+        <%= link_to "Log out", log_out_path %>
+        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %>
+        <%= image_tag "icons/Friends_20x20.png" %>
+        <%= image_tag "icons/Network.png" %>
+        <%= image_tag "icons/Messages.png" %>
+    <% end %>
+    <% if !current_user1 %>
+        <%= link_to "Sign up", sign_up_path %> or
+        <%= link_to "Log in", log_in_path %>
+    <% end %>
+  </aside>
+</header>
 
-<div id="tabs">
-	<ul>
-		<li><a href="#tabs-1">My Photos</a></li>
-		<li><a href="#tabs-2">Upload Photos</a></li>
-		<li><a href="#tabs-4">My Albums</a></li>
-		<li><a href="#tabs-5">Friends Albums</a></li>
-
-	</ul>
-	<div id="tabs-1">
-	
-		
-		<% if current_user1 %>
-<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
-<%end%>
-		
-	       <div id="Photo" style="margin-left:330px;padding:2px;width:300px;"></div>	
-	</div>
-	<div id="tabs-2">
-<% if current_user1 %>		
-<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
-<%end%>
-	</div>
-
-		<div id="tabs-4">
-		<% if current_user1 %>
-<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
-<%end%>
-	</div>
-		<div id="tabs-5">
-	  		<h2>My Friends Albums</h2>
-		  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.uid), :f_type=>'direct'} %>
-		  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.uid), :f_type=>'inverse'} %>
-		</div>
-</div>
-
-</div>
-</div>
-			<div class="container" style="width: 570px;">
-				 <script type='text/javascript'>
-			          function groupon()
-			          {
-						   var city = document.getElementById('city_select').value;
-						   myGrouponWidget.destroy();
-					       myGrouponWidget.opts.city = city;
-					       myGrouponWidget.render();
-					       document.getElementById('groupon_widget').style.display="block";
-			          }
-		              var  myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091","city":"chicago"}).render();
-		              document.getElementById('groupon_widget').style.display="none";
-				 </script>
-				 <div class="field">
-		            <label for="city" class="city-select-label">
-		               Show the daily deal for
-		            </label>
-		              <select name="city" id="city_select" onchange="javascript:groupon();" >
-		                      <option value="abbotsford">Abbotsford</option>
-		                      <option value="abilene">Abilene, TX</option>
-		                      <option value="akron-canton">Akron / Canton</option>
-		                      <option value="albany-capital-region">Albany / Capital Region</option>
-		                      <option value="albuquerque">Albuquerque</option>
-		                      <option value="allentown-reading">Allentown / Reading</option>
-		                      <option value="amarillo">Amarillo</option>
-		                      <option value="anchorage">Anchorage</option>
-		                      <option value="ann-arbor">Ann Arbor</option>
-		                      <option value="asheville">Asheville</option>
-		                      <option value="athens-ga">Athens, GA</option>
-		                      <option value="atlanta">Atlanta</option>
-		                      <option value="augusta">Augusta</option>
-		                      <option value="austin">Austin</option>
-		                      <option value="bakersfield">Bakersfield</option>
-		                      <option value="baltimore">Baltimore</option>
-		                      <option value="barrie">Barrie</option>
-		                      <option value="baton-rouge">Baton Rouge</option>
-		                      <option value="beaumont">Beaumont, TX</option>
-		                      <option value="billings">Billings / Bozeman</option>
-		                      <option value="birmingham">Birmingham</option>
-		                      <option value="bloomington-in">Bloomington, IN</option>
-		                      <option value="boise">Boise</option>
-		                      <option value="boston">Boston</option>
-		                      <option value="buffalo">Buffalo</option>
-		                      <option value="calgary">Calgary</option>
-		                      <option value="cape-breton">Cape Breton</option>
-		                      <option value="cedar-rapids-iowa-city">Cedar Rapids / Iowa City</option>
-		                      <option value="central-jersey">Central Jersey</option>
-		                      <option value="charleston">Charleston</option>
-		                      <option value="charlotte">Charlotte</option>
-		                      <option value="chattanooga">Chattanooga</option>
-		                      <option value="chicago">Chicago</option>
-		                      <option value="cincinnati">Cincinnati</option>
-		                      <option value="cleveland">Cleveland</option>
-		                      <option value="colorado-springs">Colorado Springs</option>
-		                      <option value="columbia">Columbia</option>
-		                      <option value="columbia-mo">Columbia, MO</option>
-		                      <option value="columbus">Columbus</option>
-		                      <option value="columbus-ga">Columbus GA</option>
-		                      <option value="corpus-christi">Corpus Christi</option>
-		                      <option value="dallas">Dallas</option>
-		                      <option value="dayton">Dayton</option>
-		                      <option value="daytona-beach">Daytona Beach</option>
-		                      <option value="denver">Denver</option>
-		                      <option value="des-moines">Des Moines</option>
-		                      <option value="detroit">Detroit</option>
-		                      <option value="edmonton">Edmonton</option>
-		                      <option value="el-paso">El Paso</option>
-		                      <option value="erie">Erie</option>
-		                      <option value="eugene">Eugene</option>
-		                      <option value="evansville">Evansville</option>
-		                      <option value="fairfield-county">Fairfield County</option>
-		                      <option value="fort-lauderdale">Fort Lauderdale</option>
-		                      <option value="fort-myers-cape-coral">Fort Myers / Cape Coral</option>
-		                      <option value="fort-wayne">Fort Wayne</option>
-		                      <option value="fort-worth">Fort Worth</option>
-		                      <option value="appleton">Fox Cities</option>
-		                      <option value="fresno">Fresno</option>
-		                      <option value="gainesville">Gainesville</option>
-		                      <option value="grand-rapids">Grand Rapids</option>
-		                      <option value="green-bay">Green Bay</option>
-		                      <option value="greenville">Greenville</option>
-		                      <option value="halifax">Halifax</option>
-		                      <option value="hampton-roads">Hampton Roads</option>
-		                      <option value="harrisburg">Harrisburg / Lancaster</option>
-		                      <option value="hartford">Hartford</option>
-		                      <option value="honolulu">Honolulu</option>
-		                      <option value="houston">Houston</option>
-		                      <option value="huntsville">Huntsville</option>
-		                      <option value="indianapolis">Indianapolis</option>
-		                      <option value="inland-empire">Inland Empire</option>
-		                      <option value="jackson">Jackson</option>
-		                      <option value="jacksonville">Jacksonville</option>
-		                      <option value="kalamazoo">Kalamazoo</option>
-		                      <option value="kansas-city">Kansas City</option>
-		                      <option value="kelowna">Kelowna</option>
-		                      <option value="kingston">Kingston / Belleville</option>
-		                      <option value="kitchener-waterloo">Kitchener - Waterloo</option>
-		                      <option value="knoxville">Knoxville</option>
-		                      <option value="lakeland">Lakeland</option>
-		                      <option value="lansing">Lansing</option>
-		                      <option value="las-vegas">Las Vegas</option>
-		                      <option value="lexington">Lexington</option>
-		                      <option value="lincoln">Lincoln</option>
-		                      <option value="little-rock">Little Rock</option>
-		                      <option value="london">London, ON</option>
-		                      <option value="long-island">Long Island</option>
-		                      <option value="los-angeles">Los Angeles</option>
-		                      <option value="louisville">Louisville</option>
-		                      <option value="lubbock">Lubbock</option>
-		                      <option value="macon">Macon</option>
-		                      <option value="madison">Madison</option>
-		                      <option value="memphis">Memphis</option>
-		                      <option value="miami">Miami</option>
-		                      <option value="midland-odessa">Midland / Odessa</option>
-		                      <option value="milwaukee">Milwaukee</option>
-		                      <option value="minneapolis-stpaul">Minneapolis / St Paul</option>
-		                      <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
-		                      <option value="modesto">Modesto</option>
-		                      <option value="montgomery">Montgomery</option>
-		                      <option value="napa-sonoma">Napa / Sonoma</option>
-		                      <option value="naples">Naples</option>
-		                      <option value="nashville">Nashville</option>
-		                      <option value="new-orleans">New Orleans</option>
-		                      <option value="new-york">New York City</option>
-		                      <option value="north-jersey">North Jersey</option>
-		                      <option value="ocala">Ocala</option>
-		                      <option value="ogden">Ogden</option>
-		                      <option value="oklahoma-city">Oklahoma City</option>
-		                      <option value="omaha">Omaha</option>
-		                      <option value="orange-county">Orange County</option>
-		                      <option value="orlando">Orlando</option>
-		                      <option value="ottawa">Ottawa</option>
-		                      <option value="palm-beach">Palm Beach</option>
-		                      <option value="pensacola">Pensacola / Emerald Coast</option>
-		                      <option value="philadelphia">Philadelphia</option>
-		                      <option value="phoenix">Phoenix</option>
-		                      <option value="piedmont-triad">Piedmont Triad</option>
-		                      <option value="pittsburgh">Pittsburgh</option>
-		                      <option value="portland">Portland</option>
-		                      <option value="portland-me">Portland, ME</option>
-		                      <option value="providence">Providence</option>
-		                      <option value="raleigh-durham">Raleigh / Durham</option>
-		                      <option value="regina">Regina</option>
-		                      <option value="reno">Reno</option>
-		                      <option value="richmond">Richmond</option>
-		                      <option value="rio-grande-valley">Rio Grande Valley</option>
-		                      <option value="roanoke">Roanoke</option>
-		                      <option value="rochester">Rochester</option>
-		                      <option value="rockford">Rockford</option>
-		                      <option value="sacramento">Sacramento</option>
-		                      <option value="salem-or">Salem OR</option>
-		                      <option value="salt-lake-city">Salt Lake City</option>
-		                      <option value="san-angelo">San Angelo</option>
-		                      <option value="san-antonio">San Antonio</option>
-		                      <option value="san-diego">San Diego</option>
-		                      <option value="san-francisco">San Francisco</option>
-		                      <option value="san-jose">San Jose</option>
-		                      <option value="santa-barbara">Santa Barbara</option>
-		                      <option value="santa-clarita">Santa Clarita</option>
-		                      <option value="santa-cruz">Santa Cruz / Monterey</option>
-		                      <option value="saskatoon">Saskatoon</option>
-		                      <option value="savannah-hilton-head">Savannah / Hilton Head</option>
-		                      <option value="seattle">Seattle</option>
-		                      <option value="shreveport-bossier">Shreveport / Bossier</option>
-		                      <option value="sioux-falls">Sioux Falls</option>
-		                      <option value="south-bend">South Bend</option>
-		                      <option value="albany-ga">Southern Georgia</option>
-		                      <option value="spokane-coeur-dalene">Spokane / Coeur d'Alene</option>
-		                      <option value="springfield-mo">Springfield MO</option>
-		                      <option value="springfield-ma">Springfield, MA</option>
-		                      <option value="stcatharines-niagara">St Catharines-Niagara</option>
-		                      <option value="st-johns">St John's</option>
-		                      <option value="stlouis">St Louis</option>
-		                      <option value="stockton">Stockton</option>
-		                      <option value="sudbury">Sudbury / North Bay</option>
-		                      <option value="syracuse">Syracuse</option>
-		                      <option value="tallahassee">Tallahassee</option>
-		                      <option value="tampa-bay-area">Tampa Bay Area</option>
-		                      <option value="toledo">Toledo</option>
-		                      <option value="topeka-lawrence">Topeka / Lawrence</option>
-		                      <option value="greater-toronto-area">Toronto (GTA)</option>
-		                      <option value="tucson">Tucson</option>
-		                      <option value="tulsa">Tulsa</option>
-		                      <option value="vancouver">Vancouver</option>
-		                      <option value="ventura-county">Ventura County</option>
-		                      <option value="victoria">Victoria</option>
-		                      <option value="washington-dc">Washington DC</option>
-		                      <option value="westchester-county">Westchester County</option>
-		                      <option value="wichita">Wichita</option>
-		                      <option value="wilmington-newark">Wilmington-Newark</option>
-		                      <option value="windsor">Windsor</option>
-		                      <option value="winnipeg">Winnipeg</option>
-		                      <option value="worcester">Worcester</option>
-		                      <option value="youngstown">Youngstown</option>
-		                 </select>
-		                 </div>
-				       
-				   </div>
-		
-				  <%end%>
-	       </div>
-		   
-		   <div id="leftdiv" style="float:right;width:300px;margin-top:130px;margin-right: 20px;">
-		     <% if current_user1 %>
-		      <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
-		     <%else%>
-		      <div id="user_nav" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
-		     <%end%>
-			  <% if current_user1 %>
-			      Logged in as <%= current_identity1.name %>
-			      <%= link_to "Log out", log_out_path %><br />
-			      <% else %>
-			         <%= link_to "Sign up", sign_up_path %> or
-			         <%= link_to "Log in", log_in_path %>
-		          <% end %>
-		    </div>
-			  
-		   <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
-			     <% if current_user1 %>
-			       <div id="fb-root"></div>
-			   		 <div class="container" >
-				           FaceBook Details <br/>
-				           <aside class="sidebar">
-				           <%= render :partial => 'layouts/sidebar' %>
-				           </aside>
-				      </div>
-				        <div class="container" >
+<div id="appWrap">
+<%= yield %>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash#{name}" %>
+<% end %>
+ <% if current_user1 %>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/RateMy_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Rate My</span></header>
+  <div class="">
+    <% if current_user1 %>
+        <ul class="rateMyCategories">
+          <% current_identity1.categories.each do |category| %>
+              <li class="rateMyCategoriesList">
+                <ul class="rateMyCategory">
+                  <li><%= Category.find(category).name %></li>
+                  <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+                      <li class="rateMyCategoryItem"><%= post.title %>
+                        <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span>
+                        Like this!
+                      </li>
+                      <ul>
+                        <li>
+                          <% if !post.image.nil? %>
+                              <%= post.image %>
+                          <% end %>
+                        </li>
+                        <li name="postscontents"><%= post.content %></li>
+                        <li><%= post.score %></li>
+                        <li><%= link_to image_tag("icons/UpOpen.png"), "identities/posts/rate_up/#{post.id}", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up" %> <%= link_to image_tag("icons/DownOpen.png"), "identities/posts/rate_down/#{post.id}", :remote => true %></li>
+                      </ul>
+                  <% end %>
+                </ul>
+              </li>
+          <% end %>
+        </ul>
+    <% end %>
+  </div>
+</section>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Deals</span></header>
+  <div class="">
+    <script type='text/javascript'>
+        function groupon() {
+            var city = document.getElementById('city_select').value;
+            myGrouponWidget.destroy();
+            myGrouponWidget.opts.city = city;
+            myGrouponWidget.render();
+            document.getElementById('groupon_widget').style.display = "block";
+        }
+        var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
+        document.getElementById('groupon_widget').style.display = "none";
+    </script>
+    <div class="field">
+      <label for="city" class="city-select-label">
+        Show the daily deal for
+      </label>
+      <select name="city" id="city_select" onchange="javascript:groupon();">
+        <option value="abbotsford">Abbotsford</option>
+        <option value="abilene">Abilene, TX</option>
+        <option value="akron-canton">Akron / Canton</option>
+        <option value="albany-capital-region">Albany / Capital Region</option>
+        <option value="albuquerque">Albuquerque</option>
+        <option value="allentown-reading">Allentown / Reading</option>
+        <option value="amarillo">Amarillo</option>
+        <option value="anchorage">Anchorage</option>
+        <option value="ann-arbor">Ann Arbor</option>
+        <option value="asheville">Asheville</option>
+        <option value="athens-ga">Athens, GA</option>
+        <option value="atlanta">Atlanta</option>
+        <option value="augusta">Augusta</option>
+        <option value="austin">Austin</option>
+        <option value="bakersfield">Bakersfield</option>
+        <option value="baltimore">Baltimore</option>
+        <option value="barrie">Barrie</option>
+        <option value="baton-rouge">Baton Rouge</option>
+        <option value="beaumont">Beaumont, TX</option>
+        <option value="billings">Billings / Bozeman</option>
+        <option value="birmingham">Birmingham</option>
+        <option value="bloomington-in">Bloomington, IN</option>
+        <option value="boise">Boise</option>
+        <option value="boston">Boston</option>
+        <option value="buffalo">Buffalo</option>
+        <option value="calgary">Calgary</option>
+        <option value="cape-breton">Cape Breton</option>
+        <option value="cedar-rapids-iowa-city">Cedar Rapids / Iowa City</option>
+        <option value="central-jersey">Central Jersey</option>
+        <option value="charleston">Charleston</option>
+        <option value="charlotte">Charlotte</option>
+        <option value="chattanooga">Chattanooga</option>
+        <option value="chicago">Chicago</option>
+        <option value="cincinnati">Cincinnati</option>
+        <option value="cleveland">Cleveland</option>
+        <option value="colorado-springs">Colorado Springs</option>
+        <option value="columbia">Columbia</option>
+        <option value="columbia-mo">Columbia, MO</option>
+        <option value="columbus">Columbus</option>
+        <option value="columbus-ga">Columbus GA</option>
+        <option value="corpus-christi">Corpus Christi</option>
+        <option value="dallas">Dallas</option>
+        <option value="dayton">Dayton</option>
+        <option value="daytona-beach">Daytona Beach</option>
+        <option value="denver">Denver</option>
+        <option value="des-moines">Des Moines</option>
+        <option value="detroit">Detroit</option>
+        <option value="edmonton">Edmonton</option>
+        <option value="el-paso">El Paso</option>
+        <option value="erie">Erie</option>
+        <option value="eugene">Eugene</option>
+        <option value="evansville">Evansville</option>
+        <option value="fairfield-county">Fairfield County</option>
+        <option value="fort-lauderdale">Fort Lauderdale</option>
+        <option value="fort-myers-cape-coral">Fort Myers / Cape Coral</option>
+        <option value="fort-wayne">Fort Wayne</option>
+        <option value="fort-worth">Fort Worth</option>
+        <option value="appleton">Fox Cities</option>
+        <option value="fresno">Fresno</option>
+        <option value="gainesville">Gainesville</option>
+        <option value="grand-rapids">Grand Rapids</option>
+        <option value="green-bay">Green Bay</option>
+        <option value="greenville">Greenville</option>
+        <option value="halifax">Halifax</option>
+        <option value="hampton-roads">Hampton Roads</option>
+        <option value="harrisburg">Harrisburg / Lancaster</option>
+        <option value="hartford">Hartford</option>
+        <option value="honolulu">Honolulu</option>
+        <option value="houston">Houston</option>
+        <option value="huntsville">Huntsville</option>
+        <option value="indianapolis">Indianapolis</option>
+        <option value="inland-empire">Inland Empire</option>
+        <option value="jackson">Jackson</option>
+        <option value="jacksonville">Jacksonville</option>
+        <option value="kalamazoo">Kalamazoo</option>
+        <option value="kansas-city">Kansas City</option>
+        <option value="kelowna">Kelowna</option>
+        <option value="kingston">Kingston / Belleville</option>
+        <option value="kitchener-waterloo">Kitchener - Waterloo</option>
+        <option value="knoxville">Knoxville</option>
+        <option value="lakeland">Lakeland</option>
+        <option value="lansing">Lansing</option>
+        <option value="las-vegas">Las Vegas</option>
+        <option value="lexington">Lexington</option>
+        <option value="lincoln">Lincoln</option>
+        <option value="little-rock">Little Rock</option>
+        <option value="london">London, ON</option>
+        <option value="long-island">Long Island</option>
+        <option value="los-angeles">Los Angeles</option>
+        <option value="louisville">Louisville</option>
+        <option value="lubbock">Lubbock</option>
+        <option value="macon">Macon</option>
+        <option value="madison">Madison</option>
+        <option value="memphis">Memphis</option>
+        <option value="miami">Miami</option>
+        <option value="midland-odessa">Midland / Odessa</option>
+        <option value="milwaukee">Milwaukee</option>
+        <option value="minneapolis-stpaul">Minneapolis / St Paul</option>
+        <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
+        <option value="modesto">Modesto</option>
+        <option value="montgomery">Montgomery</option>
+        <option value="napa-sonoma">Napa / Sonoma</option>
+        <option value="naples">Naples</option>
+        <option value="nashville">Nashville</option>
+        <option value="new-orleans">New Orleans</option>
+        <option value="new-york">New York City</option>
+        <option value="north-jersey">North Jersey</option>
+        <option value="ocala">Ocala</option>
+        <option value="ogden">Ogden</option>
+        <option value="oklahoma-city">Oklahoma City</option>
+        <option value="omaha">Omaha</option>
+        <option value="orange-county">Orange County</option>
+        <option value="orlando">Orlando</option>
+        <option value="ottawa">Ottawa</option>
+        <option value="palm-beach">Palm Beach</option>
+        <option value="pensacola">Pensacola / Emerald Coast</option>
+        <option value="philadelphia">Philadelphia</option>
+        <option value="phoenix">Phoenix</option>
+        <option value="piedmont-triad">Piedmont Triad</option>
+        <option value="pittsburgh">Pittsburgh</option>
+        <option value="portland">Portland</option>
+        <option value="portland-me">Portland, ME</option>
+        <option value="providence">Providence</option>
+        <option value="raleigh-durham">Raleigh / Durham</option>
+        <option value="regina">Regina</option>
+        <option value="reno">Reno</option>
+        <option value="richmond">Richmond</option>
+        <option value="rio-grande-valley">Rio Grande Valley</option>
+        <option value="roanoke">Roanoke</option>
+        <option value="rochester">Rochester</option>
+        <option value="rockford">Rockford</option>
+        <option value="sacramento">Sacramento</option>
+        <option value="salem-or">Salem OR</option>
+        <option value="salt-lake-city">Salt Lake City</option>
+        <option value="san-angelo">San Angelo</option>
+        <option value="san-antonio">San Antonio</option>
+        <option value="san-diego">San Diego</option>
+        <option value="san-francisco">San Francisco</option>
+        <option value="san-jose">San Jose</option>
+        <option value="santa-barbara">Santa Barbara</option>
+        <option value="santa-clarita">Santa Clarita</option>
+        <option value="santa-cruz">Santa Cruz / Monterey</option>
+        <option value="saskatoon">Saskatoon</option>
+        <option value="savannah-hilton-head">Savannah / Hilton Head</option>
+        <option value="seattle">Seattle</option>
+        <option value="shreveport-bossier">Shreveport / Bossier</option>
+        <option value="sioux-falls">Sioux Falls</option>
+        <option value="south-bend">South Bend</option>
+        <option value="albany-ga">Southern Georgia</option>
+        <option value="spokane-coeur-dalene">Spokane / Coeur d'Alene</option>
+        <option value="springfield-mo">Springfield MO</option>
+        <option value="springfield-ma">Springfield, MA</option>
+        <option value="stcatharines-niagara">St Catharines-Niagara</option>
+        <option value="st-johns">St John's</option>
+        <option value="stlouis">St Louis</option>
+        <option value="stockton">Stockton</option>
+        <option value="sudbury">Sudbury / North Bay</option>
+        <option value="syracuse">Syracuse</option>
+        <option value="tallahassee">Tallahassee</option>
+        <option value="tampa-bay-area">Tampa Bay Area</option>
+        <option value="toledo">Toledo</option>
+        <option value="topeka-lawrence">Topeka / Lawrence</option>
+        <option value="greater-toronto-area">Toronto (GTA)</option>
+        <option value="tucson">Tucson</option>
+        <option value="tulsa">Tulsa</option>
+        <option value="vancouver">Vancouver</option>
+        <option value="ventura-county">Ventura County</option>
+        <option value="victoria">Victoria</option>
+        <option value="washington-dc">Washington DC</option>
+        <option value="westchester-county">Westchester County</option>
+        <option value="wichita">Wichita</option>
+        <option value="wilmington-newark">Wilmington-Newark</option>
+        <option value="windsor">Windsor</option>
+        <option value="winnipeg">Winnipeg</option>
+        <option value="worcester">Worcester</option>
+        <option value="youngstown">Youngstown</option>
+      </select>
+    </div>
+  </div>
+</section>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Photos</span></header><br/>
+  <%= render :partial => 'picasa/form' %>
+  <div id="myGallery"></div>
+  <%= render :partial => 'flickr/form' %>
+  <div id="flickr" style="display:none;"></div>
+</section>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Chat_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">GreenChat</span></header>
+    <div class="">
+                        <div>
 				           Add Friends <br/>
 				         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
 				       </div>
-				      <div class="container" >
+				      <div>
 				           Chat With Friends <br/>
 				         	<ul id="friends_list1"></ul>
 				       </div>
-				       
-				      <div class="container" >
-				          <%= render :partial => 'twitter/form' %>
-				          <iframe allowtransparency="true" frameborder="0" scrolling="no"
-						            src="http://platform.twitter.com/widgets/tweet_button.html"
-						            style="width:130px; height:20px;">
-						  </iframe>
-						   <br/>
-						  <div id="twiter1" style="display:none;">
-						    My Tweets <br/>
-						    <script>
-					          MyTwitterWidget = new TWTR.Widget({
-									  version: 2,
-									  type: 'profile',
-									  rpp: 4,
-									  interval: 30000,
-									  width: 250,
-									  height: 300,
-									  theme: {
-									    shell: {
-									      background: '#333333',
-									      color: '#ffffff'
-									    },
-									    tweets: {
-									      background: '#000000',
-									      color: '#ffffff',
-									      links: '#4aed05'
-									    }
-									  },
-									  features: {
-									    scrollbar: false,
-									    loop: false,
-									    live: false,
-									    behavior: 'all'
-									  }
-									}).render().setUser('twitter').start();
-								
-								
-								function twitter()
-								{
-								   var user = document.getElementById('username').value;
-								   if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
-								    alert(_("Not a valid username"));
-								    return false;
-								   }
-								    MyTwitterWidget
-								    .destroy()
-								    .setUser(user).render().start();
-									document.getElementById('twiter1').style.display="block";
-								}
-								
-								
-						</script>
-					    </div>
-				    </div>
-				     
-			         <script src="http://connect.facebook.net/en_US/all.js"></script>
-			         <script>
-			            FB.init({
-			            appId: "<%= Facebook.config[:client_id] %>",
-			            cookie: true,
-			            oauth: true,
-			            xfbml: true
-			            });
-			                FB.Canvas.setAutoGrow();
-			         </script>
-			        
-			       </div>
-		 	<% end %>
-		   </div>
-		  </div>
-		  </div>
+ </div>
+</section>
+<section class="gidget mini" data-source="">
+		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
+		    <span class="gidgetTitle">Albums</span></header>
+		<div style="width: 570px;height:300px;">
+		 <div class="demo">
+		
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">My Photos</a></li>
+				<li><a href="#tabs-2">Upload Photos</a></li>
+				<li><a href="#tabs-4">My Albums</a></li>
+				<li><a href="#tabs-5">Friends Albums</a></li>
+		
+			</ul>
+			<div id="tabs-1">
+			
+				
+				<% if current_user1 %>
+		<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
+		<%end%>
+				
+			       <div id="Photo" style="margin-left:330px;padding:2px;width:300px;"></div>	
+			</div>
+			<div id="tabs-2">
+		<% if current_user1 %>		
+		<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
+		<%end%>
+			</div>
+		
+				<div id="tabs-4">
+				<% if current_user1 %>
+		<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
+		<%end%>
+			</div>
+				<div id="tabs-5">
+			  		<h2>My Friends Albums</h2>
+				  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
+				  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
+				</div>
+		</div>
+		
+		</div>
+		</div>
+</section>
+
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Social</span></header>
+  <div class="">
+    <div id="profile" style="width: 400px;"></div>
+    <script type="IN/Login" data-onAuth="loadData"></script>
+    <div id="fb-root"></div>
+      FaceBook Details <br/>
+      <aside class="sidebar">
+        <%= render :partial => 'layouts/sidebar' %>
+      </aside>
+    <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
+      <% if current_user1 %>
+      <script src="http://connect.facebook.net/en_US/all.js"></script>
+      <script>
+      FB.init({
+          appId:"<%= Facebook.config[:client_id] %>",
+          cookie:true,
+          oauth:true,
+          xfbml:true
+      });
+      FB.Canvas.setAutoGrow();
+      </script>
+      <% end %>
+    </div>
+  </div>
+  <%= render :partial => 'twitter/form' %>
+  <iframe allowtransparency="true" frameborder="0" scrolling="no"
+          src="http://platform.twitter.com/widgets/tweet_button.html"
+          style="width:130px; height:20px;">
+  </iframe>
+  <br/>
+
+  <div id="twiter1" style="display:none;">
+    My Tweets <br/>
+    <script>
+        MyTwitterWidget = new TWTR.Widget({
+            version:2,
+            type:'profile',
+            rpp:4,
+            interval:30000,
+            width:250,
+            height:300,
+            theme:{
+                shell:{
+                    background:'#333333',
+                    color:'#ffffff'
+                },
+                tweets:{
+                    background:'#000000',
+                    color:'#ffffff',
+                    links:'#4aed05'
+                }
+            },
+            features:{
+                scrollbar:false,
+                loop:false,
+                live:false,
+                behavior:'all'
+            }
+        }).render().setUser('twitter').start();
+
+
+        function twitter() {
+            var user = document.getElementById('username').value;
+            if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
+                alert(_("Not a valid username"));
+                return false;
+            }
+            MyTwitterWidget
+                    .destroy()
+                    .setUser(user).render().start();
+            document.getElementById('twiter1').style.display = "block";
+        }
+
+
+    </script>
+  </div>
+</section>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Blog_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Blog</span></header>
+  <div class=""><%= render :partial => 'posts/form1' ,:locals=>{:post=>Post.new} %></div>
+</section>
+</div>
+<%end%>
+
 </body>
 </html>

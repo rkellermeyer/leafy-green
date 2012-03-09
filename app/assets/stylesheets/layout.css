@@ -8,7 +8,7 @@ body > h1 {
 }
 body > h1 a,
 body > h1 a:hover {
-  color: #FFF;
+  color: #666666;
 }
 body > .container {
   width: 800px;

@@ -14,6 +14,8 @@ Ratemy::Application.routes.draw do
    match "/auth/:provider/callback", to: "sessions#create"
   match "/auth/failure", to: "sessions#failure"
   
+  match "/facebook/logout", to: "facebooks#destroy"
+  
   resource :facebook, :except => :create do
   get :callback, :to => :create
   end

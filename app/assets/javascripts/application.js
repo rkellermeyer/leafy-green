@@ -17,3 +17,6 @@
 //= require jqGalViewII.pack
 
 
+$(function(){
+  $('.container').hide();
+});

@@ -36,7 +36,7 @@
 	});
 	</script>
 	
-	  <p><%= link_to "Logout Facebook", facebook_path, :method => :delete %></p>
+	  <p><%= link_to "Logout Facebook", facebook_path+"/logout", :method => :delete %></p>
 	<% else %>
 	  <dl>
 	    <dd><fb:login-button length="long" onlogin="location.href = '<%= facebook_path %>'" scope="<%= Facebook.config[:scope] %>"></fb:login-button></dd>
