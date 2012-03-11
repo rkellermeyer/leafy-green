@@ -38,6 +38,20 @@ class IdentitiesController < ApplicationController
 	    end    
   end
     
+  def update_categories
+    @identity = Identity.find(current_identity1.id)  
+  	
+  	respond_to do |format|
+	    if @identity.update_attributes(:categories => params[:categories])
+	       format.html { redirect_to(root_url) }
+	       format.json { render json: @identity }
+	    else
+	        format.html { render :action => "edit" }
+	        format.json { render :action => "edit" }
+	    end
+	 end    
+  end
+  
     def getNamesOnId
  
    @identities = Identity.find_all_by_id(params[:id])

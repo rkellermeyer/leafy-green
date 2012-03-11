@@ -4,6 +4,13 @@
   font-family: “helvetica”,arial,sans-serif;
 }
 body {}
+
+body >  .sidebar1 {
+  float: right;
+  text-align: center;
+  width: 300px;
+}
+
 #mainHeader {
   border-bottom: 1px solid #eee;
   min-height: 30px;

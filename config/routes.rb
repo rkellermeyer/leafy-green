@@ -9,6 +9,7 @@ Ratemy::Application.routes.draw do
   resources :posts
   match "identities/posts/rate_up/:id" => "posts#rate_up"
   match "identities/posts/rate_down/:id" => "posts#rate_down"
+  match "/identities/update_categories" => "identities#update_categories"
   resources :categories
   
    match "/auth/:provider/callback", to: "sessions#create"

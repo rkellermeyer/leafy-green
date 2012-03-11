@@ -225,6 +225,16 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       	
     }
     
+    $(function() {
+ 		$('#categories_form').submit(function () {
+			console.log("categories_form");
+		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from categories_form update');
+			    }, 'json');
+
+	    		return false;
+  			}); 
+  	});
 
       function submitTag() { 
 	      	tagValue = $("#tag-name").val(); 
@@ -386,6 +396,17 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
           $("#myGallery").empty();
           loadJS(url);
       }
+      function clickablelogout(){
+       var bb=document.getElementById('logout');
+       
+       if(bb.style.display =='none')
+       {
+         bb.style.display = "block";
+         }
+       else
+         {bb.style.display = "none";
+         }
+      }
   </script>
   <% if current_user1 %>
 <script type="text/javascript">
@@ -400,11 +421,12 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   <aside class="headerNav">
     <% if current_user1 %>
         <%= current_identity1.name %> <%= current_identity1.last_name %>
-        <%= link_to "Log out", log_out_path %>
-        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %>
+       
+        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" ,:onclick => "clickablelogout();"%>
         <%= image_tag "icons/Friends_20x20.png" %>
         <%= image_tag "icons/Network.png" %>
         <%= image_tag "icons/Messages.png" %>
+        <div id="logout" style="display:none;" > <%= link_to "Log out", log_out_path %> </div>
     <% end %>
     <% if !current_user1 %>
         <%= link_to "Sign up", sign_up_path %> or
@@ -412,13 +434,23 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     <% end %>
   </aside>
 </header>
-
+<% if current_user1 %>
+<div>
+<div style="float:left;">
+<aside class="sidebar1">
+     <%= render :partial => 'layouts/sidebar1' %>
+ </aside>
+ <%end%>
+</div>
+ 
+ <div style="float:left;">
 <div id="appWrap">
 <%= yield %>
 <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash#{name}" %>
 <% end %>
  <% if current_user1 %>
+ 
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/RateMy_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Rate My</span></header>
@@ -751,7 +783,8 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
           style="width:130px; height:20px;">
   </iframe>
   <br/>
-
+  
+  
   <div id="twiter1" style="display:none;">
     My Tweets <br/>
     <script>
@@ -803,6 +836,8 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     <span class="gidgetTitle">Blog</span></header>
   <div class=""><%= render :partial => 'posts/form1' ,:locals=>{:post=>Post.new} %></div>
 </section>
+</div>
+<div>
 </div>
 <%end%>
 
