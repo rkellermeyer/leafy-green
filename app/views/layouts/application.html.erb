@@ -343,6 +343,12 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
           });
       }
 
+	
+		function rateposts(postsurl){
+			 $.getJSON(postsurl, function (data) {
+	              console.log(data);
+	          });
+		}
   </script>
 
   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
@@ -364,9 +370,10 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       }
 
   </script>
+    <% if current_user1 %>
   	 <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
 	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
-	 
+	<% end %> 
   <%= stylesheet_link_tag :jdgallery %>
   <%= javascript_include_tag :jdgallery %>
   <%= javascript_include_tag :picasa1 %>
@@ -421,8 +428,8 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   <aside class="headerNav">
     <% if current_user1 %>
         <%= current_identity1.name %> <%= current_identity1.last_name %>
-       
-        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" ,:onclick => "clickablelogout();"%>
+       <span  onclick="clickablelogout();">
+        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %> </span>
         <%= image_tag "icons/Friends_20x20.png" %>
         <%= image_tag "icons/Network.png" %>
         <%= image_tag "icons/Messages.png" %>
@@ -460,7 +467,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
           <% current_identity1.categories.each do |category| %>
               <li class="rateMyCategoriesList">
                 <ul class="rateMyCategory">
-                  <li><%= Category.find(category).name %></li>
+                  <li><h2><%= Category.find(category).name %></h2></li>
                   <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
                       <li class="rateMyCategoryItem"><%= post.title %>
                         <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span>
@@ -473,8 +480,11 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
                           <% end %>
                         </li>
                         <li name="postscontents"><%= post.content %></li>
-                        <li><%= post.score %></li>
-                        <li><%= link_to image_tag("icons/UpOpen.png"), "identities/posts/rate_up/#{post.id}", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up" %> <%= link_to image_tag("icons/DownOpen.png"), "identities/posts/rate_down/#{post.id}", :remote => true %></li>
+                        <li>Score:<%= post.score %> Rateup:<%= post.rate_up %> Ratedown:<%= post.rate_down %></li>
+                        <li>
+                        	<%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
+                        	<%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+                        </li>
                       </ul>
                   <% end %>
                 </ul>
@@ -501,7 +511,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     </script>
     <div class="field">
       <label for="city" class="city-select-label">
-        Show the daily deal for
+        Show the Groupon daily deal for
       </label>
       <select name="city" id="city_select" onchange="javascript:groupon();">
         <option value="abbotsford">Abbotsford</option>
@@ -683,6 +693,74 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       </select>
     </div>
   </div>
+  
+ <div>
+   <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+   <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('adbf0508-33e0-492d-a5a7-1e54a18e342e');</script>
+  </div>
+  <br/>
+  <div>
+  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('638a0d94-9bee-4242-baf9-096aa5810f61');</script>
+  </div>
+    <br/>
+  <div>
+  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('613c43ed-30e6-4dd5-be3f-2701ac40cc3d');</script>
+  </div>
+    <br/>
+   
+   
+   <div class="">
+    <script type='text/javascript'>
+        function coupscout() {
+            var city_coupscout = document.getElementById('city_coupscout_select').value;
+            WIDGETBOX.renderWidgetInElement(city_coupscout,'widgetbox_widget_parent_3')
+        }
+    </script>
+    <div class="field">
+      <label for="city1" class="city-select-label">
+        Show the Coupscout daily deal for
+      </label>
+      <select name="city_coupscout" id="city_coupscout_select" onchange="javascript:coupscout();">
+         <option value="2882f12e-b7e5-4840-b5f6-2d43a57aa1e9">Atlanta</option>
+         <option value="9e134ea2-7430-4ac8-9b7f-77f0c57b0770">Baltimore</option>
+         <option value="9376cc8b-9608-4960-ab47-af7c83332bed">Boston</option>
+         <option value="667bd686-6a22-4a23-888c-974b9c036a53">Brooklyn</option>
+         <option value="b9f284bb-705d-41ea-85ef-f649b1c72898">Chicago</option>
+         <option value="ffcf101d-54ea-4224-9ae4-886c15a302dd">Cleveland</option>
+         <option value="08fa21b7-7549-44d3-976b-15b02de1b303">Detroit</option>
+         <option value="fc74125a-af75-44f5-b6f1-d811688583f8">Fort Lauderdale</option>
+         <option value="64d9f52a-79fe-4b29-a81c-09f60b846da8">Hampton Roads</option>
+         <option value="15b64519-3995-4dbc-a1c4-1444a6772c65">Hartford</option>
+         <option value="29cddfda-4d12-4372-90b1-9ee9ea13103a">Honolulu</option>
+         <option value="378d55e3-3895-4411-bd62-059fd04b5ed4">Houston</option>
+         <option value="2747cd0b-710e-4d03-b035-9633d8717a73">Los Angeles</option>
+         <option value="6edf5154-e9c8-4164-90dc-0db1527056f8">Minneapolis St Paul</option>
+         <option value="4cfd569a-da65-49c3-b6f9-a6d33ef46fe7">New York</option>
+         <option value="2e20b779-cc3f-49bb-926d-141438d62cde">Philadelphia</option>
+         <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
+         <option value="45b082f4-195b-40e7-965b-0a7c9af4b086">Raleigh Durham</option>
+         <option value="82a54576-161e-43d1-96b9-283a73f80423">San Diego</option>
+         <option value="72e50efb-c9bf-4c3c-b45a-c4a9b53697c5">San Francisco</option>
+         <option value="d4b50374-e76e-45dc-b72a-05be7d67b940">Scottsdale</option>
+         <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
+         
+      
+       </select>
+     </div>  
+    </div>
+   
+   
+    <div>
+     <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+     <script type="text/javascript">
+     		var myCoupScoutWidget = null;
+     		if (WIDGETBOX) 
+     			myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
+     </script>
+   </div>
+   
 </section>
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
@@ -754,6 +832,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Social</span></header>
+    <br/><br/>
   <div class="">
     <div id="profile" style="width: 400px;"></div>
     <script type="IN/Login" data-onAuth="loadData"></script>
