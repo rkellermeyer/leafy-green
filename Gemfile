@@ -26,6 +26,7 @@ end
 	gem 'omniauth-identity'
 	gem 'execjs'
     
+    gem 'juggernaut', :git => 'git://github.com/maccman/juggernaut.git'
     
     gem 'groupon'
     gem 'carrierwave'

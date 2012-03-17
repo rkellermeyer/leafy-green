@@ -1,4 +1,16 @@
 Ratemy::Application.routes.draw do
+
+  resources :messages
+
+  resources :channels
+
+  match "/chat/send", :controller => "chat", :action => "send_message"
+  match "/chat/channel1", :controller => "chat", :action => "channel1"
+  match "/chat/channel2", :controller => "chat", :action => "channel2"
+  match "/chat/channels", :controller => "chat", :action => "channels"
+  match "/messages/send", :controller => "messages", :action => "send_message"
+   match "/getMessagesOnChannel", to: "messages#getMessagesOnChannel"
+   
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "identities#new", :as => "sign_up"

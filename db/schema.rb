@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216164310) do
+ActiveRecord::Schema.define(:version => 20120316120703) do
 
   create_table "albums", :force => true do |t|
     t.integer  "identity_id"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "channels", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -75,6 +81,14 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "messages", :force => true do |t|
+    t.string   "msg_body"
+    t.string   "sender"
+    t.string   "channel"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "photos", :force => true do |t|
     t.integer  "identity_id"
     t.string   "photo_file_name"
@@ -93,16 +107,17 @@ ActiveRecord::Schema.define(:version => 20120216164310) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.decimal  "score",       :precision => 10, :scale => 0
+    t.decimal  "score",            :precision => 10, :scale => 0
     t.integer  "rate_up"
     t.integer  "rate_down"
     t.integer  "votes"
     t.integer  "user_id"
     t.integer  "category_id"
     t.boolean  "visible"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "image"
+    t.string   "remote_image_url"
   end
 
   create_table "tags", :force => true do |t|

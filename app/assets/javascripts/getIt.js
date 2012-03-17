@@ -6,7 +6,7 @@ $(function() {
    
     for(c in data){
    		
-	    if ( jQuery.isPlainObject(data[c])){
+	    if ( $.isPlainObject(data[c])){
 	         
 	        var jj="#slider_"+data[c].id
 	   $(jj).easySlider({auto: true,continuous: true });
@@ -25,7 +25,7 @@ $(function() {
     friendsData = data;
     $("#selectvalidusers").append("<div>Select Access Users: </div>");
     for(var i in data) {
-    	if ( jQuery.isPlainObject(data[i])){
+    	if ( $.isPlainObject(data[i])){
     	
    
 
@@ -50,7 +50,7 @@ $(function() {
   $.getJSON("/photos", function(data){
     //console.log(data);
     for(var i in data) {
-    	if ( jQuery.isPlainObject(data[i])){
+    	if ( $.isPlainObject(data[i])){
     	//if (data[i].caption == null)
     	 //  data[i].caption =""
     	

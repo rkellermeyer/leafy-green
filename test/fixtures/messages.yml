@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  msg_body: MyString
+  sender: MyString
+  channel: MyString
+
+two:
+  msg_body: MyString
+  sender: MyString
+  channel: MyString

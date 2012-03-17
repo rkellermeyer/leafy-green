@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/maccman/juggernaut.git
+  revision: 5ec5081043b4f01d13499c4350e7a93e179492ea
+  specs:
+    juggernaut (2.1.1)
+      redis
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -208,6 +215,7 @@ DEPENDENCIES
   flickraw
   groupon
   jquery-rails
+  juggernaut!
   mysql
   omniauth
   omniauth-facebook
