@@ -10,6 +10,7 @@ Ratemy::Application.routes.draw do
   match "/chat/channels", :controller => "chat", :action => "channels"
   match "/messages/send", :controller => "messages", :action => "send_message"
    match "/getMessagesOnChannel", to: "messages#getMessagesOnChannel"
+   match "/downloadMessagesOnChannel", to: "messages#downloadMessagesOnChannel"
    
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"

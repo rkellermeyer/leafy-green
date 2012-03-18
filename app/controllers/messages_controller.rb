@@ -42,6 +42,19 @@ def send_message
     end
   end
   
+  def downloadMessagesOnChannel
+  channelId = params[:channel_id]
+   @messages = Message.find_all_by_channel(channelId, :order => "created_at DESC")
+	data = channelId  + " Channel Id Conversations\n"
+	data = data + "-----------------------------------------------\n\n"
+     @messages.each do| obj|
+     	msg_date = obj.created_at.to_s(:rfc822) 
+     	data = data + obj.sender + " : "+ obj.msg_body + "\t"+ msg_date + "\n"
+     end
+	filename = channelId+".txt"
+	send_data( data, :filename => filename )
+  end
+ 
 	
   # GET /messages
   # GET /messages.json

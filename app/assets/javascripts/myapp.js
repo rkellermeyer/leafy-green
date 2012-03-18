@@ -59,7 +59,7 @@
 		$.get('\getMessagesOnChannel', {channel_id: channelId}, function(data, textStatus, jqXHR){
 		    	$('#messages2').show();
 		    	$("#messages2").append("<br/>"+channelName+"&nbsp; Messages");
-		    	//$("#messages2").append("&nbsp; &nbsp; &nbsp; &nbsp; <a href='javascript:void(0);' onclick='downloadMsgs(\""+channelId+"\")'>Download Messages</a><hr/>");
+		    	$("#messages2").append("&nbsp; &nbsp; &nbsp; &nbsp; <a href='\downloadMessagesOnChannel?channel_id="+channelId+"'>Download Messages</a><hr/>");
 		    	for(var i in data) {
 			    	if ( jQuery.isPlainObject(data[i])){
 			      		$("#messages2").append("<li>"+data[i].sender +":&nbsp;&nbsp;" + data[i].msg_body + "</li>");
@@ -71,7 +71,7 @@
 	}
 	
 	function downloadMsgs(downloadChId){
-		//alert(downloadChId);
+		alert(downloadChId);
 	}
 	
 	var global_channelId = '';
