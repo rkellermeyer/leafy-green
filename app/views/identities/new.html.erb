@@ -2,7 +2,7 @@
 If you have account already <a href="http://localhost:3000/log_in">Login</a><br/>
 
 
-<%= form_tag "/auth/identity/register" , :multipart => true do %>
+<%= form_tag "/auth/identity/register" , :id => "register_form",  :multipart => true do %>
  
   <div class="field">
     <%= label_tag 'First Name' %><br>

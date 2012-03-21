@@ -1,4 +1,5 @@
 class IdentitiesController < ApplicationController
+layout "test"
   respond_to :json
   before_filter :login_required , :except => [:index,:new]
   
@@ -17,7 +18,14 @@ class IdentitiesController < ApplicationController
     @identity = env['omniauth.identity']
   end
   
+  def getCategories
+         render :template  => 'identities/getCategories'
+  end
 
+  def getRateMy
+         render :template  => 'identities/getRateMy'
+  end
+  
   def edit
     @identity = Identity.find(params[:id])
     

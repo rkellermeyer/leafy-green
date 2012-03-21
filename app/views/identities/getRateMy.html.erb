@@ -1,0 +1,33 @@
+<% if current_user1 %>
+<ul class="rateMyCategories">
+         <% if current_identity1.categories %>
+	          <% current_identity1.categories.each do |category| %>
+	              <li class="rateMyCategoriesList">
+	                <ul class="rateMyCategory">
+	                  <li><h2><%= Category.find(category).name %></h2></li>
+	                  <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+	                      <li class="rateMyCategoryItem"><%= post.title %>
+	                        <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span>
+	                        Like this!
+	                      </li>
+	                      <ul>
+	                        <li>
+	                          <% if !post.image.nil? %>
+	                              <%= post.image %>
+	                          <% end %>
+	                        </li>
+	                        <li name="postscontents"><%= post.content %></li>
+	                        <li>Score:<%= post.score %> Rateup:<%= post.rate_up %> Ratedown:<%= post.rate_down %></li>
+	                        <li>
+	                        	<%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
+	                        	<%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+	                        </li>
+	                      </ul>
+	                  <% end %>
+	                </ul> 
+	              </li>
+	          <% end %> 
+          <% end %>
+        </ul>
+ <% end %>
+ 

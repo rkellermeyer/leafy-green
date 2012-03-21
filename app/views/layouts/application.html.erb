@@ -54,7 +54,22 @@
 <%end%>
 </head>
 <body>
+<div id="signform" style="<% if current_user1 %>display:none <% end %>" >
+        <%= link_to "Sign up", 'javascript:void(0);'  , :onclick => "javascript:showsignup();"%> or
+        <%= link_to "Log in", 'javascript:void(0);' ,:onclick => "javascript:showlogin();" %>
 
+
+<div id="loginForm" style="display:none;">
+<%= render :partial => 'sessions/newform' %>
+</div>
+
+<div id="newUserForm" style="display:none;">
+<%= render :partial => 'identities/newform' %>
+</div>
+</div>
+
+
+<div id="bodyContent" style="<% if current_user1 %>display:block; <%else%> display:none; <%end%>">
 <header id="mainHeader">
   <aside class="headerNav">
     <% if current_user1 %>
@@ -66,19 +81,20 @@
         <%= image_tag "icons/Messages.png" %>
         <div id="logout" style="display:none;" > <%= link_to "Log out", log_out_path %> </div>
     <% end %>
-    <% if !current_user1 %>
-        <%= link_to "Sign up", sign_up_path %> or
-        <%= link_to "Log in", log_in_path %>
-    <% end %>
+   
   </aside>
 </header>
-<% if current_user1 %>
+
 <div>
 <div style="float:left;">
 <aside class="sidebar1">
-     <%= render :partial => 'layouts/sidebar1' %>
+	<div id="greenBlog">
+		<% if current_user1 %>
+	     <%= render :partial => 'layouts/sidebar1' %>
+	     <%end%>
+     </div>
  </aside>
- <%end%>
+
 </div>
  
  <div style="float:left;">
@@ -87,46 +103,18 @@
 <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash#{name}" %>
 <% end %>
- <% if current_user1 %>
+
  
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/RateMy_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Rate My</span></header>
-  <div class="">
+  <div class="" id="getRateMy">
     <% if current_user1 %>
-        <ul class="rateMyCategories">
-         <% if current_identity1.categories %>
-	          <% current_identity1.categories.each do |category| %>
-	              <li class="rateMyCategoriesList">
-	                <ul class="rateMyCategory">
-	                  <li><h2><%= Category.find(category).name %></h2></li>
-	                  <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
-	                      <li class="rateMyCategoryItem"><%= post.title %>
-	                        <span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span>
-	                        Like this!
-	                      </li>
-	                      <ul>
-	                        <li>
-	                          <% if !post.image.nil? %>
-	                              <%= post.image %>
-	                          <% end %>
-	                        </li>
-	                        <li name="postscontents"><%= post.content %></li>
-	                        <li>Score:<%= post.score %> Rateup:<%= post.rate_up %> Ratedown:<%= post.rate_down %></li>
-	                        <li>
-	                        	<%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
-	                        	<%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
-	                        </li>
-	                      </ul>
-	                  <% end %>
-	                </ul> 
-	              </li>
-	          <% end %> 
-          <% end %>
-        </ul>
+        
     <% end %>
   </div>
 </section>
+ 
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Deals</span></header>
@@ -206,7 +194,7 @@
         <option value="fort-worth">Fort Worth</option>
         <option value="appleton">Fox Cities</option>
         <option value="fresno">Fresno</option>
-        <option value="gainesville">Gainesville</option>
+        <option value="gaiesville">Gainesville</option>
         <option value="grand-rapids">Grand Rapids</option>
         <option value="green-bay">Green Bay</option>
         <option value="greenville">Greenville</option>
@@ -244,7 +232,7 @@
         <option value="miami">Miami</option>
         <option value="midland-odessa">Midland / Odessa</option>
         <option value="milwaukee">Milwaukee</option>
-        <option value="minneapolis-stpaul">Minneapolis / St Paul</option>
+        <option value="mineapolis-stpaul">Minneapolis / St Paul</option>
         <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
         <option value="modesto">Modesto</option>
         <option value="montgomery">Montgomery</option>
@@ -395,6 +383,7 @@
    </div>
    
 </section>
+
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Photos</span></header><br/>
@@ -403,6 +392,7 @@
   <%= render :partial => 'flickr/form' %>
   <div id="flickr" style="display:none;"></div>
 </section>
+
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Chat_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">GreenChat</span></header>
@@ -418,7 +408,9 @@
 			<div id="tabs-11">
                         <div>
 				           Add Friends <br/>
+				           <% if current_user1 %>
 				         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
+				         <%end%>
 				       </div>
 				      <div>
 				           Chat With Friends <br/>
@@ -426,17 +418,22 @@
 				       </div>
 		     </div>
 		     <div id="tabs-12">
-		     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
-		     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
+		      <% if current_user1 %>
+			     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
+			     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
+			   <%end%>   
 		     </div>
 		     <div id="tabs-13">
-		      <%= render :partial =>"chat/sendmessage" %>
+		      <% if current_user1 %>
+		     	 <%= render :partial =>"chat/sendmessage" %>
+		       <%end%>
 		     </div>
 		  </div>
 		  </div>
 		   
  </div>
 </section>
+
 <section class="gidget mini" data-source="">
 		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
 		    <span class="gidgetTitle">Albums</span></header>
@@ -473,8 +470,11 @@
 			</div>
 				<div id="tabs-5">
 			  		<h2>My Friends Albums</h2>
+			  		
+				<% if current_user1 %>
 				  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
 				  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
+				 <% end %>
 				</div>
 		</div>
 		
@@ -563,6 +563,8 @@
     </script>
   </div>
 </section>
+
+
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Blog_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Blog</span></header>
@@ -571,7 +573,7 @@
 </div>
 <div>
 </div>
-<%end%>
 
+</div>
 </body>
 </html>

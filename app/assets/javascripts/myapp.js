@@ -1,4 +1,6 @@
      $(function () {
+     
+     
       $( "#tabs" ).tabs();
       $( "#tabschat" ).tabs();
            var apiKey = '1e327eadb60c60b16219f705db8dd5be';
@@ -242,6 +244,30 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     }
     
     $(function() {
+     
+     
+      $('#login_form').submit(function () {
+			
+		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from login save'+jqXHR);
+			    	
+			    	// if(jqXHR && jqXHR.status == 200) {
+               //document.location = 'http://localhost:3000/';
+                //   }
+                
+                	afterLogin();
+			    	document.getElementById("bodyContent").style.display="block";
+			    	document.getElementById("loginForm").style.display="none";
+			    	document.getElementById("newUserForm").style.display="none";
+			    }, 'json');
+            
+	    		return false;
+  			}); 
+  			
+      
+
+       })
+
  		$('#categories_form').submit(function () {
 			console.log("categories_form");
 		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
@@ -249,8 +275,26 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			    }, 'json');
 				location.reload(true);
 	    		return false;
-  			}); 
-  	});
+  		}); 
+  		  		
+  		 $('#register_form').submit(function () {
+			console.log("login_form");
+		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from categories_form update');
+			    	//location.reload(true);
+			    }, 'json');
+  		});  	
+  		
+  		
+  		 $('#new_post').submit(function () {
+			console.log("categories_form");
+		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from categories_form update');
+			    	$('#postMsgBox').append("successfully added");
+			    }, 'json');
+  		});  
+  				
+
 
       function submitTag() { 
 	      	tagValue = $("#tag-name").val(); 
@@ -383,5 +427,33 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
          {bb.style.display = "none";
          }
       }
+      
+      function showsignup(){
+        var bb= document.getElementById('newUserForm');
+        var cc= document.getElementById('loginForm');
+        if(bb.style.display =='none')
+       {
+         bb.style.display = "block";
+         cc.style.display ="none";
+         }
+       else
+         {bb.style.display = "none";
+         }
+      }
+      
+       function showlogin(){
+        var bb= document.getElementById('loginForm');
+        var cc= document.getElementById('newUserForm');
+        if(bb.style.display =='none')
+       {
+         bb.style.display = "block";
+         cc.style.display ="none";
+         }
+       else
+         {bb.style.display = "none";
+         }
+      }
+     
+      
       
  
