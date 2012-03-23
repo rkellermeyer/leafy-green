@@ -27,7 +27,7 @@ Ratemy::Application.routes.draw do
   match "/getRateMy" => "identities#getRateMy"
   resources :categories
   
-   match "/auth/:provider/callback", to: "sessions#create"
+   match "/auth/:provider/callback", to: "sessions#callback"
   match "/auth/failure", to: "sessions#failure"
   
   match "/facebook/logout", to: "facebooks#destroy"

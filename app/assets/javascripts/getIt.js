@@ -122,7 +122,10 @@ function getGreenBlogs(){
 function getRateMy(){
     $.get("/getRateMy", null, function(data, textStatus, jqXHR){
 	    	console.log('response getRateMy');
-	    	$("#getRateMy").replaceWith(data);
+	    	if ($("#getRateMy").length>0)
+	    		$("#getRateMy").replaceWith(data);
+	    	else
+	    		$("#green_chat").replaceWith(data);
 	    	//setTimeout('callme()',4000);
 	    }, 'html');
 }

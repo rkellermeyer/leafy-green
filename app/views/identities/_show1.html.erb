@@ -1,6 +1,6 @@
 <div style="border:1px solid black">
 <div id="categories_msg"></div>
-<form name="categories_form" id="categories_form" method="post" action="/identities/update_categories">
+<form name="categories_form" id="categories_form" method="post" action="/identities/update_categories" onSubmit="categoriesFormSubmit(this);return false;">
   
 <ul>
 <% categories.each do |category| %>

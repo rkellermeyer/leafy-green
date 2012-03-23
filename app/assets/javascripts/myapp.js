@@ -266,27 +266,31 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   			
       
 
-       })
+       });
 
+/*
+ 	$(function() {
  		$('#categories_form').submit(function () {
 			console.log("categories_form");
 		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
 			    	console.log('response from categories_form update');
+			    	 getRateMy();
 			    }, 'json');
-				location.reload(true);
+				//location.reload(true);
 	    		return false;
   		}); 
-  		  		
-  		 $('#register_form').submit(function () {
-			console.log("login_form");
-		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+  	});
+*/
+  		
+  	function categoriesFormSubmit(obj){
+  		console.log("categories_form");
+		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
 			    	console.log('response from categories_form update');
-			    	//location.reload(true);
-			    
+			    	 getRateMy();
 			    }, 'json');
-  		});  	
-  		
-  		
+	    		return false;
+  	}
+  	
   		 $('#new_post').submit(function () {
 			console.log("categories_form");
 		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
@@ -295,8 +299,22 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			    }, 'json');
   		});  
   				
-
-
+  		 $(function() {
+				$('#register_form').submit(function () {
+							console.log("register_form");
+						    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
+							    	console.log('response from register_form = '+data);
+							    	if (data!=null && data!='null'){
+							    		document.getElementById("bodyContent").style.display="none";
+								    	document.getElementById("loginForm").style.display="block";
+								    	document.getElementById("newUserForm").style.display="none";	
+																																																																																																											    	
+							    	}
+							    }, 'json');
+					    		return false;
+				  }); 
+		})
+		
       function submitTag() { 
 	      	tagValue = $("#tag-name").val(); 
 	      //Adds a new list item below image. Also adds events inline since they are dynamically created after page load 

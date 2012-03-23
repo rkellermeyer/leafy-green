@@ -16,6 +16,11 @@ layout "test"
 
   def new
     @identity = env['omniauth.identity']
+     respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @identities }
+     
+    end
   end
   
   def getCategories
