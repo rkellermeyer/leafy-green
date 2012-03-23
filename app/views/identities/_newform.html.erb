@@ -1,38 +1,116 @@
 <%= form_tag "/auth/identity/register" , :id => "register_form",  :multipart => true do %>
  
-  <div class="field">
-    <%= label_tag 'First Name' %><br>
+  <div id="signup_left">
+  <div class="sign_up_marker">1</div>
+  <h2>Tell us a little bit about yourself.</h2>
+  <hr class="signup_headline_border"/>
+  <ul id="about_yourself_panel">
+    <li class="double_column_header">
+      <label for="first_name">First Name:</label>
+      <label for="last_name">Last Name:</label>
+    </li>
+    
+  <li class="double_column_inputs">
     <%= text_field_tag :name, @identity.try(:name) %>
-  </div>
-   
-   <div class="field">
-    <%= label_tag :last_name %><br>
     <%= text_field_tag :last_name, @identity.try(:last_name) %>
-  </div>
-  <div class="field">
-    <%= label_tag :email %><br>
-    <%= text_field_tag :email, @identity.try(:email) %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="field">
-    <%= label_tag :password_confirmation %><br>
-    <%= password_field_tag :password_confirmation %>
-  </div>
+  </li>
+   <li>
+      <label for="email">Email:</label>
+    </li>
+    <li>
+     <%= text_field_tag :email, @identity.try(:email) %>
+    </li>
+      <li>
+      <label for="email_confirmation">Confirm Email:</label>
+    </li>
+    <li>
+      <%= text_field_tag :confirmemail, @identity.try(:confirmemail) %>
+     </li>
+     <li>
+      <label for="username">Create a username:</label>
+    </li>
+    <li>
+       <%= text_field_tag :username, @identity.try(:username) %>
+     </li>
+    <li>
+      <label for="password">Create a password:</label>
+    </li>
+    <li>
+      <%= password_field_tag :password %>
+    </li>
+     <li>
+      <label for="password_confirmation">Confirm password:</label>
+    </li>
+    <li>
+     <%= password_field_tag :password_confirmation %>
+    </li>
+     <li>
+      <label for="month">Date of Birth:</label>
+    </li>
+    <li class="dob_inputs">
+     <%= text_field_tag :month, @identity.try(:month) %>
+       <%= text_field_tag :day, @identity.try(:day) %>
+       <%= text_field_tag :year, @identity.try(:year) %>
+    </li>
+      </li>
+    <li>
+      <label for="gender">Gender:</label>
+    </li>
+    <li>
+      <%= text_field_tag :gender, @identity.try(:gender) %>
+     </li>
+     
+      </ul>
+</div>
+<div id="sign_up_right">
+  <div class="sign_up_marker">2</div>
+  <h2>Then let us know what kind of stuff you're into.</h2>
+  <hr class="signup_headline_border"/>
+  <p class="instruction_message">Choose at least one:</p>
+  <ul class="category_choice">
+    <li class="top_level_category">
+      <input type="checkbox" name="categories[]"><label for="">Music</label><br>
+      <ul>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Country</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Pop</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Rock</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Rap/Hip Hop</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="categories[]" id=""><label for="">Sports</label><br>
+      <ul>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Extreme</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Baseball</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Basketball</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Football</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Soccer</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Hockey</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="categories[]" id=""><label for="">Television</label><br>
+      <ul>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Comedy</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Drama</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Suspense</label></li>
+        <li><input type="checkbox" name="categories[]" id=""><label for="">Horror</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="categories[]" id=""><label for="">Movies</label><br>
+    </li>
+  </ul>
+</div>
+<div id="sign_up_get_started">
+  <div class="sign_up_marker">3</div>
+  <h2>Get started!</h2>
+  <hr class="signup_headline_border"/>
+  <ul>
+    <li><label for=""><span class="instruction_message tos_link">I agree to the terms of service</span></label><input type="checkbox" name="tos_agreement" id="tos_agreement"></li>
+    <li><%= submit_tag "Create Account" %></li>
+  </ul>
+   <span class="new_to_greenchat">You Already Have An Account?  <img src="images/icons/Login_leaf.png" class="sign_up_icon" /> <%= link_to "Log in.", 'javascript:void(0);' ,:onclick => "javascript:showlogin();" , :class =>"create_an_account" %></span> 
+</div>
   
-  <div class="field">
-    <%= label_tag :zipcode %><br>
-    <%= text_field_tag :zipcode, @identity.try(:zipcode) %>
-  </div>
-  
-    <ul id="category_select">
-	    <% Category.all.map do |category| %>
-	      <li class="category_box"><label for="checkbox"><%= category.name %></label><input type="checkbox" name="categories[]" value="<%= category.id %>" /></li>
-	    <%	end  %>
-    </ul>
-  
-  <br/>
-   <div class="actions"><%= submit_tag "Register" %></div>
-<% end %>
+ <% end %>

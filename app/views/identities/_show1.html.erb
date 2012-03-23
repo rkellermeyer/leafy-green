@@ -2,9 +2,9 @@
 <div id="categories_msg"></div>
 <form name="categories_form" id="categories_form" method="post" action="/identities/update_categories">
   
-<ul class="rateMyCategories">
+<ul>
 <% categories.each do |category| %>
-  <li class="rateMyCategoriesList">
+  <li>
   
     <% if category.categoryContains(current_identity1.categories , category.id) %>
  		<%= check_box_tag "categories[]", category.id, true %>
@@ -12,7 +12,7 @@
 	 	 <%= check_box_tag "categories[]", category.id, false %>
 	<% end %>
  
-    <%=category.name%>
+    <label for=""><%=category.name%></label>
   </li>
 <% end %>
 </ul>

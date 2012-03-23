@@ -1,0 +1,109 @@
+<div id="signup_left">
+  <div class="sign_up_marker">1</div>
+  <h2>Tell us a little bit about yourself.</h2>
+  <hr class="signup_headline_border"/>
+  <ul id="about_yourself_panel">
+    <li class="double_column_header">
+      <label for="first_name">First Name:</label>
+      <label for="last_name">Last Name:</label>
+    </li>
+    <li class="double_column_inputs">
+      <input type="text" name="first_name" id="first_name" class="required"/>
+      <input type="text" name="last_name" id="last_name" class="required"/>
+    </li>
+    <li>
+      <label for="email">Email:</label>
+    </li>
+    <li>
+      <input type="text" name="email" id="email" class="required"/>
+    </li>
+    <li>
+      <label for="email_confirmation">Confirm Email:</label>
+    </li>
+    <li>
+      <input type="text" name="email_confirmation" id="email_confirmation" class="required"/>
+    </li>
+    <li>
+      <label for="username">Create a username:</label>
+    </li>
+    <li>
+      <input type="text" name="username" id="username" class="required"/>
+    </li>
+    <li>
+      <label for="password">Create a password:</label>
+    </li>
+    <li>
+      <input type="text" name="password" id="password" class="required"/>
+    </li>
+    <li>
+      <label for="password_confirmation">Confirm password:</label>
+    </li>
+    <li>
+      <input type="text" name="password_confirmation" id="password_confirmation" class="required"/>
+    </li>
+    <li>
+      <label for="month">Date of Birth:</label>
+    </li>
+    <li class="dob_inputs">
+      <input type="text" name="month" id="month" class="required" placeholder="Month"/>
+      <input type="text" name="day" id="day" class="required" placeholder="Day"/>
+      <input type="text" name="year" id="year" class="required" placeholder="Year"/>
+    </li>
+    <li>
+      <label for="gender">Gender:</label>
+    </li>
+    <li>
+      <input type="text" name="gender" id="gender" class="required"/>
+    </li>
+  </ul>
+</div>
+<div id="sign_up_right">
+  <div class="sign_up_marker">2</div>
+  <h2>Then let us know what kind of stuff you're into.</h2>
+  <hr class="signup_headline_border"/>
+  <p class="instruction_message">Choose at least one:</p>
+  <ul class="category_choice">
+    <li class="top_level_category">
+      <input type="checkbox" name="music"><label for="">Music</label><br>
+      <ul>
+        <li><input type="checkbox" name="" id=""><label for="">Country</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Pop</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Rock</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Rap/Hip Hop</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="" id=""><label for="">Sports</label><br>
+      <ul>
+        <li><input type="checkbox" name="" id=""><label for="">Extreme</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Baseball</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Basketball</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Football</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Soccer</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Hockey</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="" id=""><label for="">Television</label><br>
+      <ul>
+        <li><input type="checkbox" name="" id=""><label for="">Comedy</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Drama</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Suspense</label></li>
+        <li><input type="checkbox" name="" id=""><label for="">Horror</label></li>
+      </ul>
+    </li>
+    <li class="top_level_category">
+      <input type="checkbox" name="" id=""><label for="">Movies</label><br>
+    </li>
+  </ul>
+</div>
+<div id="sign_up_get_started">
+  <div class="sign_up_marker">3</div>
+  <h2>Get started!</h2>
+  <hr class="signup_headline_border"/>
+  <ul>
+    <li><label for=""><span class="instruction_message tos_link">I agree to the terms of service</span></label><input type="checkbox" name="tos_agreement" id="tos_agreement"></li>
+    <li><button type="button">Create Account</button></li>
+  </ul>
+</div>
+<script type="text/javascript" src="signup.js"></script>

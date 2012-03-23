@@ -1,0 +1,97 @@
+<% if current_user1 %>
+            
+            <ul class="rateMyCategories">
+         <% if current_identity1.categories %>
+<% current_identity1.categories.each do |category| %>
+<li class="rateMyCategoriesList">
+<ul class="rateMyCategory">
+<li><h2><%= Category.find(category).name %></h2></li>
+<% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+<li class="rateMyCategoryItem"><%= post.title %>
+<span class='<%= "post_#{post.id} score" %>'><%= number_to_percentage((post.score*100), :precision => 0) %></span>
+Like this!
+</li>
+<ul>
+<li>
+<% if !post.image.nil? %>
+<%= post.image %>
+<% end %>
+</li>
+<li name="postscontents"><%= post.content %></li>
+<li>Score:<%= post.score %> Rateup:<%= post.rate_up %> Ratedown:<%= post.rate_down %></li>
+<li>
+<%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %>
+<%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+</li>
+</ul>
+<% end %>
+</ul>
+</li>
+<% end %>
+          <% end %>
+        </ul>
+        
+<div id="green_chat">
+  <section>
+    <header>
+      <ul class="gidget_header_right">
+        <li>
+          <div class="arrow-up-right maximize"></div>
+        </li>
+        <li>
+          <div class="refresh_and_settings">
+            <img src="images/icons/RefreshHover.png" />
+            <img src="images/icons/SettingsHover.png" />
+          </div>
+        </li>
+      </ul>
+      <ul class="gidget_header_left">
+        <li>
+          <img src="images/icons/RateMy_Icon.png" class="gidgetIcon" />
+        </li>
+        <li>
+          <div class="title_and_message">
+            <span class="title">Rate My</span>
+            <div class="sub_title">Sort By: <span>newest</span></div>
+          </div>
+        </li>
+      </ul>
+    </header>
+    
+    <ul class="rm_article_list">
+      <li class="rm_article">
+      <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+        <ul class="rm_article_info">
+          <li>
+            <div class="rm_date"><%= post.created_at %> 
+            <%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
+	        <%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+            </div>
+            <div class="rm_author"><%= post.user_id %></div>
+          </li>
+          <li>
+            <div class="rm_content">
+              <p><%= post.title %></p>
+            </div>
+          </li>
+          <li>
+            <div class="rm_social_panel">
+              <img src="images/icons/sharing/Share_Facebook.png" alt=""><img src="images/icons/sharing/Share_Twitter.png" alt=""><img src="images/icons/sharing/Rating_Thumb.png" alt=""><p class="rm_rating"><%= number_to_percentage((post.score*100), :precision => 0) %></p> <img src="images/icons/sharing/Share_AddToMy.png" alt=""><img src="images/icons/sharing/Share_Greenchat.png" alt="">
+            </div>
+            <div class="comment_count">12 Comments</div>
+          </li>
+        </ul>
+        <div class="rm_image">
+             <% if !post.image.nil? %>
+	                 <%= post.image %>
+	         <% end %>
+        </div>
+      </li>
+      <% end %>
+       </li>
+    </ul>
+  </section>
+</div>
+                     
+<% end %>    
+ 

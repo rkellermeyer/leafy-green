@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #7E8782;
+  font-family: "Helvetica",Arial,sans-serif;
+  font-weight: normal;
+}
+
+#splash {
+  background: #fff;
+  height: 100%;
+  width: 100%;      
+}
+
+#splash_header {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  height: 42px;
+}
+
+.logo_text {
+  color: #7E8782;
+  font-family: Trebuchet MS;
+  font-size: 18pt;
+  font-weight: normal;
+  position: relative;
+  top: 20%;
+  left: 1%;
+}
+
+.logo_highlight {
+  color: #89C655;
+}
+
+.logo_1 {
+  margin: 0 5px 12px;
+}
+
+.logo_2 {
+  margin: 10px 0;
+}
+
+#splash_form {
+  margin: 20px auto;
+  padding: 5px;
+  width: 21%;
+}
+
+#splash_form header {
+  margin: auto;
+  width: 100%
+}
+
+#splash_form header > h2 {
+  font-size: 10pt;
+  margin: 3.25px;
+}
+
+input, button {
+  border: 1px solid #B7B7B7;
+  display: block;
+  margin: 10px auto;
+  padding: 2px;
+}
+
+input {
+  margin: 7px auto;
+  width: 204px;
+}
+
+.splash_form_login_button {
+  display: inline;
+  margin: 3px 10px 3px -5px;
+}
+
+/*.splash_message_border {
+  border-bottom: 1px solid #e6e6e6;
+  margin: 5px auto;
+} */
+
+#login_button_link_panel {
+  margin: 5px 0 0 34px;
+}
+
+.password_recovery_link {
+  display: inline;
+  font-size: 8pt;
+  margin-left: 40px;
+}
+
+.password_recovery_link:hover, .tos_link:hover, .create_an_account:hover {
+  color: #89C655;
+  cursor: pointer;
+}
+
+.new_to_greenchat, .create_an_account {
+  font-size: 10pt;
+}
+
+.new_to_greenchat {
+  color: #89C655;
+  font-weight: 700;
+}

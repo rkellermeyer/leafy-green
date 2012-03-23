@@ -3,7 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   #provider :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET']
   provider :facebook, '249656908396518', 'ac10a48a9a864b14fec10b4b39b685a1'
 
-provider :identity, :fields => [ :name ,:email ,:password ,:last_name , :zipcode ,:categories],
+provider :identity, :fields => [ :name ,:email ,:password ,:last_name ,:confirmemail,:username,:month,:day,:year,:gender,:categories],
    :on_failed_registration => lambda { |env|
     IdentitiesController.action(:new).call(env)
   }

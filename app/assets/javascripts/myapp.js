@@ -282,6 +282,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
 			    	console.log('response from categories_form update');
 			    	//location.reload(true);
+			    
 			    }, 'json');
   		});  	
   		

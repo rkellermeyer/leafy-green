@@ -1,12 +1,20 @@
-
+<div id="splash_form" xmlns="http://www.w3.org/1999/html">
+  <header>
+    <h2>GreenChat is your online life, all in one place.</h2>
+  </header>
+  <hr class="splash_message_border" />
+  
   <%= form_tag('/auth/identity/callback', :id => 'login_form' , :remote => "true") do %>
-	    <div class="field">
-	      <%= label_tag :auth_key, "Email" %><br>
+	   
+	     
 	      <%= text_field_tag :auth_key %>
-	    </div>
-	    <div class="field">
-	      <%= label_tag :password %><br>
+	    
+	     
 	      <%= password_field_tag :password %>
-	    </div><br/>
-	    <div class="actions"><%= submit_tag "Login" %></div><br/>
+	   <div id="login_button_link_panel">
+	   <%= submit_tag "Login" , :class => "splash_form_login_button" %>
+	   <span class="password_recovery_link">Forgot your password?</span><br />
+  </div>
+  <span class="new_to_greenchat">New To GreenChat?</span> <img src="images/icons/Login_leaf.png" class="sign_up_icon" /><%= link_to "Create an account.", 'javascript:void(0);'  , :onclick => "javascript:showsignup();" , :class =>"create_an_account"%> 
+</div>
 	  <% end %>

@@ -1,0 +1,147 @@
+.clear {
+  clear: both;
+}
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
+  border-bottom: 5px solid black;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #f00;
+}
+
+.arrow-up-right {
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #333333;
+  float: right;
+  height: 0;
+  opacity: 0.3;
+  width: 0;
+}
+
+.arrow-down-left {
+  border-left: 10px solid #333333;
+  border-top: 10px solid transparent;
+  float: right;
+  height: 0;
+  opacity: 0.3;
+  width: 0;
+}
+
+#green_chat section {
+  background: #e6e6e6;
+  border: 1px solid #444;
+  height: 48%;
+  margin: 10px auto;
+  max-height: 48%;
+  width: 30%;
+}
+
+#green_chat section header {
+  border-bottom: 2px solid #9A9A9A;
+  clear: both;
+  padding: 2px;
+}
+
+#green_chat section header ul {
+  display: inline-block;
+  width: 50%;
+}
+
+#green_chat section header ul.gidget_header_right {
+  float: right;
+}
+
+#green_chat section header div.title_and_message {
+  margin: -25px 0 0 29px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+#green_chat section header div.refresh_and_settings {
+  float: right;
+  margin: 11px -10px 0 0;
+}
+
+#green_chat section header div.refresh_and_settings img {
+  opacity: 0.4;
+}
+
+#green_chat section header div.refresh_and_settings img:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+#green_chat section header div.sub_title {
+  font-size: 7pt;
+}
+
+.rm_article {
+  padding: 5px;
+}
+
+.rm_article_list {
+  background: #ffffff;
+  width: 100%;
+}
+
+.rm_image {
+  width: 30%;
+}
+
+.rm_image img {
+  height: 75%;
+  width: 75%;
+}
+
+.rm_article_info {
+  float: right;
+  width: 75%;
+}
+
+.rm_article_info li div {
+  display: inline-block;
+}
+
+.rm_date, .rm_social_panel {
+  float: right;
+  margin: 8px 5px;
+}
+
+.rm_date {
+  font-size: 8pt;
+}
+
+.rm_date img {
+  margin-top: -6px;
+}
+
+.rm_author, .comment_count {
+  margin: 8px 0;
+}
+
+.rm_author {
+  font-weight: 700;
+}
+
+.rm_rating {
+  display: inline-block;
+  font-size: 7.5pt;
+  margin-top: 2px;
+  vertical-align: top;
+}
+
+.comment_count {
+  color: #0033ff;
+  font-size: 9pt;
+}

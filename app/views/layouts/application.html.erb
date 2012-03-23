@@ -10,8 +10,15 @@
   <%= javascript_include_tag :jqGalViewII %>
   <%= stylesheet_link_tag :jqGalViewII %>
   <%= javascript_include_tag :widget %>
-<%= stylesheet_link_tag "chat.css" %>
-  <%= javascript_include_tag :easySlider %>
+   <%= stylesheet_link_tag "chat.css" %>
+      <%= stylesheet_link_tag "reset.css" %>
+      <%= stylesheet_link_tag "splash.css" %>
+      <%= stylesheet_link_tag "signup.css" %>
+      <%= stylesheet_link_tag "gidget.css" %>
+
+    <%= javascript_include_tag :master %>
+     <%= javascript_include_tag :easySlider %>
+  <%= javascript_include_tag :resize %>
   <%= javascript_include_tag :getIt %>
     <%= stylesheet_link_tag "jqui" %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
@@ -54,12 +61,21 @@
 <%end%>
 </head>
 <body>
+
+<header id="splash_header">
+  <img src="images/Leaf_Icon.png" class="logo_1"/><img src="images/Greenchat_Logo.png" class="logo_2"/>
+  <!--<h2 class="logo_text"><span class="logo_highlight">GREEN</span>CHAT</h2>-->
+</header>
+<div id="splash"></div>
+<div id="signup"></div>
+
 <div id="signform" style="<% if current_user1 %>display:none <% end %>" >
-        <%= link_to "Sign up", 'javascript:void(0);'  , :onclick => "javascript:showsignup();"%> or
+       <!-- <%= link_to "Sign up", 'javascript:void(0);'  , :onclick => "javascript:showsignup();"%> or
         <%= link_to "Log in", 'javascript:void(0);' ,:onclick => "javascript:showlogin();" %>
+        -->
 
 
-<div id="loginForm" style="display:none;">
+<div id="loginForm" style="display:block;">
 <%= render :partial => 'sessions/newform' %>
 </div>
 
@@ -105,15 +121,11 @@
 <% end %>
 
  
-<section class="gidget mini" data-source="">
-  <header class="gidgetHeader"><%= image_tag "icons/RateMy_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Rate My</span></header>
+
   <div class="" id="getRateMy">
-    <% if current_user1 %>
-        
-    <% end %>
+
   </div>
-</section>
+
  
 <section class="gidget mini" data-source="">
   <header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>

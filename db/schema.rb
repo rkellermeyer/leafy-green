@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316120703) do
+ActiveRecord::Schema.define(:version => 20120322123032) do
 
   create_table "albums", :force => true do |t|
     t.integer  "identity_id"
@@ -65,12 +65,17 @@ ActiveRecord::Schema.define(:version => 20120316120703) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "last_name"
-    t.decimal  "zipcode",         :precision => 10, :scale => 0
     t.string   "image"
     t.text     "categories"
+    t.string   "username"
+    t.string   "confirmemail"
+    t.integer  "month"
+    t.integer  "day"
+    t.integer  "year"
+    t.string   "gender"
   end
 
   create_table "invite_friends", :force => true do |t|

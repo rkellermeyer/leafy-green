@@ -1,0 +1,90 @@
+#signup_left, #sign_up_get_started, #sign_up_right {
+  margin: 33px auto;
+  width: 32.29%
+}
+
+label {
+  font: 800 8pt "Helvetica", arial, sans-serif;
+  margin: 2px 12px;
+}
+
+.double_column_header label {
+  display: inline-block;
+  width: 22%;
+}
+
+.double_column_inputs input {
+  display: inline;
+  margin: 3px 12px;
+  width: 20.67%;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+li {
+  list-style-type: none;
+}
+
+#about_yourself_panel {
+  margin: 5px 0 5px 25px;
+}
+
+#about_yourself_panel li input {
+  margin: 0 12px;
+}
+
+.dob_inputs input {
+  display: inline-block;
+  width: 11%;
+}
+
+.sign_up_marker {
+  background: none repeat scroll 0 0 #89C655;
+  border-radius: 50px 50px 50px 50px;
+  color: #FFFFFF;
+  float: left;
+  font: bold 14px Helvetica, arial, sans-serif;
+  height: 15px;
+  margin: 2px 8px;
+  padding: 3px;
+  text-align: center;
+  width: 15px;
+}
+
+.instruction_message {
+  font-size: 8pt;
+  margin: -8px 0 5px;
+}
+
+#sign_up_right > ul {
+}
+
+#sign_up_right ul li {
+  width: 100%;
+}
+
+#sign_up_right ul li ul {
+  margin: 10px 20px;
+}
+
+#sign_up_right label {
+  margin: 5px;
+}
+
+#sign_up_right input[type=checkbox] {
+  float: left;
+}
+
+#sign_up_get_started ul li label {
+  float: right;
+}
+
+#sign_up_get_started button {
+  float: left;
+}
+
+.category_choice {
+  max-height: 346px;
+}
