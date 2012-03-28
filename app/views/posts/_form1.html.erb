@@ -1,5 +1,5 @@
 <div id="postMsgBox"></div>
-<%= form_for post, :html => {:multipart => true} do |f| %>
+<%= form_for post, :html => {:multipart => true , :onsubmit => "postsFormSubmit(this);return false;"}  do |f| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -46,6 +46,6 @@
   </div>
   <%= hidden_field_tag(:user_id, session[:user_id]) %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  %>
   </div>
 <% end %>

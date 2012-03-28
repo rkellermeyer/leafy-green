@@ -291,10 +291,20 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	    		return false;
   	}
   	
+  	function postsFormSubmit(obj){
+  
+		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
+			    	
+			    	 getRateMy();
+			    }, 'json');
+	    		return false;
+  	}
+  	
+  	
   		 $('#new_post').submit(function () {
-			console.log("categories_form");
+			
 		    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
-			    	console.log('response from categories_form update');
+			    	getRateMy();
 			    	$('#postMsgBox').append("successfully added");
 			    }, 'json');
   		});  
@@ -426,6 +436,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			$.getJSON('/getPopulatePostContent?spiderUrl='+spiderUrl, function (data) {
 	              console.log(data);
 	              $("#image_url").val(data.src);
+	              $("#post_title").val(data.title);
 	              $("#post_content").val(data.title);
 	          });
 		}
