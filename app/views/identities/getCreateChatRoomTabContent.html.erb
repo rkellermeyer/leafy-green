@@ -1,0 +1,4 @@
+ <% if current_user1 %>
+     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
+     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
+   <%end%>   

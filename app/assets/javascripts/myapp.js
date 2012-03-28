@@ -417,10 +417,18 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 		function rateposts(postsurl){
 			 $.getJSON(postsurl, function (data) {
 	              console.log(data);
+	              getRateMy();
 	          });
 		}
 		
 		
+		function populatePostContent(spiderUrl){
+			$.getJSON('/getPopulatePostContent?spiderUrl='+spiderUrl, function (data) {
+	              console.log(data);
+	              $("#image_url").val(data.src);
+	              $("#post_content").val(data.title);
+	          });
+		}
 		
       function picasaImages() {
           var user = document.getElementById('urlname').value;

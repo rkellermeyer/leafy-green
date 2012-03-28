@@ -1,5 +1,10 @@
+ require 'anemone'
 class Post < ActiveRecord::Base
  before_save :default_values
+  
+  
+
+  
   
   def default_values
     self.score = 0 unless self.score

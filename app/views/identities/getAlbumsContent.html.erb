@@ -1,0 +1,3 @@
+	<% if current_user1 %>
+						<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
+	<%end%>

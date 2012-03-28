@@ -1,0 +1,3 @@
+<% if current_user1 %>		
+	<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
+<%end%>

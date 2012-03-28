@@ -1,10 +1,12 @@
 require "authentication"
 require 'twitter'
 require "juggernaut"
+require 'anemone'
 class ApplicationController < ActionController::Base
  # protect_from_forgery
   helper_method :current_user1
   helper_method :flickr
+   helper_method :anemone
   
    def send_message
         render_text "<li>" + params[:msg_body] + "</li>"
@@ -13,8 +15,27 @@ class ApplicationController < ActionController::Base
         def parse_chat_message(msg, user)
         return "#{user} says: #{msg}"
         end
-
-  
+  def anemone
+   anemone.on_every_page do |page|
+    @myLinks =[]
+      page.links.each_with_index do |link,index|
+        puts "HOWDY PARDNER"
+       
+        puts link.to_sentence
+      end
+end
+   
+  end
+   
+   
+   def testAnemone
+	   Anemone.crawl("http://www.google.com/") do |anemone|
+		  anemone.on_every_page do |page|
+		      puts page.url
+		  end
+		end
+	end
+	
   private
   def current_user1
     @current_user1 ||= User.find_by_uid(session[:user_id]) if session[:user_id]
@@ -32,6 +53,8 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user1
   end
+  
+
   
   
    helper_method :logged_in?

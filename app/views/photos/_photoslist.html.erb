@@ -3,7 +3,10 @@
 <% if photos1.count == 0 %>
         No Photos uploaded for this user.
 <% end %>
+<% end %>
+
 <ul id="photos_list">
+<% if current_user1 %>
 <% photos1.each do |photo| %>
 <div id='dialog<%=photo.id%>' > 
 <li><%= photo.photo_file_name %>
@@ -13,5 +16,6 @@
   </div>
   </li>
   <% end %>
+  <% end %>
   </ul>
-    <% end %>
+    

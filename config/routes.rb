@@ -25,6 +25,18 @@ Ratemy::Application.routes.draw do
   match "/identities/update_categories" => "identities#update_categories"
   match "/getGreenBlogs" => "identities#getCategories"
   match "/getRateMy" => "identities#getRateMy"
+  
+  match "/getPhotosContent" => "identities#getPhotosContent"
+  match "/getUploadPhotosContent" => "identities#getUploadPhotosContent"
+  match "/getAlbumsContent" => "identities#getAlbumsContent"
+  match "/getFriendsAlbumsTabContent" => "identities#getFriendsAlbumsTabContent"
+  
+  match "/getAddFriendsListContent" => "identities#getAddFriendsListContent"
+  match "/getCreateChatRoomTabContent" => "identities#getCreateChatRoomTabContent"
+  match "/getChatWithFriendsTabContent" => "identities#getChatWithFriendsTabContent"
+  
+    match "/getPopulatePostContent" => "identities#getPopulatePostContent"
+    
   resources :categories
   
    match "/auth/:provider/callback", to: "sessions#callback"

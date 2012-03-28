@@ -1,10 +1,14 @@
+
 class PostsController < ApplicationController
   respond_to :json, :html
   # GET /posts
   # GET /posts.json
+  
+ 
+  
   def index
     @posts = Post.all
-
+     
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -33,6 +37,7 @@ class PostsController < ApplicationController
     end
   end
 
+   
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
@@ -40,15 +45,18 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
+  def create 
     @post = Post.new(params[:post])
     @post.category_id = params[:category_id]
-    @post.user_id = params[:user_id]
+    @post.user_id = current_identity1.id
+    if (!params[:image_url].nil?)
+    	@post.remote_image_url = params[:image_url]
+    end
     logger.debug "Debug: #{params}"
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
+        format.html { redirect_to root_url, notice: 'Post was successfully created.' }
+        format.json { render json: @post, status: :created, location: root_url }
       else
         format.html { render action: "new" }
         format.json { render json: @post.errors, status: :unprocessable_entity }

@@ -1,0 +1,5 @@
+<% if current_user1 %>
+  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
+  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
+ <% end %>
+ 

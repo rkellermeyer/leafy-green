@@ -1,0 +1,3 @@
+<% if current_user1 %>
+	<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
+<%end%>

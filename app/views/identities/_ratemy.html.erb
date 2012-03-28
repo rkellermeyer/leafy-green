@@ -37,8 +37,8 @@
         <ul class="rm_article_info">
           <li>
             <div class="rm_date"><%= post.created_at %> 
-            <%= link_to image_tag("icons/UpOpen.png"), "javascript:location.reload(true);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
-	        <%= link_to image_tag("icons/DownOpen.png"), "javascript:location.reload(true);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+            <%= link_to image_tag("icons/UpOpen.png"), "javascript:void(0);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %> 
+	        <%= link_to image_tag("icons/DownOpen.png"), "javascript:void(0);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
             </div>
             <div class="rm_author"><%= render :partial =>"identities/postedbyform" ,:locals=>{:identity=>Identity.find_by_id(post.user_id)}%></div>
           </li>

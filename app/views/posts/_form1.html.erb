@@ -22,11 +22,12 @@
   </div>
   <div class="field">
     <%= f.file_field :image %>
+    <input type="hidden" name="image_url" value="" id="image_url"/>
   </div>
   
    <p>
     <%= f.label :remote_image_url, "or image URL" %><br />
-    <%= f.text_field :remote_image_url %>
+    <%= f.text_field :remote_image_url , :onblur => "populatePostContent(this.value)"%>
   </p>
   
   
