@@ -4,6 +4,8 @@ Ratemy::Application.routes.draw do
 
   resources :channels
 
+  resources :postcomments 
+  
   match "/chat/send", :controller => "chat", :action => "send_message"
   match "/chat/channel1", :controller => "chat", :action => "channel1"
   match "/chat/channel2", :controller => "chat", :action => "channel2"

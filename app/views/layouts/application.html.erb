@@ -53,6 +53,14 @@
   <%= javascript_include_tag :jdgallery %>
   <%= javascript_include_tag :picasa1 %>
 
+	<script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"  />
+
+	<script type="text/javascript">
+			$(document).ready(function() {
+			    $.facebox.settings.opacity = 0.5
+			});
+	</script>
   <% if current_user1 %>
 <script type="text/javascript">
   var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');

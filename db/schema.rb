@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(:version => 20120322123032) do
     t.integer  "album_id"
   end
 
+  create_table "postcomments", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "post_id"
+    t.integer  "identity_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"

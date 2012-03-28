@@ -300,6 +300,18 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	    		return false;
   	}
   	
+  	function postsCommentsSubmit(obj){
+  
+		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
+			    	
+			    	console.log('commented');
+			    	 getRateMy();
+			    	 $(document).trigger('close.facebox');
+
+			    }, 'json');
+	    		return false;
+  	}
+  	
   	
   		 $('#new_post').submit(function () {
 			

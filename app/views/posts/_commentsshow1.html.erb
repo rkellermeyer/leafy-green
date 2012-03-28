@@ -1,0 +1,16 @@
+
+<%= postcomments.count %> postcomments
+<br/>
+<% if postcomments.count > 0 %> 
+
+ <% postcomments.each do |postcomment| %>
+    
+    Title :  <%= postcomment.title %>   Commented At <%= postcomment.created_at %>
+   <br/> Commented By <%= render :partial =>"posts/commentbyform" ,:locals=>{:user=>Identity.find_by_id(postcomment.identity_id)}%>
+ <br/>
+  Content :<%= postcomment.content %> 
+ <br/>
+     
+<% end %>
+<% end %>
+

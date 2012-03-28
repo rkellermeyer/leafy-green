@@ -1,0 +1,20 @@
+<br/>
+ 
+<b>Recent Postcomments</b><br/>
+ <% @Postcomments.each do |postcomment| %>
+    
+    Title :<%= link_to  postcomment.title,postcomment %> Commented At <%= postcomment.created_at %>
+    Postcommented By <%= render :partial =>"commentbyform" ,:locals=>{:identity=>Identity.find_by_id(postcomment.identity_id)}%>
+ <br/>
+  Content :<%= postcomment.content %>  <br/>
+         <% if postcomment.identity_id == current_user.id %>
+      
+        <%= link_to 'EditPostcomment', postcomment %>
+      
+    <%= link_to 'DeletePostcomment', postcomment, confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+ 
+<hr/>
+
+<% end %>
+

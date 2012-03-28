@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="content">
+  <div id="comment_content" class="mercury-region" data-type="editable">
+  Title :<%= raw @Postcomment.title %><br/>
+    Content:  <%= raw @Postcomment.content %>
+  </div>
+  
+  <% if @Postcomment.identity_id == current_user.id %>
+  <p><%= link_to 'Edit Postcomment', edit_Postcomment_path(@Postcomment) %></p>
+  <% end %>
+  
+  </div>
