@@ -15,9 +15,10 @@
       <%= stylesheet_link_tag "splash.css" %>
       <%= stylesheet_link_tag "signup.css" %>
       <%= stylesheet_link_tag "gidget.css" %>
+      
 
     <%= javascript_include_tag :master %>
-     <%= javascript_include_tag :easySlider %>
+   
   <%= javascript_include_tag :resize %>
   <%= javascript_include_tag :getIt %>
     <%= stylesheet_link_tag "jqui" %>
@@ -47,7 +48,7 @@
   </script>
     <% if current_user1 %>
   	 <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
-	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
+	
 	<% end %> 
   <%= stylesheet_link_tag :jdgallery %>
   <%= javascript_include_tag :jdgallery %>
@@ -56,11 +57,7 @@
 	<script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"  />
 
-	<script type="text/javascript">
-			$(document).ready(function() {
-			    $.facebox.settings.opacity = 0.5
-			});
-	</script>
+
   <% if current_user1 %>
 <script type="text/javascript">
   var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
@@ -611,5 +608,79 @@
 </div>
 
 </div>
+ <%= javascript_include_tag :swfobject %>
+     <%= javascript_include_tag :uploadify %>
+     <script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
+     
+     <script type="text/javascript">
+     $(function () {
+     $( "#tabs" ).tabs();
+      $( "#tabschat" ).tabs();
+      });
+       </script>
+       	<script type="text/javascript">
+			$(document).ready(function() {
+			    $.facebox.settings.opacity = 0.5
+			});
+	</script>
+	    <% if current_user1 %>
+	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
+	 <%end%>
+	 <script type="text/javascript">
+$(document).ready(function() {
+	<% if current_user1 %>
+		loadUploadify();
+	<% end %>
+	
+});
+
+function loadUploadify(){
+  <% key = Rails.application.config.session_options[:key] %>
+  var uploadify_script_data = {};
+  var csrf_param = $('meta[name=csrf-param]').attr('content');
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
+  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
+  var JQry = jQuery.noConflict();
+<% session_key_name = Rails.application.config.session_options[:key] %>
+   JQry('#post_image').click(function(event){ 
+        event.preventDefault();
+    }); 
+  JQry('#post_image').uploadify({
+    uploader        : '/uploadify.swf',
+    script          : '/postimage',
+    cancelImg       : 'assets/images/cancel.png',
+    auto            : true,
+     fileExt         : '*.png;*.jpg;*.gif',
+    multi :false,
+    scriptData      :  {
+             '_http_accept': 'application/javascript',
+              'format' : 'json',
+               '_method': 'post',
+            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+               },
+       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
+      
+    onComplete      : function(a, b, c, response)
+    {
+    		console.log(response);
+    		//$("#post_imageQueue").html(''); 
+    		var dat = eval('(' + response + ')');
+    		$('#post_id').val(dat.id);
+    		$('#method_type').val('PUT');
+            JQry.getScript(dat.upload);
+            document.getElementById('hiddenld').value = ''; 
+     }
+  
+     });
+      JQry('#post_image').click(function(event){ 
+            event.preventDefault(); 
+            JQry('#post_image').uploadifyUpload(); 
+        });
+     
+}
+</script>
+  <%= javascript_include_tag :easySlider %>
 </body>
+
 </html>

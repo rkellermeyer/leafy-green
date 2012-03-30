@@ -74,18 +74,25 @@ layout "test"
 		 @width = 0
 		doc.xpath("//img").each do |img| 
 		    puts "img tag **************"+img.to_s
-		    if (!img.nil? and !img['src'].nil? and !img['title'].nil? and !img['width'].nil? and img['width'].to_i > @width)
+		    #and !img['width'].nil? and img['width'].to_i > @width
+		    if (!img.nil? and !img['src'].nil? and (!img['title'].nil? or !img['alt'].nil?) and !img['width'].nil? and img['width'].to_i > @width)
 		    	puts "########## image contents are -------- "+ img.to_s
 		    	#puts "first letter---------"+img['src'][0,1] 
 		    	#puts "image next contents are -------- "+ img.parent.child.inner_text
-		    	@title = img['title']
+		    	if (!img['title'].nil?)
+		    		@title = img['title']
+		    		@content = img['title']
+		    	else
+		    		@title = img['alt']
+		    		@content = img['alt']
+		    	end
 		    	if (img['src'][0,1] == '/')
 		    		@src=@src1+img['src']
 		    	else
 		    		@src = img['src']
 		    	end
 		    	@width = img['width'].to_i
-		    	@content = img['title']
+		    	
 		    end
 		end
 		puts "%%%%%%%%%%%%%%%%% here end nokogiri Crawling"

@@ -32,8 +32,9 @@
     <ul class="rm_article_list">
           <% if current_identity1.categories %>
 <% current_identity1.categories.each do |category| %>
-      <li class="rm_article">
+      
       <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+      <li class="rm_article">
         <ul class="rm_article_info">
           <li>
             <div class="rm_date"><%= post.created_at %> 
@@ -71,7 +72,7 @@
         </div>
       </li>
       <% end %>
-       </li>
+      
         <% end %>
           <% end %>
         

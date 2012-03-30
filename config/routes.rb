@@ -24,6 +24,7 @@ Ratemy::Application.routes.draw do
   resources :posts
   match "identities/posts/rate_up/:id" => "posts#rate_up"
   match "identities/posts/rate_down/:id" => "posts#rate_down"
+  match "/postimage"  => "posts#postimage"
   match "/identities/update_categories" => "identities#update_categories"
   match "/getGreenBlogs" => "identities#getCategories"
   match "/getRateMy" => "identities#getRateMy"

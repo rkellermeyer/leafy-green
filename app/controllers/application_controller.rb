@@ -15,26 +15,8 @@ class ApplicationController < ActionController::Base
         def parse_chat_message(msg, user)
         return "#{user} says: #{msg}"
         end
-  def anemone
-   anemone.on_every_page do |page|
-    @myLinks =[]
-      page.links.each_with_index do |link,index|
-        puts "HOWDY PARDNER"
-       
-        puts link.to_sentence
-      end
-end
-   
-  end
-   
-   
-   def testAnemone
-	   Anemone.crawl("http://www.google.com/") do |anemone|
-		  anemone.on_every_page do |page|
-		      puts page.url
-		  end
-		end
-	end
+ 
+ 
 	
   private
   def current_user1

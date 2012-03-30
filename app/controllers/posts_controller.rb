@@ -41,18 +41,38 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    
   end
 
+  def postimage
+  
+   @post = Post.new(:title => "temp" , :content =>"temp" , :category_id => "37" , :image => params[:Filedata] ,:visible => '0' , :user_id => params[:user_id])
+       
+    logger.debug "*****************Debug values : #{params}"
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to root_url, notice: 'Post was successfully created.' }
+        format.json { render json: @post, status: :created, location: root_url }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+  end
+  end
+  
   # POST /posts
   # POST /posts.json
   def create 
-    @post = Post.new(params[:post])
+  
+  	@post = Post.new(params[:post])
     @post.category_id = params[:category_id]
     @post.user_id = current_identity1.id
+    @post.image =   params[:post_image] 
+    puts "file data-------------- here v12121"
     if (!params[:image_url].nil?)
     	@post.remote_image_url = params[:image_url]
     end
-    logger.debug "Debug: #{params}"
+    logger.debug "*****************Debug values : #{params}"
     respond_to do |format|
       if @post.save
         format.html { redirect_to root_url, notice: 'Post was successfully created.' }
@@ -62,6 +82,7 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PUT /posts/1

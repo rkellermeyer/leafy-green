@@ -1,8 +1,9 @@
+   var loggedInUserId = null;
+   
      $(function () {
      
      
-      $( "#tabs" ).tabs();
-      $( "#tabschat" ).tabs();
+      
            var apiKey = '1e327eadb60c60b16219f705db8dd5be';
           var userId = '76738653@N02';
           var tag = '<COMMA SEPERATED LIST OF TAGS>';
@@ -254,7 +255,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			    	// if(jqXHR && jqXHR.status == 200) {
                //document.location = 'http://localhost:3000/';
                 //   }
-                
+                	loggedInUserId = data.uid;
                 	afterLogin();
 			    	document.getElementById("bodyContent").style.display="block";
 			    	document.getElementById("loginForm").style.display="none";
@@ -292,12 +293,26 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   	}
   	
   	function postsFormSubmit(obj){
-  
-		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
-			    	
-			    	 getRateMy();
-			    }, 'json');
-	    		return false;
+			  
+			  $.ajax({
+			      type: $('#method_type').val(),
+			      url: obj.action+'/'+$('#post_id').val(),
+			      data: $(obj).serialize(),
+			      dataType: 'json',
+			      success: function(msg) {
+			      	getRateMy();
+			        $('#post_id').val('');
+    				$('#method_type').val('POST');
+    				$('#post_title').val('');
+    				$('#post_content').val('');
+    				$('#image_url').val('');
+    				$('#post_remote_image_url').val('');
+    				$('#post_visible').attr('checked',false);
+    				$("#post_imageQueue").html(''); 
+			      }
+			});
+			    
+    		return false;
   	}
   	
   	function postsCommentsSubmit(obj){

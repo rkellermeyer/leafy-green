@@ -151,4 +151,5 @@ function afterLogin(){
 	getFriendsData();
 	getCreateChatRoomTabContent();
 	//getChatWithFriendsTabContent();
+	loadUploadify();
 }

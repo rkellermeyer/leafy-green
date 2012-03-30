@@ -755,3 +755,16 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 		  </div>
 </body>
 </html>
+
+ JQry('#post_image').uploadify({
+    uploader        : '/assets/uploadify.swf',
+    script          : '/posts',
+    cancelImg       : 'assets/images/cancel.png',
+    auto            : true,
+    multi           : true,
+    removeCompleted : true,
+    scriptData      : uploadify_script_data,
+    onComplete      : function(event, ID, fileObj, doc, data) {$('#hiddenFormField').val(response);}
+  
+    
+  });
