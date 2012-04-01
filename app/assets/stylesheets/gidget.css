@@ -37,12 +37,13 @@
 }
 
 #green_chat section {
-  background: #e6e6e6;
-  border: 1px solid #444;
-  height: 48%;
-  margin: 10px auto;
-  max-height: 48%;
-  width: 30%;
+background: none repeat scroll 0 0 #E6E6E6;
+border: 1px solid #444444;
+height: 48%;
+margin: 10px auto;
+max-height: 48%;
+overflow: hidden;
+width: 33%;
 }
 
 #green_chat section header {
@@ -93,6 +94,8 @@
 }
 
 .rm_article {
+  border-bottom: 1px solid #DDDDDD;
+  height: 118px;
   padding: 5px;
 }
 
