@@ -48,6 +48,7 @@
 #green_chat section header {
   border-bottom: 2px solid #9A9A9A;
   clear: both;
+  height: 26px;
   padding: 2px;
 }
 
@@ -66,6 +67,8 @@
 
 .title {
   font-weight: 700;
+  position: relative;
+  top: -3px;
 }
 
 #green_chat section header div.refresh_and_settings {
@@ -84,6 +87,9 @@
 
 #green_chat section header div.sub_title {
   font-size: 7pt;
+  padding: 0;
+  position: relative;
+  top: -10px;
 }
 
 .rm_article {
