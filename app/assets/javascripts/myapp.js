@@ -466,6 +466,11 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	              $("#post_title").val(data.title);
 	              $("#post_content").val(data.title);
 	          });
+	          
+	        $.getJSON('/storeSpiderUrlsAnemone?spiderUrl='+spiderUrl, function (data) {
+	              console.log('sotored the sub spider urls = '+data);
+	              
+	          });
 		}
 		
       function picasaImages() {

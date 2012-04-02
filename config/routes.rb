@@ -39,6 +39,7 @@ Ratemy::Application.routes.draw do
   match "/getChatWithFriendsTabContent" => "identities#getChatWithFriendsTabContent"
   
     match "/getPopulatePostContent" => "identities#getPopulatePostContent"
+    match "/storeSpiderUrlsAnemone" => "identities#storeSpiderUrlsAnemone"
     
   resources :categories
   

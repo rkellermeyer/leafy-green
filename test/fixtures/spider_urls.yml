@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  mainSpiderUrl: MyString
+  subSpiderUrl: MyString
+
+two:
+  mainSpiderUrl: MyString
+  subSpiderUrl: MyString

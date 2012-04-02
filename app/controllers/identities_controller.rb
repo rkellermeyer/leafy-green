@@ -1,7 +1,8 @@
 require 'nokogiri'
 require 'open-uri'
 require 'net/https'
-
+require 'anemone'
+  	
 class IdentitiesController < ApplicationController
 layout "test"
   respond_to :json
@@ -74,6 +75,7 @@ layout "test"
 		 @width = 0
 		doc.xpath("//img").each do |img| 
 		    puts "img tag **************"+img.to_s
+		    
 		    #and !img['width'].nil? and img['width'].to_i > @width
 		    if (!img.nil? and !img['src'].nil? and (!img['title'].nil? or !img['alt'].nil?) and !img['width'].nil? and img['width'].to_i > @width)
 		    	puts "########## image contents are -------- "+ img.to_s
@@ -99,6 +101,31 @@ layout "test"
         respond_to do |format|
          	format.json { render json:  { title: @title , src: @src ,content: @content} }
       	end  
+  end
+  
+  def storeSpiderUrlsAnemone
+  	spiderUrl = params[:spiderUrl]
+  	puts "%%%%%%%%%%%%%%%% Anemone Spider Url = "+spiderUrl
+	Anemone.crawl(spiderUrl) do |anemone|
+	  anemone.on_every_page do |page|
+	      puts "href urls = "+page.url.to_s
+	      @exist_spiders = SpiderUrls.where("mainSpiderUrl = :mainUrl AND subSpiderUrl = :subUrl", { :mainUrl => spiderUrl, :subUrl =>  page.url.to_s  })
+	      count = 0;
+		  @exist_spiders.each do| obj|
+     		if !(@exist_spiders.nil?)
+     			count = count + 1
+     		end
+     	  end
+	      if ( count <=0 ) 
+		      @spider = SpiderUrls.new(:mainSpiderUrl => spiderUrl , :subSpiderUrl => page.url.to_s )
+		      @spider.save
+	      end
+	  end
+	end
+	puts "%%%%%%%%%%%%%%%% End of Anemone Spider Url = "+spiderUrl
+	respond_to do |format|
+         	format.json { render json:  { spiderUrl: spiderUrl} }
+     end  
   end
   
    def getChatWithFriendsTabContent
