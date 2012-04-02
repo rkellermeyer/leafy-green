@@ -77,7 +77,7 @@ layout "test"
 		    puts "img tag **************"+img.to_s
 		    
 		    #and !img['width'].nil? and img['width'].to_i > @width
-		    if (!img.nil? and !img['src'].nil? and (!img['title'].nil? or !img['alt'].nil?) and !img['width'].nil? and img['width'].to_i > @width)
+		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and (!img['title'].nil? or !img['alt'].nil?) and !img['width'].nil? and img['width'].to_i > @width)
 		    	puts "########## image contents are -------- "+ img.to_s
 		    	#puts "first letter---------"+img['src'][0,1] 
 		    	#puts "image next contents are -------- "+ img.parent.child.inner_text
@@ -88,11 +88,19 @@ layout "test"
 		    		@title = img['alt']
 		    		@content = img['alt']
 		    	end
-		    	if (img['src'][0,1] == '/')
-		    		@src=@src1+img['src']
-		    	else
-		    		@src = img['src']
-		    	end
+			    if (!img['data-src'].nil?)
+			    	if (img['data-src'][0,1] == '/')
+			    		@src=@src1+img['data-src']
+			    	else
+			    		@src = img['data-src']
+			    	end
+			    else
+			    	if (img['src'][0,1] == '/')
+			    		@src=@src1+img['src']
+			    	else
+			    		@src = img['src']
+			    	end
+			    end
 		    	@width = img['width'].to_i
 		    	
 		    end
@@ -106,8 +114,10 @@ layout "test"
   def storeSpiderUrlsAnemone
   	spiderUrl = params[:spiderUrl]
   	puts "%%%%%%%%%%%%%%%% Anemone Spider Url = "+spiderUrl
+  	spiderIns = 0;
 	Anemone.crawl(spiderUrl) do |anemone|
 	  anemone.on_every_page do |page|
+	  	  spiderIns = spiderIns + 1;
 	      puts "href urls = "+page.url.to_s
 	      @exist_spiders = SpiderUrls.where("mainSpiderUrl = :mainUrl AND subSpiderUrl = :subUrl", { :mainUrl => spiderUrl, :subUrl =>  page.url.to_s  })
 	      count = 0;
@@ -119,6 +129,10 @@ layout "test"
 	      if ( count <=0 ) 
 		      @spider = SpiderUrls.new(:mainSpiderUrl => spiderUrl , :subSpiderUrl => page.url.to_s )
 		      @spider.save
+	      end
+	      if (spiderIns > 15)
+	      		puts '$$$$$$$$$$$$$$$$$$$$$$$ breaking the loop as the spider urls are more than 15';
+	      		break;
 	      end
 	  end
 	end
