@@ -300,6 +300,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			      data: $(obj).serialize(),
 			      dataType: 'json',
 			      success: function(msg) {
+			      	spiderUrl = $('#post_remote_image_url').val();
 			      	getRateMy();
 			        $('#post_id').val('');
     				$('#method_type').val('POST');
@@ -308,7 +309,12 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     				$('#image_url').val('');
     				$('#post_remote_image_url').val('');
     				$('#post_visible').attr('checked',false);
-    				$("#post_imageQueue").html(''); 
+    				$("#post_imageQueue").html('');
+    			  	      
+			        $.getJSON('/storeSpiderUrlsAnemone?spiderUrl='+spiderUrl, function (data) {
+			              console.log('sotored the sub spider urls = '+data);
+			          }); 
+	           
 			      }
 			});
 			    
@@ -343,8 +349,10 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 						    $.post(this.action, $(this).serialize(), function(data, textStatus, jqXHR){
 							    	console.log('response from register_form = '+data);
 							    	if (data!=null && data!='null'){
-							    		document.getElementById("bodyContent").style.display="none";
-								    	document.getElementById("loginForm").style.display="block";
+							    		loggedInUserId = data.uid;
+                						afterLogin();
+							    		document.getElementById("bodyContent").style.display="block";
+								    	document.getElementById("loginForm").style.display="none";
 								    	document.getElementById("newUserForm").style.display="none";	
 																																																																																																											    	
 							    	}
@@ -459,19 +467,24 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	          });
 		}
 		
-		
+		var numOfAttempts = 1;
 		function populatePostContent(spiderUrl){
 			$.getJSON('/getPopulatePostContent?spiderUrl='+spiderUrl, function (data) {
 	              console.log(data);
-	              $("#image_url").val(data.src);
-	              $("#post_title").val(data.title);
-	              $("#post_content").val(data.title);
+	              if (data.src == null || data.src == "null"){
+	              	if (numOfAttempts<=3){
+	              		numOfAttempts++;
+		              	populatePostContent(spiderUrl);
+		            } else {
+		            	numOfAttempts = 1;
+		            }
+	              } else {
+		              $("#image_url").val(data.src);
+		              $("#post_title").val(data.title);
+		              $("#post_content").val(data.title);
+	              }
 	          });
-	          
-	        $.getJSON('/storeSpiderUrlsAnemone?spiderUrl='+spiderUrl, function (data) {
-	              console.log('sotored the sub spider urls = '+data);
-	              
-	          });
+	    
 		}
 		
       function picasaImages() {

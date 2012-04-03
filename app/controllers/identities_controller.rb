@@ -77,7 +77,7 @@ layout "test"
 		    puts "img tag **************"+img.to_s
 		    
 		    #and !img['width'].nil? and img['width'].to_i > @width
-		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and (!img['title'].nil? or !img['alt'].nil?) and !img['width'].nil? and img['width'].to_i > @width)
+		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and ( (!img['title'].nil? and !img['title'].blank?) or ( !img['alt'].nil? and !img['alt'].blank? ) ) and !img['width'].nil? and img['width'].to_i > @width)
 		    	puts "########## image contents are -------- "+ img.to_s
 		    	#puts "first letter---------"+img['src'][0,1] 
 		    	#puts "image next contents are -------- "+ img.parent.child.inner_text
@@ -130,11 +130,9 @@ layout "test"
 		      @spider = SpiderUrl.new(:mainSpiderUrl => spiderUrl , :subSpiderUrl => page.url.to_s )
 		      @spider.save
 	      end
-	      if (spiderIns >=
-	      
-	       15)
-	      		puts '$$$$$$$$$$$$$$$$$$$$$$$ breaking the loop as the spider urls are more than 15';
-	      		break;
+	      if (spiderIns >= 15)
+	      		puts '$$$$$$$$$$$$$$$$$$$$$$$ breaking the loop as the spider urls are more than 15'
+                return
 	      end
 	  end
 	end
