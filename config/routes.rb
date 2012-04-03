@@ -1,5 +1,7 @@
 Ratemy::Application.routes.draw do
 
+  resources :spider_urls
+
   resources :messages
 
   resources :channels

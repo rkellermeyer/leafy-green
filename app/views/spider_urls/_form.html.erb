@@ -1,0 +1,25 @@
+<%= form_for(@spider_url) do |f| %>
+  <% if @spider_url.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spider_url.errors.count, "error") %> prohibited this spider_url from being saved:</h2>
+
+      <ul>
+      <% @spider_url.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mainSpiderUrl %><br />
+    <%= f.text_field :mainSpiderUrl %>
+  </div>
+  <div class="field">
+    <%= f.label :subSpiderUrl %><br />
+    <%= f.text_field :subSpiderUrl %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

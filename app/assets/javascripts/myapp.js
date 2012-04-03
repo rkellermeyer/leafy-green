@@ -321,7 +321,8 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			    	
 			    	console.log('commented');
 			    	 getRateMy();
-			    	 $(document).trigger('close.facebox');
+			    	 jQuery(document).trigger('close.facebox');
+			    
 
 			    }, 'json');
 	    		return false;

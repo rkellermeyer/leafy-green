@@ -1,0 +1,27 @@
+<h1>Listing spider_urls</h1>
+
+<table>
+  <tr>
+    <th>Mainspiderurl</th>
+    <th></th>
+    <th>Subspiderurl</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @spider_urls.each do |spider_url| %>
+  <tr>
+    <td><%= spider_url.mainSpiderUrl %>   </td>
+    <td>&nbsp;&nbsp;</td>
+    <td><%= spider_url.subSpiderUrl %></td>
+    <td><%= link_to 'Show', spider_url %></td>
+    <td><%= link_to 'Edit', edit_spider_url_path(spider_url) %></td>
+    <td><%= link_to 'Destroy', spider_url, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Spider url', new_spider_url_path %>

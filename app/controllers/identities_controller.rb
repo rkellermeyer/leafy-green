@@ -119,7 +119,7 @@ layout "test"
 	  anemone.on_every_page do |page|
 	  	  spiderIns = spiderIns + 1;
 	      puts "href urls = "+page.url.to_s
-	      @exist_spiders = SpiderUrls.where("mainSpiderUrl = :mainUrl AND subSpiderUrl = :subUrl", { :mainUrl => spiderUrl, :subUrl =>  page.url.to_s  })
+	      @exist_spiders = SpiderUrl.where("mainSpiderUrl = :mainUrl AND subSpiderUrl = :subUrl", { :mainUrl => spiderUrl, :subUrl =>  page.url.to_s  })
 	      count = 0;
 		  @exist_spiders.each do| obj|
      		if !(@exist_spiders.nil?)
@@ -127,10 +127,12 @@ layout "test"
      		end
      	  end
 	      if ( count <=0 ) 
-		      @spider = SpiderUrls.new(:mainSpiderUrl => spiderUrl , :subSpiderUrl => page.url.to_s )
+		      @spider = SpiderUrl.new(:mainSpiderUrl => spiderUrl , :subSpiderUrl => page.url.to_s )
 		      @spider.save
 	      end
-	      if (spiderIns > 15)
+	      if (spiderIns >=
+	      
+	       15)
 	      		puts '$$$$$$$$$$$$$$$$$$$$$$$ breaking the loop as the spider urls are more than 15';
 	      		break;
 	      end
