@@ -89,9 +89,10 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
+     puts "category id ==========="+params[:category_id]
     respond_to do |format|
       if @post.update_attributes(params[:post])
+      @post.update_attributes(:category_id => params[:category_id])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
