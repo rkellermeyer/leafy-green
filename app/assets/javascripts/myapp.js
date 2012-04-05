@@ -282,6 +282,17 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   		}); 
   	});
 */
+
+    	function channelFormSubmit(obj){
+  		console.log("channel_form");
+		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
+		  	    	console.log('response from channels create'+data);
+			    
+    	      		$('#channellist').append(data.name+"<br/>");
+      	    			    	 
+			    }, 'json');
+	    		return false;
+  	    }
   		
   	function categoriesFormSubmit(obj){
   		console.log("categories_form");
@@ -318,6 +329,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			      }
 			});
 			    
+			    jQuery(document).trigger('close.facebox');
     		return false;
   	}
   	
@@ -391,6 +403,9 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       	     }
       	     }
          });
+         
+      
+              
   
           $('#flickr_form').submit(function () {
               console.log("test");
@@ -481,7 +496,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	              } else {
 		              $("#image_url").val(data.src);
 		              $("#post_title").val(data.title);
-		              $("#post_content").val(data.title);
+		              $("#post_content").val(data.content);
 	              }
 	          });
 	    
@@ -502,6 +517,18 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
       
       function clickablelogout(){
        var bb=document.getElementById('logout');
+       
+       if(bb.style.display =='none')
+       {
+         bb.style.display = "block";
+         }
+       else
+         {bb.style.display = "none";
+         }
+      }
+      
+       function clickablepost(){
+       var bb=document.getElementById('postform');
        
        if(bb.style.display =='none')
        {

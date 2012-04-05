@@ -73,11 +73,25 @@ layout "test"
 		 #puts "host-----------------"+url.host.to_s
 		 @src1="http://"+url.host.to_s
 		 @width = 0
+		 @height = 0
+
+
+
+
+
+doc.xpath("//p").each do |header|
+ 
+puts header.text
+end
+
+	puts "titile-------"+doc.css('title').to_s
+			 
 		doc.xpath("//img").each do |img| 
 		    puts "img tag **************"+img.to_s
 		    
-		    #and !img['width'].nil? and img['width'].to_i > @width
-		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and ( (!img['title'].nil? and !img['title'].blank?) or ( !img['alt'].nil? and !img['alt'].blank? ) ) and !img['width'].nil? and img['width'].to_i > @width)
+		    # and !img['width'].nil? and img['width'].to_i > @width
+		    # ( (!img['title'].nil? and !img['title'].blank?) or ( !img['alt'].nil? and !img['alt'].blank? ) ) and
+		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and !img['width'].nil? and img['width'].to_i > @width and !img['height'].nil? and img['height'].to_i > @height  )
 		    	puts "########## image contents are -------- "+ img.to_s
 		    	#puts "first letter---------"+img['src'][0,1] 
 		    	#puts "image next contents are -------- "+ img.parent.child.inner_text
@@ -102,12 +116,20 @@ layout "test"
 			    	end
 			    end
 		    	@width = img['width'].to_i
-		    	
+		    	@height = img['height'].to_i
 		    end
 		end
 		puts "%%%%%%%%%%%%%%%%% here end nokogiri Crawling"
+	@title1 =doc.css('title').text.to_s
+	@content1 =doc.css('p')[0].text.to_s
+	
+	doc.xpath("//meta[@name='description']/@content").each do |attr|
+	  puts "^^^^^^^^^^^^^^ META DESC = "+attr.value
+	  @content1 = attr.value
+	end
+	
         respond_to do |format|
-         	format.json { render json:  { title: @title , src: @src ,content: @content} }
+         	format.json { render json:  { title: @title1 , src: @src ,content: @content1} }
       	end  
   end
   

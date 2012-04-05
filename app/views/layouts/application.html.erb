@@ -57,6 +57,21 @@
 	<script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"  />
 
+     
+     <script type="text/javascript">
+     $(function () {
+     $( "#tabs" ).tabs();
+      $( "#tabschat" ).tabs();
+      });
+       </script>
+       	<script type="text/javascript">
+			$(document).ready(function() {
+			    $.facebox.settings.opacity = 0.5
+			});
+	</script>
+	
+	 
+
 
   <% if current_user1 %>
 <script type="text/javascript">
@@ -126,6 +141,52 @@
     <%= content_tag :div, msg, :id => "flash#{name}" %>
 <% end %>
 
+<section class="gidget mini" data-source="" >
+  <header class="gidgetHeader"><%= image_tag "icons/Chat_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">GreenChat</span></header>
+    <div style="width: 570px; height: 300px;">
+       <div class="demo">
+		
+		<div id="tabschat">
+			<ul>
+				<li><a href="#tabs-11">Friends Chat</a></li>
+				<li><a href="#tabs-12">Create ChatRooms</a></li>
+				<li><a href="#tabs-13">ChatRoom Chat</a></li>
+			</ul>
+			<div id="tabs-11">
+                        <div>
+				           Add Friends <br/>
+				           <div id="addFriendsList">
+					         <% if current_user1 %>
+					         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
+					         <%end%>
+				         </div>
+				       </div>
+				      <div>
+				           Chat With Friends <br/>
+				         	<ul id="friends_list1"></ul>
+				       </div>
+		     </div>
+		     <div id="tabs-12">
+			     	<div id="createChatRoomTabContent">
+					      <% if current_user1 %>
+						     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
+						     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
+						   <%end%>   
+				   </div>
+		     </div>
+		     <div id="tabs-13">
+			     <div id="chatWithFriendsTabContent">
+				      <% if current_user1 %>
+				     	 <%= render :partial =>"chat/sendmessage" %>
+				       <%end%>
+			       </div>
+		     </div>
+		  </div>
+		  </div>
+		   
+ </div>
+</section>
  
 
   <div class="" id="getRateMy">
@@ -135,7 +196,7 @@
   </div>
 
  
-<section class="gidget mini" data-source="">
+<section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Deals</span></header>
   <div class="">
@@ -404,7 +465,7 @@
    
 </section>
 
-<section class="gidget mini" data-source="">
+<section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Photos</span></header><br/>
   <%= render :partial => 'picasa/form' %>
@@ -413,54 +474,9 @@
   <div id="flickr" style="display:none;"></div>
 </section>
 
-<section class="gidget mini" data-source="">
-  <header class="gidgetHeader"><%= image_tag "icons/Chat_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">GreenChat</span></header>
-    <div style="width: 570px; height: 300px;">
-       <div class="demo">
-		
-		<div id="tabschat">
-			<ul>
-				<li><a href="#tabs-11">Friends Chat</a></li>
-				<li><a href="#tabs-12">Create ChatRooms</a></li>
-				<li><a href="#tabs-13">ChatRoom Chat</a></li>
-			</ul>
-			<div id="tabs-11">
-                        <div>
-				           Add Friends <br/>
-				           <div id="addFriendsList">
-					         <% if current_user1 %>
-					         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
-					         <%end%>
-				         </div>
-				       </div>
-				      <div>
-				           Chat With Friends <br/>
-				         	<ul id="friends_list1"></ul>
-				       </div>
-		     </div>
-		     <div id="tabs-12">
-			     	<div id="createChatRoomTabContent">
-					      <% if current_user1 %>
-						     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
-						     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
-						   <%end%>   
-				   </div>
-		     </div>
-		     <div id="tabs-13">
-			     <div id="chatWithFriendsTabContent">
-				      <% if current_user1 %>
-				     	 <%= render :partial =>"chat/sendmessage" %>
-				       <%end%>
-			       </div>
-		     </div>
-		  </div>
-		  </div>
-		   
- </div>
-</section>
 
-<section class="gidget mini" data-source="">
+
+<section class="gidget mini" data-source="" style="display:none;">
 		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
 		    <span class="gidgetTitle">Albums</span></header>
 		<div style="width: 570px;height:300px;">
@@ -515,7 +531,7 @@
 		</div>
 </section>
 
-<section class="gidget mini" data-source="">
+<section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Social</span></header>
     <br/><br/>
@@ -598,89 +614,22 @@
 </section>
 
 
-<section class="gidget mini" data-source="">
-  <header class="gidgetHeader"><%= image_tag "icons/Blog_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Blog</span></header>
-  <div class=""><%= render :partial => 'posts/form1' ,:locals=>{:post=>Post.new} %></div>
-</section>
+
+
+
 </div>
 <div>
 </div>
 
 </div>
- <%= javascript_include_tag :swfobject %>
-     <%= javascript_include_tag :uploadify %>
-     <script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
-     
-     <script type="text/javascript">
-     $(function () {
-     $( "#tabs" ).tabs();
-      $( "#tabschat" ).tabs();
-      });
-       </script>
-       	<script type="text/javascript">
-			$(document).ready(function() {
-			    $.facebox.settings.opacity = 0.5
-			});
-	</script>
-	    <% if current_user1 %>
+  
+    <% if current_user1 %>
 	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
 	 <%end%>
-	 <script type="text/javascript">
-$(document).ready(function() {
-	<% if current_user1 %>
-		loadUploadify();
-	<% end %>
-	
-});
-
-function loadUploadify(){
-  <% key = Rails.application.config.session_options[:key] %>
-  var uploadify_script_data = {};
-  var csrf_param = $('meta[name=csrf-param]').attr('content');
-  var csrf_token = $('meta[name=csrf-token]').attr('content');
-  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
-  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
-  var JQry = jQuery.noConflict();
-<% session_key_name = Rails.application.config.session_options[:key] %>
-   JQry('#post_image').click(function(event){ 
-        event.preventDefault();
-    }); 
-  JQry('#post_image').uploadify({
-    uploader        : '/uploadify.swf',
-    script          : '/postimage',
-    cancelImg       : 'assets/images/cancel.png',
-    auto            : true,
-     fileExt         : '*.png;*.jpg;*.gif',
-    multi :false,
-    scriptData      :  {
-             '_http_accept': 'application/javascript',
-              'format' : 'json',
-               '_method': 'post',
-            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-               },
-       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
-      
-    onComplete      : function(a, b, c, response)
-    {
-    		console.log(response);
-    		//$("#post_imageQueue").html(''); 
-    		var dat = eval('(' + response + ')');
-    		$('#post_id').val(dat.id);
-    		$('#method_type').val('PUT');
-            JQry.getScript(dat.upload);
-            document.getElementById('hiddenld').value = ''; 
-     }
-  
-     });
-      JQry('#post_image').click(function(event){ 
-            event.preventDefault(); 
-            JQry('#post_image').uploadifyUpload(); 
-        });
+	   <%= javascript_include_tag :easySlider %>
+ <%= javascript_include_tag :swfobject %>
+     <%= javascript_include_tag :uploadify %>
      
-}
-</script>
-  <%= javascript_include_tag :easySlider %>
 </body>
 
 </html>

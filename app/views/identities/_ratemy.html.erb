@@ -28,7 +28,10 @@
         </li>
       </ul>
     </header>
-    
+    <%=link_to  'Add New Post','javascript:void(0);', :onclick => "clickablepost()" %>
+    <div id="postform" style="display:none;">
+ <%= render :partial => 'posts/form1' ,:locals=>{:post=>Post.new} %>
+</div>
     <ul class="rm_article_list">
           <% if current_identity1.categories %>
 <% current_identity1.categories.each do |category| %>
@@ -81,4 +84,64 @@
 </div>
                      
 <% end %>    
+
+
+	 
+<script type="text/javascript">
+
+	 
+$(document).ready(function() {
+	<% if current_user1 %>
+		loadUploadify();
+	<% end %>
+	
+});
+
+function loadUploadify(){
+  <% key = Rails.application.config.session_options[:key] %>
+  var uploadify_script_data = {};
+  var csrf_param = $('meta[name=csrf-param]').attr('content');
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
+  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
+  var JQry = jQuery.noConflict();
+<% session_key_name = Rails.application.config.session_options[:key] %>
+   JQry('#post_image').click(function(event){ 
+        event.preventDefault();
+    }); 
+  JQry('#post_image').uploadify({
+    uploader        : '/uploadify.swf',
+    script          : '/postimage',
+    cancelImg       : 'assets/images/cancel.png',
+    auto            : true,
+     fileExt         : '*.png;*.jpg;*.gif',
+    multi :false,
+    scriptData      :  {
+             '_http_accept': 'application/javascript',
+              'format' : 'json',
+               '_method': 'post',
+            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+               },
+       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
+      
+    onComplete      : function(a, b, c, response)
+    {
+    		console.log(response);
+    		//$("#post_imageQueue").html(''); 
+    		var dat = eval('(' + response + ')');
+    		$('#post_id').val(dat.id);
+    		$('#method_type').val('PUT');
+            JQry.getScript(dat.upload);
+            document.getElementById('hiddenld').value = ''; 
+     }
+  
+     });
+      JQry('#post_image').click(function(event){ 
+            event.preventDefault(); 
+            JQry('#post_image').uploadifyUpload(); 
+        });
+     
+}
+</script>
+ 
  
