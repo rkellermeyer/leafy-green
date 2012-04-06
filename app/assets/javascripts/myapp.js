@@ -287,9 +287,10 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   		console.log("channel_form");
 		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
 		  	    	console.log('response from channels create'+data);
-			    
-    	      		$('#channellist').append(data.name+"<br/>");
-      	    			    	 
+    	      		$('#channellist').append("<li>"+data.name+"</li>");
+    	      		$('#channel_name').val('');
+    	      		var strApp = '<input type="radio" value="'+data.name+'" onchange="getMessages2(\''+data.name+'\', \''+data.name+'\');" name="channel_id" id="channel_id_'+data.name+'"><label for="'+data.name+'">'+data.name+'</label>';
+    	      		$('#channelIdsWithRadio').append(strApp);
 			    }, 'json');
 	    		return false;
   	    }

@@ -43,6 +43,8 @@ Ratemy::Application.routes.draw do
     match "/getPopulatePostContent" => "identities#getPopulatePostContent"
     match "/storeSpiderUrlsAnemone" => "identities#storeSpiderUrlsAnemone"
     
+   match "/getHeaderBarData" => "identities#getHeaderBarData"
+    
   resources :categories
   
    match "/auth/:provider/callback", to: "sessions#callback"

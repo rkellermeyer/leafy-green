@@ -61,6 +61,10 @@ layout "test"
          render :template  => 'identities/getCreateChatRoomTabContent'
   end
   
+  def getHeaderBarData
+  	 render :template  => 'identities/getHeaderBarData'
+  end
+  
   def getPopulatePostContent
   		puts "%%%%%%%%%%%%%%%%% here in nokogiri Crawling"
   		spiderUrl = params[:spiderUrl]

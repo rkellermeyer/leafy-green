@@ -122,7 +122,7 @@ function convertToDateObject2(dateString){
  }
  
  function getFromatedDate(dateObj){
- 	var dateString = $.format.date(dateObj, "dd MMM hh:mm a");;
+ 	var dateString = jQuery.format.date(dateObj, "dd MMM hh:mm a");;
  	return dateString;
  }
 

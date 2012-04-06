@@ -137,8 +137,27 @@ function getChatWithFriendsTabContent(){
 	    }, 'html');
 }
 
+function loadHeaderBar(){
+  $.get("/getHeaderBarData", null, function(data, textStatus, jqXHR){
+	    	console.log('response getHeaderBarData');
+	    	$("#mainHeader").replaceWith(data);
+	    }, 'html');
+}
+
+function loadRemainingJSFiles(){
+
+		$.getScript('http://localhost:3000/assets/jquery-dateformat.js', function(data) {
+            console.log('success loading jquery-dateformat ')
+        });
+         
+		$.getScript('http://localhost:3000/assets/chat.js?body=1', function(data) {
+            console.log('success loading chat.js ')
+        });
+
+}
 
 function afterLogin(){
+	loadHeaderBar();
 	getGreenBlogs();
 	getRateMy();
 	
@@ -150,6 +169,7 @@ function afterLogin(){
 	getAddFriendsListContent();
 	getFriendsData();
 	getCreateChatRoomTabContent();
-	//getChatWithFriendsTabContent();
+	getChatWithFriendsTabContent();
 	loadUploadify();
+	loadRemainingJSFiles();
 }

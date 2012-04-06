@@ -1,0 +1,19 @@
+<aside class="headerNav">
+    <% if current_user1 %>
+        <%= current_identity1.name %> <%= current_identity1.last_name %>
+       <span  onclick="clickablelogout();">
+        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %> </span>
+        <%= image_tag "icons/Friends_20x20.png" %>
+        <%= image_tag "icons/Network.png" %>
+        <%= image_tag "icons/Messages.png" %>
+        <div id="logout" style="display:none;" > <%= link_to "Log out", log_out_path %> </div>
+        
+        <script type="text/javascript">
+		  var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
+		  console.log(current_user1);
+		</script>
+
+    <% end %>
+   
+  </aside>
+  

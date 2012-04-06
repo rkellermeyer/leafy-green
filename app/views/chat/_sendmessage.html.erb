@@ -42,11 +42,14 @@
 <%= form_tag('/messages/send', :id => 'chat_window', :remote => true) do %>
 
 Please select your ChatRoom<br />
+
+<div id="channelIdsWithRadio">
 <% Channel.all.each do |channel| %>
  
    <%= radio_button_tag 'channel_id', channel.name , false , :onchange => "getMessages2('#{channel.name}', '#{channel.name}');"%>
-   <%= label_tag(channel.name) %><br/>
+   <%= label_tag(channel.name) %>
 <% end %>
+</div>
 
 <%= text_field_tag 'msg_body', '', :size => 50 %>
 <%= hidden_field_tag 'sender', current_identity1.name%>
