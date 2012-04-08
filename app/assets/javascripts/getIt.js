@@ -69,6 +69,7 @@ function getAlbumsData(){
 function getFriendsData(){
 	  $.getJSON("/friendships", function(data){
 	        friendsData = data;
+	        $("#friends_list1").empty();
 	      	for(var i in data) {
 		    	if ( $.isPlainObject(data[i])){
 		    	      		$("#friends_list1").append("<li><span id="+data[i].id+"></span> Name &nbsp;&nbsp; <a  href='javascript:void(0)' onclick=javascript:chatWith('" + data[i].name + "') >"+data[i].name +"</a></li>");
@@ -119,7 +120,8 @@ function getRateMy(){
 function getAddFriendsListContent(){
   $.get("/getAddFriendsListContent", null, function(data, textStatus, jqXHR){
 	    	console.log('response getAddFriendsListContent');
-	    	$("#addFriendsList").replaceWith(data);
+	    	$("#addFriendsList").empty();
+	    	$("#addFriendsList").append(data);
 	    }, 'html');
 }
 
@@ -154,6 +156,22 @@ function loadRemainingJSFiles(){
             console.log('success loading chat.js ')
         });
 
+}
+
+function addFriendToList(friendId){
+	 $.get("/add_friend?friend_id="+friendId, null, function(data, textStatus, jqXHR){
+	    	console.log('response addFriendToList');
+	    	getAddFriendsListContent();
+			getFriendsData();
+	    }, 'html');
+}
+
+function removeFriendToList(friendId){
+	 $.get("/remove_friend?friend_id="+friendId, null, function(data, textStatus, jqXHR){
+	    	console.log('response addFriendToList');
+	    	getAddFriendsListContent();
+			getFriendsData();
+	    }, 'html');
 }
 
 function afterLogin(){

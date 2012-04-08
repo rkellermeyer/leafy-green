@@ -38,11 +38,11 @@
                     <td>&nbsp;</td>
                    <% if user.is_friend? current_user1.friendships  or  current_user1.inverse_friends.include? user  %>
                    <td> <%=  button_to  "Already added " , "/", :method => :put %><br/>  </td>
-                   <td>   <%= link_to "Remove Friend", remove_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/> </td>
+                   <td>   <%= link_to "Remove Friend", "javascript:void(0);", :method => :get ,  :class => "ui-button", :onclick => "removeFriendToList(#{user.id});" %> <br/> </td>
                    <% else %>
                      <td>
                        <%#= button_to "Add Friend", {:controller => "friendships", :action => "add_friend", :friend_id => user}  %>
-                       <%= link_to "Add Friend", add_friend_path(:friend_id => user), :method => :get ,  :class => "ui-button" %> <br/></td>
+                       <%= link_to "Add Friend", "javascript:void(0);", :method => :get ,  :class => "ui-button" , :onclick => "addFriendToList(#{user.id});"%> <br/></td>
                  <% end %>
                <% end %>
              </tr>

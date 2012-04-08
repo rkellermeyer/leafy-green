@@ -62,7 +62,6 @@ function restructureChatBoxes() {
 
 function chatWith(chatuser) {
 	createChatBox(chatuser);
-	$("#chatbox_"+chatuser+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatuser+'\',7)">show one week back messages</a></div>');
 	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
 }
 
@@ -73,9 +72,10 @@ function getOldMessages(chatuser, numOfDays){
 		  cache: false,
 		  dataType: "json",
 		  success: function(data) {
-	
+	chatboxtitle = chatuser;
 			username = current_user1.name;
-	
+			$("#chatbox_"+chatboxtitle+" .chatboxcontent").empty();
+			
 			for(i=0;i<data.length;i++) {
 				var item = data[i];
 				if (item)	{ // fix strange ie bug
@@ -92,7 +92,7 @@ function getOldMessages(chatuser, numOfDays){
 					
 					dateObj = convertToDateObject2(item.sent);
 					var dateString = getFromatedDate(dateObj);
-					$("#oldmsgs").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.from+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.message+'</span><div class="chatboxmessagesentdate" style="">'+dateString+'</div></div>');
 				}
 			}
 			
@@ -163,8 +163,8 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 	if (minimizeChatBox == 1) {
 		minimizedChatBoxes = new Array();
 
-		if ($.cookie('chatbox_minimized')) {
-			minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
+		if (jQuery.cookie('chatbox_minimized')) {
+			minimizedChatBoxes = jQuery.cookie('chatbox_minimized').split(/\|/);
 		}
 		minimize = 0;
 		for (j=0;j<minimizedChatBoxes.length;j++) {
@@ -197,6 +197,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 		}
 	});
 
+	$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatboxtitle+'\',7)">show one week back messages</a></div>');
 	$("#chatbox_"+chatboxtitle).show();
 }
 
@@ -255,7 +256,7 @@ function chatHeartbeat(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle);
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage" onclick="getOldMessages(\''+chatboxtitle+'\',7)"  id="oldmsgs">show one week back messages</div>');
+					// $("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage" onclick="getOldMessages(\''+chatboxtitle+'\',7)"  id="oldmsgs">show one week back messages</div>');
 				}
 				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 					$("#chatbox_"+chatboxtitle).css('display','block');
@@ -313,8 +314,8 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		
 		var minimizedChatBoxes = new Array();
 		
-		if ($.cookie('chatbox_minimized')) {
-			minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
+		if (jQuery.cookie('chatbox_minimized')) {
+			minimizedChatBoxes = jQuery.cookie('chatbox_minimized').split(/\|/);
 		}
 
 		var newCookie = '';
@@ -328,7 +329,7 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		newCookie = newCookie.slice(0, -1)
 
 
-		$.cookie('chatbox_minimized', newCookie);
+		jQuery.cookie('chatbox_minimized', newCookie);
 		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','block');
 		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','block');
 		$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
@@ -336,8 +337,8 @@ function toggleChatBoxGrowth(chatboxtitle) {
 		
 		var newCookie = chatboxtitle;
 
-		if ($.cookie('chatbox_minimized')) {
-			newCookie += '|'+$.cookie('chatbox_minimized');
+		if (jQuery.cookie('chatbox_minimized')) {
+			newCookie += '|'+jQuery.cookie('chatbox_minimized');
 		}
 
 
@@ -404,7 +405,7 @@ function startChatSession(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle,1);
-					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatboxtitle+'\',7)">show one week back messages</a></div>');
+					// $("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div id="oldmsgs"><a href="javascript:void(0);" onclick="getOldMessages(\''+chatboxtitle+'\',7)">show one week back messages</a></div>');
 				} else {
 					$("#chatbox_"+chatboxtitle).show(); 
 				}

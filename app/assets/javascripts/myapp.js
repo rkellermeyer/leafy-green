@@ -290,7 +290,8 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
     	      		$('#channellist').append("<li>"+data.name+"</li>");
     	      		$('#channel_name').val('');
     	      		var strApp = '<input type="radio" value="'+data.name+'" onchange="getMessages2(\''+data.name+'\', \''+data.name+'\');" name="channel_id" id="channel_id_'+data.name+'"><label for="'+data.name+'">'+data.name+'</label>';
-    	      		$('#channelIdsWithRadio').append(strApp);
+   
+    	      	      		$('#channelIdsWithRadio').append(strApp);
 			    }, 'json');
 	    		return false;
   	    }
