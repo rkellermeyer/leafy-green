@@ -10,17 +10,17 @@
           var perPage = '25';
           var showOnPage = '6';
           
-            $('#new_photo').submit(function () {
-            var myForm = $("#new_photo");
-            var x=document.forms["new_photo"]["photo_photo"].value;
- 
-             if (x==null || x=="")
-                {
-                   alert("You have to select Photo");
-                    return false;
-                 }
+           /* $('#new_photo').submit(function () {
+	            var myForm = $("#new_photo");
+	            var x=document.forms["new_photo"]["photo_photo"].value;
+	 
+	             if (x==null || x=="")
+	                {
+	                   alert("You have to select Photo");
+	                    return false;
+	                 }
 
-});
+			}); */
 
           /* $.getJSON('http://api.flickr.com/services/rest/?format=json&method='+
            'flickr.people.getPublicPhotos&api_key=' + apiKey + '&user_id=' + userId +
@@ -265,10 +265,7 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 	    		return false;
   			}); 
   			
-      
-
-       });
-
+  		});
 /*
  	$(function() {
  		$('#categories_form').submit(function () {
@@ -283,8 +280,32 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
   	});
 */
 
+
+		function createAlbumFormSubmit(obj){
+  			console.log("createAlbumFormSubmit");
+		     $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from createAlbumFormSubmit'+jqXHR);
+			    	getUploadPhotosData();
+			    	getAlbumsData();
+			    }, 'json');
+            
+	    		return false;
+ 			
+  	    }
+  	    
+  	    function updateAlbumFormSubmit(obj){
+  			console.log("createAlbumFormSubmit");
+		     $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
+			    	console.log('response from updateAlbumFormSubmit'+jqXHR);
+			    	getAlbumsData();
+			    }, 'json');
+            
+	    		return false;
+ 			
+  	    }
+  	    
     	function channelFormSubmit(obj){
-  		console.log("channel_form");
+  			console.log("channel_form");
 		    $.post(obj.action, $(obj).serialize(), function(data, textStatus, jqXHR){
 		  	    	console.log('response from channels create'+data);
     	      		$('#channellist').append("<li>"+data.name+"</li>");
@@ -332,6 +353,24 @@ $('button[type="reset"]').click(function(){ closeTagInput(); });
 			});
 			    
 			    jQuery(document).trigger('close.facebox');
+    		return false;
+  	}
+  	
+  	function photosFormSubmit(obj){
+			  
+			  $.ajax({
+			      type: 'PUT',
+			      url: obj.action+'/'+$('#photo_id').val(),
+			      data: $(obj).serialize(),
+			      dataType: 'json',
+			      success: function(msg) {
+			        console.log('saved photos');
+					getUploadPhotosData();
+					getPhotosData();
+					getAlbumsData();
+			      }
+			});
+			    
     		return false;
   	}
   	

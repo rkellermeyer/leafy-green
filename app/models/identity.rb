@@ -1,5 +1,7 @@
 class Identity < OmniAuth::Identity::Models::ActiveRecord
 
+  self.table_name = 'identities'
+  
   #attr_accessible  :categories
   #attr_accessor :password
   #before_save :encrypt_password
@@ -10,10 +12,10 @@ class Identity < OmniAuth::Identity::Models::ActiveRecord
   has_many :posts, :dependent => :destroy
   accepts_nested_attributes_for :posts, :allow_destroy => true, :reject_if => :all_blank
    has_many :photos
-  #validates_confirmation_of :password
-  #validates_presence_of :password, :on => :create
-  #validates_presence_of :email
-  #validates_uniqueness_of :email
+   
+  validates :name, :presence => true
+  validates :email, :presence => true
+
 
   # follow a user
   def follow!(identity)

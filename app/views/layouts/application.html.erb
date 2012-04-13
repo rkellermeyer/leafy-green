@@ -192,28 +192,28 @@
 <% session_key_name = Rails.application.config.session_options[:key] %>
     JQry('#post_image').click(function (event) {
         event.preventDefault();
-    });
-    JQry('#post_image').uploadify({
-        uploader:'/uploadify.swf',
-        script:'/postimage',
-        cancelImg:'assets/images/cancel.png',
-        auto:true,
-        fileExt:'*.png;*.jpg;*.gif',
-        multi:false,
-        scriptData:{
-            '_http_accept':'application/javascript',
-            'format':'json',
-            '_method':'post',
-            'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-        },
-        onProgress:function (event, queueID, fileObj, data) {
-            $('#post_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
-        }, onComplete:function (a, b, c, response) {
-            console.log(response);
-            //$("#post_imageQueue").html('');
-            var dat = eval('(' + response + ')');
-            $('#post_id').val(dat.id);
-            $('#method_type').val('PUT');
+    }); 
+  JQry('#post_image').uploadify({
+    uploader        : '/uploadify.swf',
+    script          : '/postimage',
+    cancelImg       : 'assets/images/cancel.png',
+    auto            : true,
+     fileExt         : '*.png;*.jpg;*.gif',
+    multi :false,
+    scriptData      :  {
+             '_http_accept': 'application/javascript',
+              'format' : 'json',
+               '_method': 'post',
+            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+               },
+       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
+      
+    onComplete      : function(a, b, c, response)
+    {
+    		console.log(response);
+    		var dat = eval('(' + response + ')');
+    		$('#post_id').val(dat.id);
+    		$('#method_type').val('PUT');
             JQry.getScript(dat.upload);
             document.getElementById('hiddenld').value = '';
         }        });
@@ -221,6 +221,49 @@
         event.preventDefault();
         JQry('#post_image').uploadifyUpload();
     });
+}
+
+function loadUploadifyForPhotos(){
+  <% key = Rails.application.config.session_options[:key] %>
+  var uploadify_script_data = {};
+  var csrf_param = $('meta[name=csrf-param]').attr('content');
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
+  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
+  var JQry = jQuery.noConflict();
+<% session_key_name = Rails.application.config.session_options[:key] %>
+   JQry('#photo_image').click(function(event){ 
+        event.preventDefault();
+    }); 
+  JQry('#photo_image').uploadify({
+    uploader        : '/uploadify.swf',
+    script          : '/photosimage',
+    cancelImg       : 'assets/images/cancel.png',
+    auto            : true,
+     fileExt         : '*.png;*.jpg;*.gif',
+    multi :false,
+    scriptData      :  {
+             '_http_accept': 'application/javascript',
+              'format' : 'json',
+               '_method': 'post',
+            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+               },
+       onProgress      : function(event, queueID, fileObj, data){ $('#photo_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
+      
+    onComplete      : function(a, b, c, response)
+    {
+    		console.log(response);
+    		var dat = eval('(' + response + ')');
+    		$('#photo_id').val(dat.id);
+            JQry.getScript(dat.upload);
+     }
+  
+     });
+      JQry('#photo_image').click(function(event){ 
+            event.preventDefault(); 
+            JQry('#photo_image').uploadifyUpload(); 
+        });
+     
 }
 </script>
 <section class="gidget mini" data-source="" style="display:none;">
@@ -495,53 +538,59 @@
   <%= render :partial => 'flickr/form' %>
   <div id="flickr" style="display:none;"></div>
 </section>
-<section class="gidget mini" data-source="" style="display:none;">
-  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Albums</span></header>
-  <div style="width: 570px;height:300px;">
-    <div class="demo">
-      <div id="tabs">
-        <ul>
-          <li><a href="#tabs-1">My Photos</a></li>
-          <li><a href="#tabs-2">Upload Photos</a></li>
-          <li><a href="#tabs-4">My Albums</a></li>
-          <li><a href="#tabs-5">Friends Albums</a></li>
-        </ul>
-        <div id="tabs-1">
-          <div id="photosTabContent">
-            <% if current_user1 %>
-                <%= render :partial => "photos/photoslist", :locals => {:photos1 => Photo.find_all_by_identity_id(current_user1.uid)} %>
-            <% end %>
-          </div>
-          <div id="Photo" style="margin-left:330px;padding:2px;width:300px;"></div>
-        </div>
-        <div id="tabs-2">
-          <div id="uploadPhotosTabContent">
-            <% if current_user1 %>
-                <%= render :partial => "photos/form", :locals => {:photo => Photo.new(:identity_id => current_user1.uid)} %>
-            <% end %>
-          </div>
-        </div>
-        <div id="tabs-4">
-          <div id="alubmsTabContent">
-            <% if current_user1 %>
-                <%= render :partial => "albums/albumlist", :locals => {:albums => Album.find_all_by_identity_id(current_user1.uid)} %>
-            <% end %>
-          </div>
-        </div>
-        <div id="tabs-5">
-          <h2>My Friends Albums</h2>
-
-          <div id="friendsAlbumsTabContent">
-            <% if current_user1 %>
-                <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_user_id(current_user1.id), :f_type => 'direct'} %>
-                <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_friend_id(current_user1.id), :f_type => 'inverse'} %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="gidget mini" data-source="" >
+		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
+		    <span class="gidgetTitle">Albums</span></header>
+		<div style="width: 570px;height:300px;">
+		 <div class="demo">
+		
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">My Photos</a></li>
+				<li><a href="#tabs-2">Upload Photos</a></li>
+				<li><a href="#tabs-4">My Albums</a></li>
+				<li><a href="#tabs-5">Friends Albums</a></li>
+		
+			</ul>
+			<div id="tabs-1">
+			
+				<div id="photosTabContent">
+				<% if current_user1 %>
+					<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
+				<%end%>
+				</div>
+				
+			       <div id="Photo" style="margin-left:150px;padding:2px;width:300px;margin-top:-50px;"></div>	
+			</div>
+			<div id="tabs-2">
+				<div id="uploadPhotosTabContent">
+					<% if current_user1 %>		
+					<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
+					<%end%>
+				</div>
+			</div>
+		
+				<div id="tabs-4">
+				<div id="alubmsTabContent">
+					<% if current_user1 %>
+						<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
+					<%end%>
+				</div>
+				</div>
+				
+				<div id="tabs-5">
+			  		<h2>My Friends Albums</h2>
+					<div id="friendsAlbumsTabContent">  		
+						<% if current_user1 %>
+						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
+						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
+						 <% end %>
+					</div>	 
+				</div>
+		</div>
+		
+		</div>
+		</div>
 </section>
 <section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>

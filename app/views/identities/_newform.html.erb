@@ -1,5 +1,16 @@
 <%= form_tag "/auth/identity/register" , :id => "register_form",  :multipart => true do %>
  
+ <% if @identity && @identity.errors.any? %>  
+     <div class="error_messages">  
+       <h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>  
+      <ul>  
+      <% @identity.errors.full_messages.each do |msg| %>  
+        <li><%= msg %></li>  
+       <% end %>  
+       </ul>  
+     </div>  
+   <% end %>  
+  
   <div id="signup_left">
   <div class="sign_up_marker">1</div>
   <h2>Tell us a little bit about yourself.</h2>

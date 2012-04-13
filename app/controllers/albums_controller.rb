@@ -85,10 +85,10 @@ class AlbumsController < ApplicationController
 	@album.visibletype = params[:album][:visibletype]
     respond_to do |format|
       if @album.update_attributes(:name => @album.name, :caption => @album.caption, :visibletype => @album.visibletype, :accessusers => @album.accessusers)
-        format.html { redirect_to root_url, notice: 'Album was successfully updated.' }
-        format.json { head :ok }
+        # format.html { redirect_to root_url, notice: 'Album was successfully updated.' }
+        format.json {render json: @album }
       else
-        format.html { render action: "edit" }
+        # format.html { render action: "edit" }
         format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end

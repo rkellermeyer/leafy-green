@@ -1,6 +1,4 @@
-<%= form_for(album) do |f| %>
-
-
+ <%= form_for album, :html => {:onsubmit => "createAlbumFormSubmit(this);return false;"}   do |f| %>
 <%= f.hidden_field :identity_id ,:value=>current_user1.id%>
   
   <div class="field">

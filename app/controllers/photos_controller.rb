@@ -68,23 +68,40 @@ today=Date.current
     end
   end
 
+
+  # Photo upload using ajax
+  def photosimage
+   @photo = Photo.new(:album_id => "0" ,  :image => params[:Filedata]  ,:visible => '0' , :identity_id => params[:user_id])
+    logger.debug "*****************Debug values : #{params}"
+    respond_to do |format|
+      if @photo.save
+        format.html { redirect_to root_url, notice: 'photo was successfully created.' }
+        format.json { render json: @photo, status: :created, location: root_url }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @photo.errors, status: :unprocessable_entity }
+      end
+  end
+  end
+  
   # PUT /photos/1
   # PUT /photos/1.json
   def update
     @photo = Photo.find(params[:id])
     puts "coming------------------"
-puts "date------------"+params[:photo][:publishdate].to_s
+	puts "date------------"+params[:photo][:publishdate].to_s
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
+      		@photo.update_attributes(:album_id => params[:photo][:album_id])
            if (params[:photo][:publishdate].nil? || params[:photo][:publishdate] == '')
              @photo.update_attributes(:publishdate => Date.current)
              else
             @photo.update_attributes(:publishdate => params[:photo][:publishdate].to_s)
         end
-        format.html { redirect_to '/photos' }
-        format.json { head :ok }
+        #format.html { redirect_to '/photos' }
+        format.json { render json: @photo }
       else
-        format.html { render action: "edit" }
+        #format.html { render action: "edit" }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
