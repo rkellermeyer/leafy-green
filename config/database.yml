@@ -6,7 +6,7 @@ development:
   database: newratemy_development
   pool: 5
   username: root
-  password: indian
+  password: Dillinger420
   host: localhost
 
 
@@ -17,14 +17,14 @@ test:
   database: newratemy_test
   pool: 5
   username: root
-  password: indian
+  password: Dillinger420
   host: localhost
 
 production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: indian
+  database: newratemy_production
   pool: 5
   username: root
   password: Dillinger420

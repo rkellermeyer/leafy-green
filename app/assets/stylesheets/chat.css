@@ -90,3 +90,35 @@
 .chatboxtitle {
 	float: left;
 }
+
+#chat_options_settings {
+  background: #fff;
+  border: 1px solid #999;
+  float: right;
+  position: relative;
+  width: 90px;
+  z-index: 9999;
+}
+
+#chatGidget {
+  
+}
+
+
+
+#chat {
+  background: #fff;
+}
+
+#chat_options_settings ul {
+
+}
+
+#chat_options_settings ul li {
+}
+
+#chat_options_settings ul li:hover {
+  background: #ddd;
+  color: #fff;
+  cursor: pointer;
+}

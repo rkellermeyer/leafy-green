@@ -63,9 +63,8 @@ input, button {
   padding: 2px;
 }
 
-input {
-  margin: 7px auto;
-  width: 204px;
+.button_to > button {
+  width: 75px;
 }
 
 .splash_form_login_button {

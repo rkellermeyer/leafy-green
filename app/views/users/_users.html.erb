@@ -1,73 +1,20 @@
- <% if current_user1 %>
-
-
- <table><tr>
-
-
-   <td>
-
-    <table>
-
-
+<aside id="friendsColumn">
+  <div class="scrollUp">^</div>
+    <ul>
       <% for user in users %>
-
-      <tr>
-
-        
-
-        <td>
-          <table width="100%">
-<% if user.name != current_user1.name %>
-             <tr>
-               <td>Name:</td>
-               <td><%= link_to  user.name,user %>
-               <br/></td>
-              </tr>
-              
-<% end %>
-
-
-
-          </table>
-        </td>
-
-        <td>
-          <table>
-             <tr>
-                <% if user.name != current_user1.name %>
-                    <td>&nbsp;</td>
-                   <% if user.is_friend? current_user1.friendships  or  current_user1.inverse_friends.include? user  %>
-                   <td> <%=  button_to  "Already added " , "/", :method => :put %><br/>  </td>
-                   <td>   <%= link_to "Remove Friend", "javascript:void(0);", :method => :get ,  :class => "ui-button", :onclick => "removeFriendToList(#{user.id});" %> <br/> </td>
-                   <% else %>
-                     <td>
-                       <%#= button_to "Add Friend", {:controller => "friendships", :action => "add_friend", :friend_id => user}  %>
-                       <%= link_to "Add Friend", "javascript:void(0);", :method => :get ,  :class => "ui-button" , :onclick => "addFriendToList(#{user.id});"%> <br/></td>
-                 <% end %>
-               <% end %>
-             </tr>
-          </table>
-        </td>
-
-
-
-      </tr>
-      
-     
-      
-
+        <% if user.name != current_user1.name %>
+            <% if Identity.where(:id => current_user1.id).first.image.nil? %>
+              <li>Image Missing</li>
+            <% else %>
+            <li>
+              <%= link_to user %>
+            </li>
+            <% end %>
+            <li>
+              <%= link_to user.name, user %>
+            </li>
+        <% end %>
       <% end %>
-
-
-  </table>
-  </td>
-
- 
-
- </tr>
- 
- </table>
-
-<%end%>
- 
- 
+    </ul>
+  <div class="scrollDown">V</div>
+</aside>

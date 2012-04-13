@@ -16,4 +16,7 @@ $(function () {
       $(this).removeClass('arrow-down-left').addClass('arrow-up-right');
     });
   });
+  $('#chatOptions').bind('click', function(){
+    $('#chat_options_settings').slideToggle();
+  });
 });

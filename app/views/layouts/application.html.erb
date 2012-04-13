@@ -10,23 +10,17 @@
   <%= javascript_include_tag :jqGalViewII %>
   <%= stylesheet_link_tag :jqGalViewII %>
   <%= javascript_include_tag :widget %>
-   <%= stylesheet_link_tag "chat.css" %>
-      <%= stylesheet_link_tag "reset.css" %>
-      <%= stylesheet_link_tag "splash.css" %>
-      <%= stylesheet_link_tag "signup.css" %>
-      <%= stylesheet_link_tag "gidget.css" %>
-      
-
-    <%= javascript_include_tag :master %>
-   
-  <%= javascript_include_tag :resize %>
+  <%= stylesheet_link_tag "chat.css" %>
+  <%= stylesheet_link_tag "reset.css" %>
+  <%= stylesheet_link_tag "splash.css" %>
+  <%= stylesheet_link_tag "signup.css" %>
+  <%= stylesheet_link_tag "gidget.css" %>  <%= javascript_include_tag :master %>  <%= javascript_include_tag :resize %>
   <%= javascript_include_tag :getIt %>
-    <%= stylesheet_link_tag "jqui" %>
+  <%= stylesheet_link_tag "jqui" %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <%= javascript_include_tag 'rails', 'jquery.gritter' %>
   <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
   <%= javascript_include_tag :myapp %>
-
   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
       api_key: titzvdcmcaot
       authorize: true
@@ -34,577 +28,546 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
-
-  <script type="text/javascript">
-
-      function loadData() {
-          IN.API.Profile("me")
-                  .result(function (result) {
-                      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
-                      IN.parse(document.getElementById("profile"))
-                  })
-      }
-
-  </script>
-    <% if current_user1 %>
-  	 <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
-	
-	<% end %> 
+  <script type="text/javascript">      function loadData() {
+      IN.API.Profile("me")
+              .result(function (result) {
+                  $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+                  IN.parse(document.getElementById("profile"))
+              })
+  }  </script>
+  <% if current_user1 %>
+      <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
+  <% end %>
   <%= stylesheet_link_tag :jdgallery %>
   <%= javascript_include_tag :jdgallery %>
   <%= javascript_include_tag :picasa1 %>
-
-	<script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"  />
-
-     
-     <script type="text/javascript">
-     $(function () {
-     $( "#tabs" ).tabs();
-      $( "#tabschat" ).tabs();
+  <script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"/>
+  <script type="text/javascript">
+      $(function () {
+          $("#tabs").tabs();
+          $("#tabschat").tabs();
       });
-       </script>
-       	<script type="text/javascript">
-			$(document).ready(function() {
-			    $.facebox.settings.opacity = 0.5
-			});
-	</script>
-	
-	 
-
-
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $.facebox.settings.opacity = 0.5
+      });
+  </script>
   <% if current_user1 %>
-<script type="text/javascript">
-  var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
-  console.log(current_user1);
-</script>
-<%end%>
+      <script type="text/javascript">
+          var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
+          console.log(current_user1);
+      </script>
+  <% end %>
 </head>
 <body>
-
 <header id="splash_header">
   <img src="images/Leaf_Icon.png" class="logo_1"/><img src="images/Greenchat_Logo.png" class="logo_2"/>
   <!--<h2 class="logo_text"><span class="logo_highlight">GREEN</span>CHAT</h2>-->
 </header>
 <div id="splash"></div>
 <div id="signup"></div>
-
-<div id="signform" style="<% if current_user1 %>display:none <% end %>" >
-       <!-- <%= link_to "Sign up", 'javascript:void(0);'  , :onclick => "javascript:showsignup();"%> or
-        <%= link_to "Log in", 'javascript:void(0);' ,:onclick => "javascript:showlogin();" %>
+<div id="signform" style="<% if current_user1 %>display:none
+  <% end %>">
+  <!-- <%= link_to "Sign up", 'javascript:void(0);', :onclick => "javascript:showsignup();" %> or
+        <%= link_to "Log in", 'javascript:void(0);', :onclick => "javascript:showlogin();" %>
         -->
-
-
-<div id="loginForm" style="display:block;">
-<%= render :partial => 'sessions/newform' %>
+  <div id="loginForm" style="display:block;">
+    <%= render :partial => 'sessions/newform' %>
+  </div>
+  <div id="newUserForm" style="display:none;">
+    <%= render :partial => 'identities/newform' %>
+  </div>
 </div>
-
-<div id="newUserForm" style="display:none;">
-<%= render :partial => 'identities/newform' %>
-</div>
-</div>
-
-
-<div id="bodyContent" style="<% if current_user1 %>display:block; <%else%> display:none; <%end%>">
-
+<div id="bodyContent" style="<% if current_user1 %>display:block; <%else%> display:none;
+  <% end %>">
 <header id="mainHeader">
   <aside class="headerNav">
     <% if current_user1 %>
         <%= current_identity1.name %> <%= current_identity1.last_name %>
-       <span  onclick="clickablelogout();">
+        <span onclick="clickablelogout();">
         <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %> </span>
         <%= image_tag "icons/Friends_20x20.png" %>
         <%= image_tag "icons/Network.png" %>
         <%= image_tag "icons/Messages.png" %>
-        <div id="logout" style="display:none;" > <%= link_to "Log out", log_out_path %> </div>
-    <% end %>
-   
-  </aside>
-  
+        <div id="logout" style="display:none;"> <%= link_to "Log out", log_out_path %> </div>
+    <% end %>  </aside>
 </header>
-
 <div>
 <div style="float:left;">
-<aside class="sidebar1">
-	<div id="greenBlog">
-		<% if current_user1 %>
-	     <%= render :partial => 'layouts/sidebar1' %>
-	     <%end%>
-     </div>
- </aside>
-
+  <aside class="sidebar1">
+    <div id="greenBlog">
+      <% if current_user1 %>
+          <%= render :partial => 'layouts/sidebar1' %>
+      <% end %>
+    </div>
+  </aside>
 </div>
- 
- <div style="float:left;">
+<div style="float:left;">
 <div id="appWrap">
 <%= yield %>
 <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash#{name}" %>
 <% end %>
-
-<section class="gidget mini" data-source="" >
-  <header class="gidgetHeader"><%= image_tag "icons/Chat_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">GreenChat</span></header>
-    <div style="width: 570px; height: 300px;">
-       <div class="demo">
-		
-		<div id="tabschat">
-			<ul>
-				<li><a href="#tabs-11">Friends Chat</a></li>
-				<li><a href="#tabs-12">Create ChatRooms</a></li>
-				<li><a href="#tabs-13">ChatRoom Chat</a></li>
-			</ul>
-			<div id="tabs-11">
-                        <div>
-				           Add Friends <br/>
-				           <div id="addFriendsList">
-					         <% if current_user1 %>
-					         <%= render :partial =>"users/users" ,:locals=>{:users=>User.all} %>
-					         <%end%>
-				         </div>
-				       </div>
-				      <div>
-				           Chat With Friends <br/>
-				         	<ul id="friends_list1"></ul>
-				       </div>
-		     </div>
-		     <div id="tabs-12">
-			     	<div id="createChatRoomTabContent">
-					      <% if current_user1 %>
-						     <%= render :partial =>"channels/channels" ,:locals=>{:channels=>Channel.all}%>
-						     <%= render :partial =>"channels/channelform" ,:locals=>{:channel=>Channel.new}%>
-						   <%end%>   
-				   </div>
-		     </div>
-		     <div id="tabs-13">
-			     <div id="chatWithFriendsTabContent">
-				      <% if current_user1 %>
-				     	 <%= render :partial =>"chat/sendmessage" %>
-				       <%end%>
-			       </div>
-		     </div>
-		  </div>
-		  </div>
-		   
- </div>
-</section>
- 
-
-  <div class="" id="getRateMy">
-	<% if current_user1 %>
-	     <%= render :partial => 'layouts/ratemy' %>
-	<%end%>
+<div id="green_chat">
+<div class="" id="getRateMy">
+  <% if current_user1 %>
+      <%= render :partial => 'layouts/ratemy' %>
+  <% end %>
+</div>
+<section id="chatGidget">
+  <header>
+    <ul class="gidget_header_right">
+      <li>
+        <div class="arrow-up-right maximize"></div>
+      </li>
+      <li>
+        <div class="refresh_and_settings">
+          <img src="images/icons/RefreshHover.png"/>
+          <img src="images/icons/SettingsHover.png" id="chatOptions" />
+        </div>
+      </li>
+    </ul>
+    <ul class="gidget_header_left">
+      <li>
+        <img src="images/icons/Chat_Icon.png" class="gidgetIcon"/>
+      </li>
+      <li>
+        <div class="title_and_message">
+          <span class="title">GreenChat</span>
+          <div class="sub_title">
+            <span>6 open chats</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </header>
+  <div id="chat_options_settings">
+   <ul class="options_list">
+     <li class="conversations">Conversations</li>
+     <li class="chat_settings">Settings</li>
+   </ul>
   </div>
-  
-<script type="text/javascript">
-
-function loadUploadify(){
-  <% key = Rails.application.config.session_options[:key] %>
-  var uploadify_script_data = {};
-  var csrf_param = $('meta[name=csrf-param]').attr('content');
-  var csrf_token = $('meta[name=csrf-token]').attr('content');
-  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
-  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
-  var JQry = jQuery.noConflict();
+  <article id="chat">
+    <div id="add_friends">
+      <div>
+        <div id="addFriendsList">
+          <% if current_user1 %>
+              <%= render :partial => "users/users", :locals => {:users => User.all} %>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        Chat With Friends <br/>
+        <ul id="friends_list1"></ul>
+      </div>
+    </div>
+    <div id="create_chat_room">
+      <div id="createChatRoomTabContent">
+        <% if current_user1 %>
+            <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
+            <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
+        <% end %>
+      </div>
+    </div>
+    <div id="chat_with_friends">
+      <div id="chatWithFriendsTabContent">
+        <% if current_user1 %>
+            <%= render :partial => "chat/sendmessage" %>
+        <% end %>
+      </div>
+    </div>
+  </article>
+</section>
+</div>
+<script type="text/javascript">    function loadUploadify() {
+<% key = Rails.application.config.session_options[:key] %>
+    var uploadify_script_data = {};
+    var csrf_param = $('meta[name=csrf-param]').attr('content');
+    var csrf_token = $('meta[name=csrf-token]').attr('content');
+    uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
+    uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
+    var JQry = jQuery.noConflict();
 <% session_key_name = Rails.application.config.session_options[:key] %>
-   JQry('#post_image').click(function(event){ 
+    JQry('#post_image').click(function (event) {
         event.preventDefault();
-    }); 
-  JQry('#post_image').uploadify({
-    uploader        : '/uploadify.swf',
-    script          : '/postimage',
-    cancelImg       : 'assets/images/cancel.png',
-    auto            : true,
-     fileExt         : '*.png;*.jpg;*.gif',
-    multi :false,
-    scriptData      :  {
-             '_http_accept': 'application/javascript',
-              'format' : 'json',
-               '_method': 'post',
-            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-               },
-       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
-      
-    onComplete      : function(a, b, c, response)
-    {
-    		console.log(response);
-    		//$("#post_imageQueue").html(''); 
-    		var dat = eval('(' + response + ')');
-    		$('#post_id').val(dat.id);
-    		$('#method_type').val('PUT');
+    });
+    JQry('#post_image').uploadify({
+        uploader:'/uploadify.swf',
+        script:'/postimage',
+        cancelImg:'assets/images/cancel.png',
+        auto:true,
+        fileExt:'*.png;*.jpg;*.gif',
+        multi:false,
+        scriptData:{
+            '_http_accept':'application/javascript',
+            'format':'json',
+            '_method':'post',
+            'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+        },
+        onProgress:function (event, queueID, fileObj, data) {
+            $('#post_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
+        }, onComplete:function (a, b, c, response) {
+            console.log(response);
+            //$("#post_imageQueue").html('');
+            var dat = eval('(' + response + ')');
+            $('#post_id').val(dat.id);
+            $('#method_type').val('PUT');
             JQry.getScript(dat.upload);
-            document.getElementById('hiddenld').value = ''; 
-     }
-  
-     });
-      JQry('#post_image').click(function(event){ 
-            event.preventDefault(); 
-            JQry('#post_image').uploadifyUpload(); 
-        });
-     
+            document.getElementById('hiddenld').value = '';
+        }        });
+    JQry('#post_image').click(function (event) {
+        event.preventDefault();
+        JQry('#post_image').uploadifyUpload();
+    });
 }
 </script>
- 
- 
 <section class="gidget mini" data-source="" style="display:none;">
-  <header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Deals</span></header>
-  <div class="">
-    <script type='text/javascript'>
-        function groupon() {
-            var city = document.getElementById('city_select').value;
-            myGrouponWidget.destroy();
-            myGrouponWidget.opts.city = city;
-            myGrouponWidget.render();
-            document.getElementById('groupon_widget').style.display = "block";
-        }
-        var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
-        document.getElementById('groupon_widget').style.display = "none";
-    </script>
-    <div class="field">
-      <label for="city" class="city-select-label">
-        Show the Groupon daily deal for
-      </label>
-      <select name="city" id="city_select" onchange="javascript:groupon();">
-        <option value="abbotsford">Abbotsford</option>
-        <option value="abilene">Abilene, TX</option>
-        <option value="akron-canton">Akron / Canton</option>
-        <option value="albany-capital-region">Albany / Capital Region</option>
-        <option value="albuquerque">Albuquerque</option>
-        <option value="allentown-reading">Allentown / Reading</option>
-        <option value="amarillo">Amarillo</option>
-        <option value="anchorage">Anchorage</option>
-        <option value="ann-arbor">Ann Arbor</option>
-        <option value="asheville">Asheville</option>
-        <option value="athens-ga">Athens, GA</option>
-        <option value="atlanta">Atlanta</option>
-        <option value="augusta">Augusta</option>
-        <option value="austin">Austin</option>
-        <option value="bakersfield">Bakersfield</option>
-        <option value="baltimore">Baltimore</option>
-        <option value="barrie">Barrie</option>
-        <option value="baton-rouge">Baton Rouge</option>
-        <option value="beaumont">Beaumont, TX</option>
-        <option value="billings">Billings / Bozeman</option>
-        <option value="birmingham">Birmingham</option>
-        <option value="bloomington-in">Bloomington, IN</option>
-        <option value="boise">Boise</option>
-        <option value="boston">Boston</option>
-        <option value="buffalo">Buffalo</option>
-        <option value="calgary">Calgary</option>
-        <option value="cape-breton">Cape Breton</option>
-        <option value="cedar-rapids-iowa-city">Cedar Rapids / Iowa City</option>
-        <option value="central-jersey">Central Jersey</option>
-        <option value="charleston">Charleston</option>
-        <option value="charlotte">Charlotte</option>
-        <option value="chattanooga">Chattanooga</option>
-        <option value="chicago">Chicago</option>
-        <option value="cincinnati">Cincinnati</option>
-        <option value="cleveland">Cleveland</option>
-        <option value="colorado-springs">Colorado Springs</option>
-        <option value="columbia">Columbia</option>
-        <option value="columbia-mo">Columbia, MO</option>
-        <option value="columbus">Columbus</option>
-        <option value="columbus-ga">Columbus GA</option>
-        <option value="corpus-christi">Corpus Christi</option>
-        <option value="dallas">Dallas</option>
-        <option value="dayton">Dayton</option>
-        <option value="daytona-beach">Daytona Beach</option>
-        <option value="denver">Denver</option>
-        <option value="des-moines">Des Moines</option>
-        <option value="detroit">Detroit</option>
-        <option value="edmonton">Edmonton</option>
-        <option value="el-paso">El Paso</option>
-        <option value="erie">Erie</option>
-        <option value="eugene">Eugene</option>
-        <option value="evansville">Evansville</option>
-        <option value="fairfield-county">Fairfield County</option>
-        <option value="fort-lauderdale">Fort Lauderdale</option>
-        <option value="fort-myers-cape-coral">Fort Myers / Cape Coral</option>
-        <option value="fort-wayne">Fort Wayne</option>
-        <option value="fort-worth">Fort Worth</option>
-        <option value="appleton">Fox Cities</option>
-        <option value="fresno">Fresno</option>
-        <option value="gaiesville">Gainesville</option>
-        <option value="grand-rapids">Grand Rapids</option>
-        <option value="green-bay">Green Bay</option>
-        <option value="greenville">Greenville</option>
-        <option value="halifax">Halifax</option>
-        <option value="hampton-roads">Hampton Roads</option>
-        <option value="harrisburg">Harrisburg / Lancaster</option>
-        <option value="hartford">Hartford</option>
-        <option value="honolulu">Honolulu</option>
-        <option value="houston">Houston</option>
-        <option value="huntsville">Huntsville</option>
-        <option value="indianapolis">Indianapolis</option>
-        <option value="inland-empire">Inland Empire</option>
-        <option value="jackson">Jackson</option>
-        <option value="jacksonville">Jacksonville</option>
-        <option value="kalamazoo">Kalamazoo</option>
-        <option value="kansas-city">Kansas City</option>
-        <option value="kelowna">Kelowna</option>
-        <option value="kingston">Kingston / Belleville</option>
-        <option value="kitchener-waterloo">Kitchener - Waterloo</option>
-        <option value="knoxville">Knoxville</option>
-        <option value="lakeland">Lakeland</option>
-        <option value="lansing">Lansing</option>
-        <option value="las-vegas">Las Vegas</option>
-        <option value="lexington">Lexington</option>
-        <option value="lincoln">Lincoln</option>
-        <option value="little-rock">Little Rock</option>
-        <option value="london">London, ON</option>
-        <option value="long-island">Long Island</option>
-        <option value="los-angeles">Los Angeles</option>
-        <option value="louisville">Louisville</option>
-        <option value="lubbock">Lubbock</option>
-        <option value="macon">Macon</option>
-        <option value="madison">Madison</option>
-        <option value="memphis">Memphis</option>
-        <option value="miami">Miami</option>
-        <option value="midland-odessa">Midland / Odessa</option>
-        <option value="milwaukee">Milwaukee</option>
-        <option value="mineapolis-stpaul">Minneapolis / St Paul</option>
-        <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
-        <option value="modesto">Modesto</option>
-        <option value="montgomery">Montgomery</option>
-        <option value="napa-sonoma">Napa / Sonoma</option>
-        <option value="naples">Naples</option>
-        <option value="nashville">Nashville</option>
-        <option value="new-orleans">New Orleans</option>
-        <option value="new-york">New York City</option>
-        <option value="north-jersey">North Jersey</option>
-        <option value="ocala">Ocala</option>
-        <option value="ogden">Ogden</option>
-        <option value="oklahoma-city">Oklahoma City</option>
-        <option value="omaha">Omaha</option>
-        <option value="orange-county">Orange County</option>
-        <option value="orlando">Orlando</option>
-        <option value="ottawa">Ottawa</option>
-        <option value="palm-beach">Palm Beach</option>
-        <option value="pensacola">Pensacola / Emerald Coast</option>
-        <option value="philadelphia">Philadelphia</option>
-        <option value="phoenix">Phoenix</option>
-        <option value="piedmont-triad">Piedmont Triad</option>
-        <option value="pittsburgh">Pittsburgh</option>
-        <option value="portland">Portland</option>
-        <option value="portland-me">Portland, ME</option>
-        <option value="providence">Providence</option>
-        <option value="raleigh-durham">Raleigh / Durham</option>
-        <option value="regina">Regina</option>
-        <option value="reno">Reno</option>
-        <option value="richmond">Richmond</option>
-        <option value="rio-grande-valley">Rio Grande Valley</option>
-        <option value="roanoke">Roanoke</option>
-        <option value="rochester">Rochester</option>
-        <option value="rockford">Rockford</option>
-        <option value="sacramento">Sacramento</option>
-        <option value="salem-or">Salem OR</option>
-        <option value="salt-lake-city">Salt Lake City</option>
-        <option value="san-angelo">San Angelo</option>
-        <option value="san-antonio">San Antonio</option>
-        <option value="san-diego">San Diego</option>
-        <option value="san-francisco">San Francisco</option>
-        <option value="san-jose">San Jose</option>
-        <option value="santa-barbara">Santa Barbara</option>
-        <option value="santa-clarita">Santa Clarita</option>
-        <option value="santa-cruz">Santa Cruz / Monterey</option>
-        <option value="saskatoon">Saskatoon</option>
-        <option value="savannah-hilton-head">Savannah / Hilton Head</option>
-        <option value="seattle">Seattle</option>
-        <option value="shreveport-bossier">Shreveport / Bossier</option>
-        <option value="sioux-falls">Sioux Falls</option>
-        <option value="south-bend">South Bend</option>
-        <option value="albany-ga">Southern Georgia</option>
-        <option value="spokane-coeur-dalene">Spokane / Coeur d'Alene</option>
-        <option value="springfield-mo">Springfield MO</option>
-        <option value="springfield-ma">Springfield, MA</option>
-        <option value="stcatharines-niagara">St Catharines-Niagara</option>
-        <option value="st-johns">St John's</option>
-        <option value="stlouis">St Louis</option>
-        <option value="stockton">Stockton</option>
-        <option value="sudbury">Sudbury / North Bay</option>
-        <option value="syracuse">Syracuse</option>
-        <option value="tallahassee">Tallahassee</option>
-        <option value="tampa-bay-area">Tampa Bay Area</option>
-        <option value="toledo">Toledo</option>
-        <option value="topeka-lawrence">Topeka / Lawrence</option>
-        <option value="greater-toronto-area">Toronto (GTA)</option>
-        <option value="tucson">Tucson</option>
-        <option value="tulsa">Tulsa</option>
-        <option value="vancouver">Vancouver</option>
-        <option value="ventura-county">Ventura County</option>
-        <option value="victoria">Victoria</option>
-        <option value="washington-dc">Washington DC</option>
-        <option value="westchester-county">Westchester County</option>
-        <option value="wichita">Wichita</option>
-        <option value="wilmington-newark">Wilmington-Newark</option>
-        <option value="windsor">Windsor</option>
-        <option value="winnipeg">Winnipeg</option>
-        <option value="worcester">Worcester</option>
-        <option value="youngstown">Youngstown</option>
-      </select>
-    </div>
+<header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
+  <span class="gidgetTitle">Deals</span></header>
+<div class="">
+  <script type='text/javascript'>
+      function groupon() {
+          var city = document.getElementById('city_select').value;
+          myGrouponWidget.destroy();
+          myGrouponWidget.opts.city = city;
+          myGrouponWidget.render();
+          document.getElementById('groupon_widget').style.display = "block";
+      }
+      var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
+      document.getElementById('groupon_widget').style.display = "none";
+  </script>
+  <div class="field">
+    <label for="city" class="city-select-label">
+      Show the Groupon daily deal for
+    </label>
+    <select name="city" id="city_select" onchange="javascript:groupon();">
+      <option value="abbotsford">Abbotsford</option>
+      <option value="abilene">Abilene, TX</option>
+      <option value="akron-canton">Akron / Canton</option>
+      <option value="albany-capital-region">Albany / Capital Region</option>
+      <option value="albuquerque">Albuquerque</option>
+      <option value="allentown-reading">Allentown / Reading</option>
+      <option value="amarillo">Amarillo</option>
+      <option value="anchorage">Anchorage</option>
+      <option value="ann-arbor">Ann Arbor</option>
+      <option value="asheville">Asheville</option>
+      <option value="athens-ga">Athens, GA</option>
+      <option value="atlanta">Atlanta</option>
+      <option value="augusta">Augusta</option>
+      <option value="austin">Austin</option>
+      <option value="bakersfield">Bakersfield</option>
+      <option value="baltimore">Baltimore</option>
+      <option value="barrie">Barrie</option>
+      <option value="baton-rouge">Baton Rouge</option>
+      <option value="beaumont">Beaumont, TX</option>
+      <option value="billings">Billings / Bozeman</option>
+      <option value="birmingham">Birmingham</option>
+      <option value="bloomington-in">Bloomington, IN</option>
+      <option value="boise">Boise</option>
+      <option value="boston">Boston</option>
+      <option value="buffalo">Buffalo</option>
+      <option value="calgary">Calgary</option>
+      <option value="cape-breton">Cape Breton</option>
+      <option value="cedar-rapids-iowa-city">Cedar Rapids / Iowa City</option>
+      <option value="central-jersey">Central Jersey</option>
+      <option value="charleston">Charleston</option>
+      <option value="charlotte">Charlotte</option>
+      <option value="chattanooga">Chattanooga</option>
+      <option value="chicago">Chicago</option>
+      <option value="cincinnati">Cincinnati</option>
+      <option value="cleveland">Cleveland</option>
+      <option value="colorado-springs">Colorado Springs</option>
+      <option value="columbia">Columbia</option>
+      <option value="columbia-mo">Columbia, MO</option>
+      <option value="columbus">Columbus</option>
+      <option value="columbus-ga">Columbus GA</option>
+      <option value="corpus-christi">Corpus Christi</option>
+      <option value="dallas">Dallas</option>
+      <option value="dayton">Dayton</option>
+      <option value="daytona-beach">Daytona Beach</option>
+      <option value="denver">Denver</option>
+      <option value="des-moines">Des Moines</option>
+      <option value="detroit">Detroit</option>
+      <option value="edmonton">Edmonton</option>
+      <option value="el-paso">El Paso</option>
+      <option value="erie">Erie</option>
+      <option value="eugene">Eugene</option>
+      <option value="evansville">Evansville</option>
+      <option value="fairfield-county">Fairfield County</option>
+      <option value="fort-lauderdale">Fort Lauderdale</option>
+      <option value="fort-myers-cape-coral">Fort Myers / Cape Coral</option>
+      <option value="fort-wayne">Fort Wayne</option>
+      <option value="fort-worth">Fort Worth</option>
+      <option value="appleton">Fox Cities</option>
+      <option value="fresno">Fresno</option>
+      <option value="gaiesville">Gainesville</option>
+      <option value="grand-rapids">Grand Rapids</option>
+      <option value="green-bay">Green Bay</option>
+      <option value="greenville">Greenville</option>
+      <option value="halifax">Halifax</option>
+      <option value="hampton-roads">Hampton Roads</option>
+      <option value="harrisburg">Harrisburg / Lancaster</option>
+      <option value="hartford">Hartford</option>
+      <option value="honolulu">Honolulu</option>
+      <option value="houston">Houston</option>
+      <option value="huntsville">Huntsville</option>
+      <option value="indianapolis">Indianapolis</option>
+      <option value="inland-empire">Inland Empire</option>
+      <option value="jackson">Jackson</option>
+      <option value="jacksonville">Jacksonville</option>
+      <option value="kalamazoo">Kalamazoo</option>
+      <option value="kansas-city">Kansas City</option>
+      <option value="kelowna">Kelowna</option>
+      <option value="kingston">Kingston / Belleville</option>
+      <option value="kitchener-waterloo">Kitchener - Waterloo</option>
+      <option value="knoxville">Knoxville</option>
+      <option value="lakeland">Lakeland</option>
+      <option value="lansing">Lansing</option>
+      <option value="las-vegas">Las Vegas</option>
+      <option value="lexington">Lexington</option>
+      <option value="lincoln">Lincoln</option>
+      <option value="little-rock">Little Rock</option>
+      <option value="london">London, ON</option>
+      <option value="long-island">Long Island</option>
+      <option value="los-angeles">Los Angeles</option>
+      <option value="louisville">Louisville</option>
+      <option value="lubbock">Lubbock</option>
+      <option value="macon">Macon</option>
+      <option value="madison">Madison</option>
+      <option value="memphis">Memphis</option>
+      <option value="miami">Miami</option>
+      <option value="midland-odessa">Midland / Odessa</option>
+      <option value="milwaukee">Milwaukee</option>
+      <option value="mineapolis-stpaul">Minneapolis / St Paul</option>
+      <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
+      <option value="modesto">Modesto</option>
+      <option value="montgomery">Montgomery</option>
+      <option value="napa-sonoma">Napa / Sonoma</option>
+      <option value="naples">Naples</option>
+      <option value="nashville">Nashville</option>
+      <option value="new-orleans">New Orleans</option>
+      <option value="new-york">New York City</option>
+      <option value="north-jersey">North Jersey</option>
+      <option value="ocala">Ocala</option>
+      <option value="ogden">Ogden</option>
+      <option value="oklahoma-city">Oklahoma City</option>
+      <option value="omaha">Omaha</option>
+      <option value="orange-county">Orange County</option>
+      <option value="orlando">Orlando</option>
+      <option value="ottawa">Ottawa</option>
+      <option value="palm-beach">Palm Beach</option>
+      <option value="pensacola">Pensacola / Emerald Coast</option>
+      <option value="philadelphia">Philadelphia</option>
+      <option value="phoenix">Phoenix</option>
+      <option value="piedmont-triad">Piedmont Triad</option>
+      <option value="pittsburgh">Pittsburgh</option>
+      <option value="portland">Portland</option>
+      <option value="portland-me">Portland, ME</option>
+      <option value="providence">Providence</option>
+      <option value="raleigh-durham">Raleigh / Durham</option>
+      <option value="regina">Regina</option>
+      <option value="reno">Reno</option>
+      <option value="richmond">Richmond</option>
+      <option value="rio-grande-valley">Rio Grande Valley</option>
+      <option value="roanoke">Roanoke</option>
+      <option value="rochester">Rochester</option>
+      <option value="rockford">Rockford</option>
+      <option value="sacramento">Sacramento</option>
+      <option value="salem-or">Salem OR</option>
+      <option value="salt-lake-city">Salt Lake City</option>
+      <option value="san-angelo">San Angelo</option>
+      <option value="san-antonio">San Antonio</option>
+      <option value="san-diego">San Diego</option>
+      <option value="san-francisco">San Francisco</option>
+      <option value="san-jose">San Jose</option>
+      <option value="santa-barbara">Santa Barbara</option>
+      <option value="santa-clarita">Santa Clarita</option>
+      <option value="santa-cruz">Santa Cruz / Monterey</option>
+      <option value="saskatoon">Saskatoon</option>
+      <option value="savannah-hilton-head">Savannah / Hilton Head</option>
+      <option value="seattle">Seattle</option>
+      <option value="shreveport-bossier">Shreveport / Bossier</option>
+      <option value="sioux-falls">Sioux Falls</option>
+      <option value="south-bend">South Bend</option>
+      <option value="albany-ga">Southern Georgia</option>
+      <option value="spokane-coeur-dalene">Spokane / Coeur d'Alene</option>
+      <option value="springfield-mo">Springfield MO</option>
+      <option value="springfield-ma">Springfield, MA</option>
+      <option value="stcatharines-niagara">St Catharines-Niagara</option>
+      <option value="st-johns">St John's</option>
+      <option value="stlouis">St Louis</option>
+      <option value="stockton">Stockton</option>
+      <option value="sudbury">Sudbury / North Bay</option>
+      <option value="syracuse">Syracuse</option>
+      <option value="tallahassee">Tallahassee</option>
+      <option value="tampa-bay-area">Tampa Bay Area</option>
+      <option value="toledo">Toledo</option>
+      <option value="topeka-lawrence">Topeka / Lawrence</option>
+      <option value="greater-toronto-area">Toronto (GTA)</option>
+      <option value="tucson">Tucson</option>
+      <option value="tulsa">Tulsa</option>
+      <option value="vancouver">Vancouver</option>
+      <option value="ventura-county">Ventura County</option>
+      <option value="victoria">Victoria</option>
+      <option value="washington-dc">Washington DC</option>
+      <option value="westchester-county">Westchester County</option>
+      <option value="wichita">Wichita</option>
+      <option value="wilmington-newark">Wilmington-Newark</option>
+      <option value="windsor">Windsor</option>
+      <option value="winnipeg">Winnipeg</option>
+      <option value="worcester">Worcester</option>
+      <option value="youngstown">Youngstown</option>
+    </select>
   </div>
-  
- <div>
-   <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-   <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('adbf0508-33e0-492d-a5a7-1e54a18e342e');</script>
-  </div>
-  <br/>
-  <div>
+</div>
+<div>
+  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('adbf0508-33e0-492d-a5a7-1e54a18e342e');</script>
+</div>
+<br/>
+
+<div>
   <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
   <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('638a0d94-9bee-4242-baf9-096aa5810f61');</script>
-  </div>
-    <br/>
-  <div>
+</div>
+<br/>
+
+<div>
   <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
   <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('613c43ed-30e6-4dd5-be3f-2701ac40cc3d');</script>
-  </div>
-    <br/>
-   
-   
-   <div class="">
-    <script type='text/javascript'>
-        function coupscout() {
-            var city_coupscout = document.getElementById('city_coupscout_select').value;
-            WIDGETBOX.renderWidgetInElement(city_coupscout,'widgetbox_widget_parent_3')
-        }
-    </script>
-    <div class="field">
-      <label for="city1" class="city-select-label">
-        Show the Coupscout daily deal for
-      </label>
-      <select name="city_coupscout" id="city_coupscout_select" onchange="javascript:coupscout();">
-         <option value="2882f12e-b7e5-4840-b5f6-2d43a57aa1e9">Atlanta</option>
-         <option value="9e134ea2-7430-4ac8-9b7f-77f0c57b0770">Baltimore</option>
-         <option value="9376cc8b-9608-4960-ab47-af7c83332bed">Boston</option>
-         <option value="667bd686-6a22-4a23-888c-974b9c036a53">Brooklyn</option>
-         <option value="b9f284bb-705d-41ea-85ef-f649b1c72898">Chicago</option>
-         <option value="ffcf101d-54ea-4224-9ae4-886c15a302dd">Cleveland</option>
-         <option value="08fa21b7-7549-44d3-976b-15b02de1b303">Detroit</option>
-         <option value="fc74125a-af75-44f5-b6f1-d811688583f8">Fort Lauderdale</option>
-         <option value="64d9f52a-79fe-4b29-a81c-09f60b846da8">Hampton Roads</option>
-         <option value="15b64519-3995-4dbc-a1c4-1444a6772c65">Hartford</option>
-         <option value="29cddfda-4d12-4372-90b1-9ee9ea13103a">Honolulu</option>
-         <option value="378d55e3-3895-4411-bd62-059fd04b5ed4">Houston</option>
-         <option value="2747cd0b-710e-4d03-b035-9633d8717a73">Los Angeles</option>
-         <option value="6edf5154-e9c8-4164-90dc-0db1527056f8">Minneapolis St Paul</option>
-         <option value="4cfd569a-da65-49c3-b6f9-a6d33ef46fe7">New York</option>
-         <option value="2e20b779-cc3f-49bb-926d-141438d62cde">Philadelphia</option>
-         <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
-         <option value="45b082f4-195b-40e7-965b-0a7c9af4b086">Raleigh Durham</option>
-         <option value="82a54576-161e-43d1-96b9-283a73f80423">San Diego</option>
-         <option value="72e50efb-c9bf-4c3c-b45a-c4a9b53697c5">San Francisco</option>
-         <option value="d4b50374-e76e-45dc-b72a-05be7d67b940">Scottsdale</option>
-         <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
-         
-      
-       </select>
-     </div>  
-    </div>
-   
-   
-    <div>
-     <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-     <script type="text/javascript">
-     		var myCoupScoutWidget = null;
-     		if (WIDGETBOX) 
-     			myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
-     </script>
-   </div>
-   
-</section>
+</div>
+<br/>
 
+<div class="">
+  <script type='text/javascript'>
+      function coupscout() {
+          var city_coupscout = document.getElementById('city_coupscout_select').value;
+          WIDGETBOX.renderWidgetInElement(city_coupscout, 'widgetbox_widget_parent_3')
+      }
+  </script>
+  <div class="field">
+    <label for="city1" class="city-select-label">
+      Show the Coupscout daily deal for
+    </label>
+    <select name="city_coupscout" id="city_coupscout_select" onchange="javascript:coupscout();">
+      <option value="2882f12e-b7e5-4840-b5f6-2d43a57aa1e9">Atlanta</option>
+      <option value="9e134ea2-7430-4ac8-9b7f-77f0c57b0770">Baltimore</option>
+      <option value="9376cc8b-9608-4960-ab47-af7c83332bed">Boston</option>
+      <option value="667bd686-6a22-4a23-888c-974b9c036a53">Brooklyn</option>
+      <option value="b9f284bb-705d-41ea-85ef-f649b1c72898">Chicago</option>
+      <option value="ffcf101d-54ea-4224-9ae4-886c15a302dd">Cleveland</option>
+      <option value="08fa21b7-7549-44d3-976b-15b02de1b303">Detroit</option>
+      <option value="fc74125a-af75-44f5-b6f1-d811688583f8">Fort Lauderdale</option>
+      <option value="64d9f52a-79fe-4b29-a81c-09f60b846da8">Hampton Roads</option>
+      <option value="15b64519-3995-4dbc-a1c4-1444a6772c65">Hartford</option>
+      <option value="29cddfda-4d12-4372-90b1-9ee9ea13103a">Honolulu</option>
+      <option value="378d55e3-3895-4411-bd62-059fd04b5ed4">Houston</option>
+      <option value="2747cd0b-710e-4d03-b035-9633d8717a73">Los Angeles</option>
+      <option value="6edf5154-e9c8-4164-90dc-0db1527056f8">Minneapolis St Paul</option>
+      <option value="4cfd569a-da65-49c3-b6f9-a6d33ef46fe7">New York</option>
+      <option value="2e20b779-cc3f-49bb-926d-141438d62cde">Philadelphia</option>
+      <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
+      <option value="45b082f4-195b-40e7-965b-0a7c9af4b086">Raleigh Durham</option>
+      <option value="82a54576-161e-43d1-96b9-283a73f80423">San Diego</option>
+      <option value="72e50efb-c9bf-4c3c-b45a-c4a9b53697c5">San Francisco</option>
+      <option value="d4b50374-e76e-45dc-b72a-05be7d67b940">Scottsdale</option>
+      <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
+    </select>
+  </div>
+</div>
+<div>
+  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
+  <script type="text/javascript">
+      var myCoupScoutWidget = null;
+      if (WIDGETBOX)
+          myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
+  </script>
+</div>
+</section>
 <section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Photos</span></header><br/>
+    <span class="gidgetTitle">Photos</span></header>
+  <br/>
   <%= render :partial => 'picasa/form' %>
   <div id="myGallery"></div>
   <%= render :partial => 'flickr/form' %>
   <div id="flickr" style="display:none;"></div>
 </section>
-
-
-
 <section class="gidget mini" data-source="" style="display:none;">
-		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-		    <span class="gidgetTitle">Albums</span></header>
-		<div style="width: 570px;height:300px;">
-		 <div class="demo">
-		
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">My Photos</a></li>
-				<li><a href="#tabs-2">Upload Photos</a></li>
-				<li><a href="#tabs-4">My Albums</a></li>
-				<li><a href="#tabs-5">Friends Albums</a></li>
-		
-			</ul>
-			<div id="tabs-1">
-			
-				<div id="photosTabContent">
-				<% if current_user1 %>
-					<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
-				<%end%>
-				</div>
-				
-			       <div id="Photo" style="margin-left:330px;padding:2px;width:300px;"></div>	
-			</div>
-			<div id="tabs-2">
-				<div id="uploadPhotosTabContent">
-					<% if current_user1 %>		
-					<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
-					<%end%>
-				</div>
-			</div>
-		
-				<div id="tabs-4">
-				<div id="alubmsTabContent">
-					<% if current_user1 %>
-						<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
-					<%end%>
-				</div>
-				</div>
-				
-				<div id="tabs-5">
-			  		<h2>My Friends Albums</h2>
-					<div id="friendsAlbumsTabContent">  		
-						<% if current_user1 %>
-						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
-						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
-						 <% end %>
-					</div>	 
-				</div>
-		</div>
-		
-		</div>
-		</div>
-</section>
+  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Albums</span></header>
+  <div style="width: 570px;height:300px;">
+    <div class="demo">
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">My Photos</a></li>
+          <li><a href="#tabs-2">Upload Photos</a></li>
+          <li><a href="#tabs-4">My Albums</a></li>
+          <li><a href="#tabs-5">Friends Albums</a></li>
+        </ul>
+        <div id="tabs-1">
+          <div id="photosTabContent">
+            <% if current_user1 %>
+                <%= render :partial => "photos/photoslist", :locals => {:photos1 => Photo.find_all_by_identity_id(current_user1.uid)} %>
+            <% end %>
+          </div>
+          <div id="Photo" style="margin-left:330px;padding:2px;width:300px;"></div>
+        </div>
+        <div id="tabs-2">
+          <div id="uploadPhotosTabContent">
+            <% if current_user1 %>
+                <%= render :partial => "photos/form", :locals => {:photo => Photo.new(:identity_id => current_user1.uid)} %>
+            <% end %>
+          </div>
+        </div>
+        <div id="tabs-4">
+          <div id="alubmsTabContent">
+            <% if current_user1 %>
+                <%= render :partial => "albums/albumlist", :locals => {:albums => Album.find_all_by_identity_id(current_user1.uid)} %>
+            <% end %>
+          </div>
+        </div>
+        <div id="tabs-5">
+          <h2>My Friends Albums</h2>
 
+          <div id="friendsAlbumsTabContent">
+            <% if current_user1 %>
+                <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_user_id(current_user1.id), :f_type => 'direct'} %>
+                <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_friend_id(current_user1.id), :f_type => 'inverse'} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
     <span class="gidgetTitle">Social</span></header>
-    <br/><br/>
+  <br/><br/>
+
   <div class="">
     <div id="profile" style="width: 400px;"></div>
     <script type="IN/Login" data-onAuth="loadData"></script>
     <div id="fb-root"></div>
-      FaceBook Details <br/>
-      <aside class="sidebar">
-        <%= render :partial => 'layouts/sidebar' %>
-      </aside>
+    FaceBook Details <br/>
+    <aside class="sidebar">
+      <%= render :partial => 'layouts/sidebar' %>
+    </aside>
     <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
       <% if current_user1 %>
-      <script src="http://connect.facebook.net/en_US/all.js"></script>
-      <script>
-      FB.init({
-          appId:"<%= Facebook.config[:client_id] %>",
-          cookie:true,
-          oauth:true,
-          xfbml:true
-      });
-      FB.Canvas.setAutoGrow();
-      </script>
+          <script src="http://connect.facebook.net/en_US/all.js"></script>
+          <script>
+              FB.init({
+                  appId:"<%= Facebook.config[:client_id] %>",
+                  cookie:true,
+                  oauth:true,
+                  xfbml:true
+              });
+              FB.Canvas.setAutoGrow();
+          </script>
       <% end %>
     </div>
   </div>
@@ -614,8 +577,7 @@ function loadUploadify(){
           style="width:130px; height:20px;">
   </iframe>
   <br/>
-  
-  
+
   <div id="twiter1" style="display:none;">
     My Tweets <br/>
     <script>
@@ -644,8 +606,6 @@ function loadUploadify(){
                 behavior:'all'
             }
         }).render().setUser('twitter').start();
-
-
         function twitter() {
             var user = document.getElementById('username').value;
             if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
@@ -656,30 +616,17 @@ function loadUploadify(){
                     .destroy()
                     .setUser(user).render().start();
             document.getElementById('twiter1').style.display = "block";
-        }
-
-
-    </script>
+        }    </script>
   </div>
 </section>
-
-
-
-
-
 </div>
 <div>
 </div>
-
 </div>
-  
-    <% if current_user1 %>
-	 <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
-	 <%end%>
-	   <%= javascript_include_tag :easySlider %>
- <%= javascript_include_tag :swfobject %>
-     <%= javascript_include_tag :uploadify %>
-     
-</body>
-
+<% if current_user1 %>
+    <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
+<% end %>
+<%= javascript_include_tag :easySlider %>
+<%= javascript_include_tag :swfobject %>
+<%= javascript_include_tag :uploadify %></body>
 </html>
