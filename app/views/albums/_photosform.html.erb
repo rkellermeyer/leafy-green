@@ -8,7 +8,9 @@
 <% photos.each do |photo| %>
   
    
- <li><a href="javascript:void(0);"><%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:original) ) : image_tag("/assets/images/upload.jpg", :size => '50x50') %></a></li>
+ <li><a href="javascript:void(0);">
+  <%=image_tag(photo.image.url)%>
+ </a></li>
    
 
 <% end %>

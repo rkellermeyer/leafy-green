@@ -8,8 +8,8 @@
    <% if album.identity_id == current_user1.id %>
     <%=link_to  'Edit Album','javascript:void(0);', :onclick => "javascript:document.getElementById('editalbum_#{album.id}').style.display='block';" %>
      <div id="editalbum_<%=album.id%>" style="display:none;">
-     <%= form_for(album) do |f| %>
-
+    
+ <%= form_for album, :html => {:onsubmit => "updateAlbumFormSubmit(this);return false;"}   do |f| %>
 
 <%= f.hidden_field :identity_id ,:value=>current_user1.id%>
   

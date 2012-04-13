@@ -37,7 +37,7 @@ body >  .sidebar1 {
   max-height: 320px;
   min-height: 300px;
   padding: 0;
-  width: 300px;
+  width: 600px;
   overflow:scroll;
 }
 .gidget {}

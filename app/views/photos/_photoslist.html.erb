@@ -9,9 +9,10 @@
 <% if current_user1 %>
 <% photos1.each do |photo| %>
 <div id='dialog<%=photo.id%>' > 
-<li><%= photo.photo_file_name %>
+<li>
   
-  <%= (!photo.photo.nil? and photo.photo.file?) ? image_tag(photo.photo.url(:thumb) , :size => '50x50' , :title => 'Click to Tag It' , :alt => photo.photo_file_name ,  :onclick => "openPhoto( '#{photo.id}' , '#{photo.photo.url(:thumb)}' )") : image_tag("/assets/images/upload.jpg", :size => '50x50') %>
+   <%=image_tag(photo.image.url ,:size => '50x50' , :title => 'Click to Tag It' ,  :onclick => "openPhoto( '#{photo.id}' , '#{photo.image.url}' )") %>
+  
   <%= photo.caption %>
   </div>
   </li>
