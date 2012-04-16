@@ -27,7 +27,7 @@ body >  .sidebar1 {
   margin-top: 0px;
 }
 #appWrap {
-  width: 1024px;
+  width: 100%;
 }
 #appWrap section {
   border: 1px solid #BBBDBF;
@@ -41,7 +41,16 @@ body >  .sidebar1 {
   overflow:scroll;
 }
 .gidget {}
-.gidgetIcon {
+
+#socialGidget .gidgetIcon {
+  border: 1px solid #777;
+  border-radius: 2px;
+  height: 20px;
+  width: 20px;
+}
+#socialGidget .title_and_message {
+  left: 54px;
+  position: relative;
 }
 .mini {}
 .gidgetHeader {
@@ -120,4 +129,50 @@ section {
 }
 #wbx-gw-button-5{
  display:none;
+}
+.sidewrap {
+  display: none;
+}
+.options_settings {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #999999;
+  display: none;
+  float: right;
+  margin: -1px -221px 0 0;
+  padding: 4px;
+  width: 82px;
+  z-index: 9999;
+}
+.options_settings ul {
+
+}
+
+.options_settings ul li {
+}
+
+.options_settings ul li:hover {
+  background: #ddd;
+  color: #fff;
+  cursor: pointer;
+}
+
+#addNewRateMyPost {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-radius: 4px 0 0 0;
+  box-shadow: 1px 1px 2px 2px #999999;
+  float: right;
+  padding: 2px;
+  position: relative;
+  right: -220px;
+  top: 281px;
+}
+
+#addNewRateMyPost:hover {
+  box-shadow: 1px 1px 2px 2px #333333;
+  cursor: pointer;
+}
+
+.add {
+  height: 12px;
+  width: 12px;
 }

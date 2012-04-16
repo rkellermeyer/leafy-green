@@ -91,15 +91,6 @@
 	float: left;
 }
 
-#chat_options_settings {
-  background: #fff;
-  border: 1px solid #999;
-  float: right;
-  position: relative;
-  width: 90px;
-  z-index: 9999;
-}
-
 #chatGidget {
   
 }
@@ -110,15 +101,84 @@
   background: #fff;
 }
 
-#chat_options_settings ul {
+#friendsColumn ul {
+  background: none repeat scroll 0 0 #FFFFFF;
+  box-shadow: 9px 0 6px -10px #999999;
+  height: 304px;
+  padding: 10px 0 0 9px;
+  position: relative;
+  top: -8px;
+  width: 60px;
+}
+
+#add_friends, #create_chat_room, #chat_with_friends {
+  display: none;
+  max-height: 304px;
+  min-height: 304px;
+  overflow: hidden;
+}
+
+.scrollUp, .scrollDown {
+  height: 15px;
+  position: absolute;
+  width: 70px;
+  z-index: 9999;
+}
+
+.scrollUp:hover, .scrollDown:hover {
+  background: none repeat scroll 0 0 #777;
+  opacity: 0.8;
+}
+.scrollUp {
 
 }
 
-#chat_options_settings ul li {
+.scrollDown {
+  top: 401px;
 }
 
-#chat_options_settings ul li:hover {
-  background: #ddd;
-  color: #fff;
-  cursor: pointer;
+.scroll-up, .scroll-down {
+  margin: 5px auto;
+  position: relative;
+  opacity: 1;
+  z-index: 9998;
+}
+
+.scroll-up:hover, .scroll-down:hover {
+  opacity: 1;
+  z-index: 99999;
+}
+
+#chatInput {
+  display: inline;
+  float: right;
+  position: relative;
+  right: 80px;
+  top: 262px;
+  width: 293px;
+}
+
+#chatInput textarea {
+  bottom: 0;
+  left: 0;
+  position: relative;
+  resize: none;
+  right: 0;
+  top: -33px;
+  width: 320px;
+}
+
+#chatInput button {
+  float: right;
+  height: 30px;
+  left: 81px;
+  position: relative;
+  top: -18px;
+  width: 24px;
+}
+
+#channelIdsWithRadio {
+  position: relative;
+  top: -141px;
+  width: 131px;
 }

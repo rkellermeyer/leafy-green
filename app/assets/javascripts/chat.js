@@ -481,3 +481,33 @@ jQuery.cookie = function(name, value, options) {
         return cookieValue;
     }
 };
+var jug = new Juggernaut();
+
+//$("#mesg").append($("<li/>").append("Subscribing to friends"));
+jug.subscribe("/chats/friends", function(data){
+  var li = $("<li/>");
+  li.text(data);
+  $("#mesg").append(li);
+}); 
+
+/* $.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+}); */
+
+$.fn.submitWithAjax = function() {
+  this.preventDefault();
+  console.log(this);
+  //this.submit(function() {
+  //  $.post(this.action, $(this).serialize(), null, "script");
+  //  return false;
+  //})
+  //return this;
+};
+
+$(function(){
+  $('#postform input[name=commit]').bind('click', function(){
+    console.log('Caught it!');
+    //$("#chat_window").submitWithAjax();
+    $('#postform').dialog( "close" );
+  });
+})

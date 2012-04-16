@@ -22,21 +22,21 @@
   <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
   <%= javascript_include_tag :myapp %>
   <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-      api_key: titzvdcmcaot
-      authorize: true
+    api_key: titzvdcmcaot
+    authorize: true
   </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
   <script type="text/javascript">      function loadData() {
-      IN.API.Profile("me")
-              .result(function (result) {
-                  $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
-                  IN.parse(document.getElementById("profile"))
-              })
+    IN.API.Profile("me")
+        .result(function (result) {
+          $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+          IN.parse(document.getElementById("profile"))
+        })
   }  </script>
   <% if current_user1 %>
-      <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
+    <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
   <% end %>
   <%= stylesheet_link_tag :jdgallery %>
   <%= javascript_include_tag :jdgallery %>
@@ -44,21 +44,21 @@
   <script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
   <link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"/>
   <script type="text/javascript">
-      $(function () {
-          $("#tabs").tabs();
-          $("#tabschat").tabs();
-      });
+    $(function () {
+      $("#tabs").tabs();
+      $("#tabschat").tabs();
+    });
   </script>
   <script type="text/javascript">
-      $(document).ready(function () {
-          $.facebox.settings.opacity = 0.5
-      });
+    $(document).ready(function () {
+      $.facebox.settings.opacity = 0.5
+    });
   </script>
   <% if current_user1 %>
-      <script type="text/javascript">
-          var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
-          console.log(current_user1);
-      </script>
+    <script type="text/javascript">
+      var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
+      console.log(current_user1);
+    </script>
   <% end %>
 </head>
 <body>
@@ -85,35 +85,126 @@
 <header id="mainHeader">
   <aside class="headerNav">
     <% if current_user1 %>
-        <%= current_identity1.name %> <%= current_identity1.last_name %>
-        <span onclick="clickablelogout();">
+      <%= current_identity1.name %> <%= current_identity1.last_name %>
+      <span onclick="clickablelogout();">
         <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %> </span>
-        <%= image_tag "icons/Friends_20x20.png" %>
-        <%= image_tag "icons/Network.png" %>
-        <%= image_tag "icons/Messages.png" %>
-        <div id="logout" style="display:none;"> <%= link_to "Log out", log_out_path %> </div>
+      <%= image_tag "icons/Friends_20x20.png" %>
+      <%= image_tag "icons/Network.png" %>
+      <%= image_tag "icons/Messages.png" %>
+      <div id="logout" style="display:none;"> <%= link_to "Log out", log_out_path %> </div>
     <% end %>  </aside>
 </header>
-<div>
-<div style="float:left;">
+<div style="float:left;" class="sidewrap">
   <aside class="sidebar1">
     <div id="greenBlog">
       <% if current_user1 %>
-          <%= render :partial => 'layouts/sidebar1' %>
+        <%= render :partial => 'layouts/sidebar1' %>
       <% end %>
     </div>
   </aside>
 </div>
-<div style="float:left;">
 <div id="appWrap">
 <%= yield %>
 <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash#{name}" %>
+  <%= content_tag :div, msg, :id => "flash#{name}" %>
 <% end %>
 <div id="green_chat">
 <div class="" id="getRateMy">
   <% if current_user1 %>
-      <%= render :partial => 'layouts/ratemy' %>
+    <section>
+      <header>
+        <ul class="gidget_header_right">
+
+          <li>
+            <div class="arrow-up-right maximize"></div>
+          </li>
+          <li>
+            <div class="refresh_and_settings">
+              <img src="images/icons/RefreshHover.png"/>
+              <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
+            </div>
+          </li>
+        </ul>
+        <ul class="gidget_header_left">
+          <li>
+            <img src="images/icons/RateMy_Icon.png" class="gidgetIcon"/>
+          </li>
+          <li>
+            <div class="title_and_message">
+              <span class="title">Rate My</span>
+
+              <div class="sub_title">Sort By: <span>newest</span></div>
+            </div>
+          </li>
+        </ul>
+      </header>
+      <div class="options_settings">
+        <ul class="options_list">
+          <li class="conversations">Top Rated</li>
+          <li class="chat_settings">My Interests</li>
+          <li>Most Recent</li>
+          <li class="categoryPanelSwitch"><strong>+</strong> Categories
+            <ul>
+
+            </ul>
+          </li>
+        </ul>
+      </div>      
+      <ul class="rm_article_list">
+        <% if current_identity1.categories %>
+          <% current_identity1.categories.each do |category| %>
+
+            <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
+              <li class="rm_article">
+                <ul class="rm_article_info">
+                  <li>
+                    <div class="rm_date"><%= post.created_at %>
+                      <%= link_to image_tag("icons/UpOpen.png"), "javascript:void(0);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %>
+                      <%= link_to image_tag("icons/DownOpen.png"), "javascript:void(0);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
+                    </div>
+                    <div class="rm_author"><%= render :partial => "identities/postedbyform", :locals => {:identity => Identity.find_by_id(post.user_id)} %></div>
+                  </li>
+                  <li>
+                    <div class="rm_content">
+                      <p><%= post.title %></p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="rm_social_panel">
+                      <img src="images/icons/sharing/Share_Facebook.png" alt=""><img src="images/icons/sharing/Share_Twitter.png" alt=""><img src="images/icons/sharing/Rating_Thumb.png" alt="">
+
+                      <p class="rm_rating"><%= number_to_percentage((post.score*100), :precision => 0) %></p>
+                      <img src="images/icons/sharing/Share_AddToMy.png" alt=""><img src="images/icons/sharing/Share_Greenchat.png" alt="">
+                    </div>
+                    <div class="comment_count"><%= Postcomment.find_all_by_post_id(post.id).count %>
+                      <%= link_to 'Comments', 'javascript:void(0);', :onclick => "javascript:jQuery.facebox(document.getElementById('comment_#{post.id}').innerHTML)" %>
+                      <div id="comment_<%= post.id %>" style="display:none;">
+
+
+                        <%= render :partial => "posts/comments", :locals => {:postcomment => Postcomment.new(:post_id => post.id, :identity_id => current_identity1.id)} %>
+                        <%= render :partial => "posts/commentsshow1", :locals => {:postcomments => Postcomment.find_all_by_post_id(post.id)} %>
+
+
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="rm_image">
+                  <% if !post.image.nil? %>
+                    <%= image_tag(post.image.url) %>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+
+          <% end %>
+        <% end %>
+
+      </ul>
+      <div id="addNewRateMyPost">
+        <img src="images/icons/sharing/add.png" class="add" />
+      </div>
+    </section>
   <% end %>
 </div>
 <section id="chatGidget">
@@ -125,7 +216,7 @@
       <li>
         <div class="refresh_and_settings">
           <img src="images/icons/RefreshHover.png"/>
-          <img src="images/icons/SettingsHover.png" id="chatOptions" />
+          <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
         </div>
       </li>
     </ul>
@@ -136,6 +227,7 @@
       <li>
         <div class="title_and_message">
           <span class="title">GreenChat</span>
+
           <div class="sub_title">
             <span>6 open chats</span>
           </div>
@@ -143,18 +235,23 @@
       </li>
     </ul>
   </header>
-  <div id="chat_options_settings">
-   <ul class="options_list">
-     <li class="conversations">Conversations</li>
-     <li class="chat_settings">Settings</li>
-   </ul>
+  <div class="options_settings">
+    <ul class="options_list">
+      <li class="conversations">Conversations</li>
+      <li class="chat_settings">Settings</li>
+    </ul>
   </div>
   <article id="chat">
+    <div id="chatInput">
+      <% if current_user1 %>
+        <%= render :partial => "chat/sendmessage" %>
+      <% end %>
+    </div>
     <div id="add_friends">
       <div>
         <div id="addFriendsList">
           <% if current_user1 %>
-              <%= render :partial => "users/users", :locals => {:users => User.all} %>
+            <%= render :partial => "users/users", :locals => {:users => User.all} %>
           <% end %>
         </div>
       </div>
@@ -166,16 +263,83 @@
     <div id="create_chat_room">
       <div id="createChatRoomTabContent">
         <% if current_user1 %>
-            <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
-            <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
+          <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
+          <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
         <% end %>
       </div>
     </div>
     <div id="chat_with_friends">
       <div id="chatWithFriendsTabContent">
         <% if current_user1 %>
-            <%= render :partial => "chat/sendmessage" %>
+          <%= render :partial => "chat/sendmessage" %>
         <% end %>
+      </div>
+    </div>
+  </article>
+</section>
+<section id="socialGidget">
+  <header>
+    <ul class="gidget_header_right">
+      <li>
+        <div class="arrow-up-right maximize"></div>
+      </li>
+      <li>
+        <div class="refresh_and_settings">
+          <img src="images/icons/RefreshHover.png"/>
+          <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
+        </div>
+      </li>
+    </ul>
+    <ul class="gidget_header_left">
+      <li>
+        <img src="images/icons/social/linkedin.png" class="gidgetIcon" />
+        <img src="images/icons/social/twitter.png" class="gidgetIcon" />
+        <img src="images/icons/social/facebook.png" class="gidgetIcon" />
+      </li>
+      <li>
+        <div class="title_and_message">
+          <span class="title">Social</span>
+
+          <div class="sub_title">
+            <% if current_user1 %>
+              <span><%= current_user1 %></span>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </header>
+  <div class="options_settings">
+    <ul class="options_list">
+      <li class="conversations">Conversations</li>
+      <li class="chat_settings">Settings</li>
+    </ul>
+  </div>
+  <article id="chat">
+    <div id="add_friends">
+      <div>
+        <div id="addFriendsList">
+          <% if current_user1 %>
+            <%= render :partial => "users/users", :locals => {:users => User.all} %>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        Chat With Friends <br/>
+        <ul id="friends_list1"></ul>
+      </div>
+    </div>
+    <div id="create_chat_room">
+      <div id="createChatRoomTabContent">
+        <% if current_user1 %>
+          <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
+          <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
+        <% end %>
+      </div>
+    </div>
+    <div id="chat_with_friends">
+      <div id="chatWithFriendsTabContent">
+        [Removed Render CHat Send Partial]
       </div>
     </div>
   </article>
@@ -183,48 +347,6 @@
 </div>
 <script type="text/javascript">    function loadUploadify() {
 <% key = Rails.application.config.session_options[:key] %>
-    var uploadify_script_data = {};
-    var csrf_param = $('meta[name=csrf-param]').attr('content');
-    var csrf_token = $('meta[name=csrf-token]').attr('content');
-    uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
-    uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
-    var JQry = jQuery.noConflict();
-<% session_key_name = Rails.application.config.session_options[:key] %>
-    JQry('#post_image').click(function (event) {
-        event.preventDefault();
-    }); 
-  JQry('#post_image').uploadify({
-    uploader        : '/uploadify.swf',
-    script          : '/postimage',
-    cancelImg       : 'assets/images/cancel.png',
-    auto            : true,
-     fileExt         : '*.png;*.jpg;*.gif',
-    multi :false,
-    scriptData      :  {
-             '_http_accept': 'application/javascript',
-              'format' : 'json',
-               '_method': 'post',
-            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-               },
-       onProgress      : function(event, queueID, fileObj, data){ $('#post_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
-      
-    onComplete      : function(a, b, c, response)
-    {
-    		console.log(response);
-    		var dat = eval('(' + response + ')');
-    		$('#post_id').val(dat.id);
-    		$('#method_type').val('PUT');
-            JQry.getScript(dat.upload);
-            document.getElementById('hiddenld').value = '';
-        }        });
-    JQry('#post_image').click(function (event) {
-        event.preventDefault();
-        JQry('#post_image').uploadifyUpload();
-    });
-}
-
-function loadUploadifyForPhotos(){
-  <% key = Rails.application.config.session_options[:key] %>
   var uploadify_script_data = {};
   var csrf_param = $('meta[name=csrf-param]').attr('content');
   var csrf_token = $('meta[name=csrf-token]').attr('content');
@@ -232,38 +354,82 @@ function loadUploadifyForPhotos(){
   uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
   var JQry = jQuery.noConflict();
 <% session_key_name = Rails.application.config.session_options[:key] %>
-   JQry('#photo_image').click(function(event){ 
-        event.preventDefault();
-    }); 
+  JQry('#post_image').click(function (event) {
+    event.preventDefault();
+  });
+  JQry('#post_image').uploadify({
+    uploader:'/uploadify.swf',
+    script:'/postimage',
+    cancelImg:'assets/images/cancel.png',
+    auto:true,
+    fileExt:'*.png;*.jpg;*.gif',
+    multi:false,
+    scriptData:{
+      '_http_accept':'application/javascript',
+      'format':'json',
+      '_method':'post',
+      'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+    },
+    onProgress:function (event, queueID, fileObj, data) {
+      $('#post_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
+    },
+
+    onComplete:function (a, b, c, response) {
+      console.log(response);
+      var dat = eval('(' + response + ')');
+      $('#post_id').val(dat.id);
+      $('#method_type').val('PUT');
+      JQry.getScript(dat.upload);
+      document.getElementById('hiddenld').value = '';
+    }        });
+  JQry('#post_image').click(function (event) {
+    event.preventDefault();
+    JQry('#post_image').uploadifyUpload();
+  });
+}
+
+function loadUploadifyForPhotos() {
+<% key = Rails.application.config.session_options[:key] %>
+  var uploadify_script_data = {};
+  var csrf_param = $('meta[name=csrf-param]').attr('content');
+  var csrf_token = $('meta[name=csrf-token]').attr('content');
+  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
+  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
+  var JQry = jQuery.noConflict();
+<% session_key_name = Rails.application.config.session_options[:key] %>
+  JQry('#photo_image').click(function (event) {
+    event.preventDefault();
+  });
   JQry('#photo_image').uploadify({
-    uploader        : '/uploadify.swf',
-    script          : '/photosimage',
-    cancelImg       : 'assets/images/cancel.png',
-    auto            : true,
-     fileExt         : '*.png;*.jpg;*.gif',
-    multi :false,
-    scriptData      :  {
-             '_http_accept': 'application/javascript',
-              'format' : 'json',
-               '_method': 'post',
-            'user_id' : <% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-               },
-       onProgress      : function(event, queueID, fileObj, data){ $('#photo_imageQueue').html(fileObj.name+" - "+data.percentage + '%') },
-      
-    onComplete      : function(a, b, c, response)
-    {
-    		console.log(response);
-    		var dat = eval('(' + response + ')');
-    		$('#photo_id').val(dat.id);
-            JQry.getScript(dat.upload);
-     }
-  
-     });
-      JQry('#photo_image').click(function(event){ 
-            event.preventDefault(); 
-            JQry('#photo_image').uploadifyUpload(); 
-        });
-     
+    uploader:'/uploadify.swf',
+    script:'/photosimage',
+    cancelImg:'assets/images/cancel.png',
+    auto:true,
+    fileExt:'*.png;*.jpg;*.gif',
+    multi:false,
+    scriptData:{
+      '_http_accept':'application/javascript',
+      'format':'json',
+      '_method':'post',
+      'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
+    },
+    onProgress:function (event, queueID, fileObj, data) {
+      $('#photo_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
+    },
+
+    onComplete:function (a, b, c, response) {
+      console.log(response);
+      var dat = eval('(' + response + ')');
+      $('#photo_id').val(dat.id);
+      JQry.getScript(dat.upload);
+    }
+
+  });
+  JQry('#photo_image').click(function (event) {
+    event.preventDefault();
+    JQry('#photo_image').uploadifyUpload();
+  });
+
 }
 </script>
 <section class="gidget mini" data-source="" style="display:none;">
@@ -271,15 +437,15 @@ function loadUploadifyForPhotos(){
   <span class="gidgetTitle">Deals</span></header>
 <div class="">
   <script type='text/javascript'>
-      function groupon() {
-          var city = document.getElementById('city_select').value;
-          myGrouponWidget.destroy();
-          myGrouponWidget.opts.city = city;
-          myGrouponWidget.render();
-          document.getElementById('groupon_widget').style.display = "block";
-      }
-      var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
-      document.getElementById('groupon_widget').style.display = "none";
+    function groupon() {
+      var city = document.getElementById('city_select').value;
+      myGrouponWidget.destroy();
+      myGrouponWidget.opts.city = city;
+      myGrouponWidget.render();
+      document.getElementById('groupon_widget').style.display = "block";
+    }
+    //var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
+    document.getElementById('groupon_widget').style.display = "none";
   </script>
   <div class="field">
     <label for="city" class="city-select-label">
@@ -485,10 +651,10 @@ function loadUploadifyForPhotos(){
 
 <div class="">
   <script type='text/javascript'>
-      function coupscout() {
-          var city_coupscout = document.getElementById('city_coupscout_select').value;
-          WIDGETBOX.renderWidgetInElement(city_coupscout, 'widgetbox_widget_parent_3')
-      }
+    function coupscout() {
+      var city_coupscout = document.getElementById('city_coupscout_select').value;
+      WIDGETBOX.renderWidgetInElement(city_coupscout, 'widgetbox_widget_parent_3')
+    }
   </script>
   <div class="field">
     <label for="city1" class="city-select-label">
@@ -523,9 +689,9 @@ function loadUploadifyForPhotos(){
 <div>
   <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
   <script type="text/javascript">
-      var myCoupScoutWidget = null;
-      if (WIDGETBOX)
-          myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
+    var myCoupScoutWidget = null;
+    if (WIDGETBOX)
+      myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
   </script>
 </div>
 </section>
@@ -538,59 +704,60 @@ function loadUploadifyForPhotos(){
   <%= render :partial => 'flickr/form' %>
   <div id="flickr" style="display:none;"></div>
 </section>
-<section class="gidget mini" data-source="" >
-		  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-		    <span class="gidgetTitle">Albums</span></header>
-		<div style="width: 570px;height:300px;">
-		 <div class="demo">
-		
-		<div id="tabs">
-			<ul>
-				<li><a href="#tabs-1">My Photos</a></li>
-				<li><a href="#tabs-2">Upload Photos</a></li>
-				<li><a href="#tabs-4">My Albums</a></li>
-				<li><a href="#tabs-5">Friends Albums</a></li>
-		
-			</ul>
-			<div id="tabs-1">
-			
-				<div id="photosTabContent">
-				<% if current_user1 %>
-					<%= render :partial =>"photos/photoslist" ,:locals=>{:photos1=>Photo.find_all_by_identity_id(current_user1.uid)} %>
-				<%end%>
-				</div>
-				
-			       <div id="Photo" style="margin-left:150px;padding:2px;width:300px;margin-top:-50px;"></div>	
-			</div>
-			<div id="tabs-2">
-				<div id="uploadPhotosTabContent">
-					<% if current_user1 %>		
-					<%= render :partial =>"photos/form" ,:locals=>{:photo=>Photo.new(:identity_id => current_user1.uid)}%>
-					<%end%>
-				</div>
-			</div>
-		
-				<div id="tabs-4">
-				<div id="alubmsTabContent">
-					<% if current_user1 %>
-						<%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.find_all_by_identity_id(current_user1.uid)} %>
-					<%end%>
-				</div>
-				</div>
-				
-				<div id="tabs-5">
-			  		<h2>My Friends Albums</h2>
-					<div id="friendsAlbumsTabContent">  		
-						<% if current_user1 %>
-						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_user_id(current_user1.id), :f_type=>'direct'} %>
-						  	<%= render :partial =>"friendships/myfriendlslist" ,:locals=>{:friendslist=>Friendship.find_all_by_friend_id(current_user1.id), :f_type=>'inverse'} %>
-						 <% end %>
-					</div>	 
-				</div>
-		</div>
-		
-		</div>
-		</div>
+<section class="gidget mini" data-source="">
+  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
+    <span class="gidgetTitle">Albums</span></header>
+  <div style="width: 570px;height:300px;">
+    <div class="demo">
+
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">My Photos</a></li>
+          <li><a href="#tabs-2">Upload Photos</a></li>
+          <li><a href="#tabs-4">My Albums</a></li>
+          <li><a href="#tabs-5">Friends Albums</a></li>
+
+        </ul>
+        <div id="tabs-1">
+
+          <div id="photosTabContent">
+            <% if current_user1 %>
+              <%= render :partial => "photos/photoslist", :locals => {:photos1 => Photo.find_all_by_identity_id(current_user1.uid)} %>
+            <% end %>
+          </div>
+
+          <div id="Photo" style="margin-left:150px;padding:2px;width:300px;margin-top:-50px;"></div>
+        </div>
+        <div id="tabs-2">
+          <div id="uploadPhotosTabContent">
+            <% if current_user1 %>
+              <%= render :partial => "photos/form", :locals => {:photo => Photo.new(:identity_id => current_user1.uid)} %>
+            <% end %>
+          </div>
+        </div>
+
+        <div id="tabs-4">
+          <div id="alubmsTabContent">
+            <% if current_user1 %>
+              <%= render :partial => "albums/albumlist", :locals => {:albums => Album.find_all_by_identity_id(current_user1.uid)} %>
+            <% end %>
+          </div>
+        </div>
+
+        <div id="tabs-5">
+          <h2>My Friends Albums</h2>
+
+          <div id="friendsAlbumsTabContent">
+            <% if current_user1 %>
+              <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_user_id(current_user1.id), :f_type => 'direct'} %>
+              <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_friend_id(current_user1.id), :f_type => 'inverse'} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 <section class="gidget mini" data-source="" style="display:none;">
   <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
@@ -607,16 +774,16 @@ function loadUploadifyForPhotos(){
     </aside>
     <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
       <% if current_user1 %>
-          <script src="http://connect.facebook.net/en_US/all.js"></script>
-          <script>
-              FB.init({
-                  appId:"<%= Facebook.config[:client_id] %>",
-                  cookie:true,
-                  oauth:true,
-                  xfbml:true
-              });
-              FB.Canvas.setAutoGrow();
-          </script>
+        <script src="http://connect.facebook.net/en_US/all.js"></script>
+        <script>
+          //FB.init({
+          //  appId:"<%= Facebook.config[:client_id] %>",
+          //  cookie:true,
+          //  oauth:true,
+          //  xfbml:true
+          //});
+          //FB.Canvas.setAutoGrow();
+        </script>
       <% end %>
     </div>
   </div>
@@ -630,52 +797,57 @@ function loadUploadifyForPhotos(){
   <div id="twiter1" style="display:none;">
     My Tweets <br/>
     <script>
-        MyTwitterWidget = new TWTR.Widget({
-            version:2,
-            type:'profile',
-            rpp:4,
-            interval:30000,
-            width:250,
-            height:300,
-            theme:{
-                shell:{
-                    background:'#333333',
-                    color:'#ffffff'
-                },
-                tweets:{
-                    background:'#000000',
-                    color:'#ffffff',
-                    links:'#4aed05'
-                }
-            },
-            features:{
-                scrollbar:false,
-                loop:false,
-                live:false,
-                behavior:'all'
-            }
-        }).render().setUser('twitter').start();
-        function twitter() {
-            var user = document.getElementById('username').value;
-            if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
-                alert(_("Not a valid username"));
-                return false;
-            }
-            MyTwitterWidget
-                    .destroy()
-                    .setUser(user).render().start();
-            document.getElementById('twiter1').style.display = "block";
-        }    </script>
+      MyTwitterWidget = new TWTR.Widget({
+        version:2,
+        type:'profile',
+        rpp:4,
+        interval:30000,
+        width:250,
+        height:300,
+        theme:{
+          shell:{
+            background:'#333333',
+            color:'#ffffff'
+          },
+          tweets:{
+            background:'#000000',
+            color:'#ffffff',
+            links:'#4aed05'
+          }
+        },
+        features:{
+          scrollbar:false,
+          loop:false,
+          live:false,
+          behavior:'all'
+        }
+      }).render().setUser('twitter').start();
+      function twitter() {
+        var user = document.getElementById('username').value;
+        if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
+          alert(_("Not a valid username"));
+          return false;
+        }
+        MyTwitterWidget
+            .destroy()
+            .setUser(user).render().start();
+        document.getElementById('twiter1').style.display = "block";
+      }    </script>
   </div>
 </section>
-</div>
-<div>
-</div>
-</div>
 <% if current_user1 %>
-    <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
+  <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
 <% end %>
 <%= javascript_include_tag :easySlider %>
 <%= javascript_include_tag :swfobject %>
-<%= javascript_include_tag :uploadify %></body>
+<%= javascript_include_tag :uploadify %>
+<% if current_user1 %>
+<div id="categoriesPanel">
+<%= render :partial => 'categories/panel' %>
+</div>
+<div id="postform" style="display:none;">
+  <%= render :partial => 'posts/form1', :locals => {:post => Post.new} %>
+</div>
+<% end %>
+</body>
 </html>

@@ -56,10 +56,10 @@
   margin: 3.25px;
 }
 
-input, button {
+input, button, textarea {
   border: 1px solid #B7B7B7;
   display: block;
-  margin: 10px auto;
+  margin: 10px;
   padding: 2px;
 }
 

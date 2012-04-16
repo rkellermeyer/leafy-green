@@ -8,6 +8,7 @@ $(function () {
   // Load splash template
   //$('#splash').load('splash.html');
   $.getScript('splash.js');
+  $.getScript('resize.js');
   $('.arrow-up-right').bind('click', function () {
     $(this).parents('section').resize('max');
     $(this).removeClass('arrow-up-right').addClass('arrow-down-left');
@@ -15,8 +16,5 @@ $(function () {
       $(this).parents('section').resize();
       $(this).removeClass('arrow-down-left').addClass('arrow-up-right');
     });
-  });
-  $('#chatOptions').bind('click', function(){
-    $('#chat_options_settings').slideToggle();
   });
 });

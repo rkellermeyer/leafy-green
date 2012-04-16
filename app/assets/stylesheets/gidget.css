@@ -6,16 +6,15 @@
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid white;
 }
 
 .arrow-down {
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #f00;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
 }
 
 .arrow-up-right {
@@ -37,13 +36,13 @@
 }
 
 #green_chat section {
-background: none repeat scroll 0 0 #E6E6E6;
-border: 1px solid #444444;
-height: 48%;
-margin: 10px auto;
-max-height: 48%;
-overflow: hidden;
-width: 33%;
+  background: none repeat scroll 0 0 #E6E6E6;
+  border: 1px solid #444444;
+  height: 330px;
+  margin: 10px 10px 10px 19px;
+  max-height: 330px;
+  overflow: hidden;
+  width: 31%;
 }
 
 #green_chat section header {

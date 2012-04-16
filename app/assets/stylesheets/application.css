@@ -11,3 +11,19 @@
  *= require_self
  *= require_tree .
 */
+#categoriesPanel {
+  border: 1px solid #777;
+  display: none;
+}
+
+#sign_up_right.modal {
+  width: 100%;
+  margin: 5px auto;
+}
+
+#postform {
+  background: #ddd;
+  border-: 1px solid #777;
+  display: none;
+  width: 98%;
+}

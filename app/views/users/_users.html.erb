@@ -1,10 +1,10 @@
 <aside id="friendsColumn">
-  <div class="scrollUp">^</div>
+  <div class="scrollUp"><div class="arrow-up scroll-up"></div></div>
     <ul>
       <% for user in users %>
         <% if user.name != current_user1.name %>
             <% if Identity.where(:id => current_user1.id).first.image.nil? %>
-              <li>Image Missing</li>
+              <li><img src="images/icons/image_not_found.png" data-user="<%= current_user1.id %>" /></li>
             <% else %>
             <li>
               <%= link_to user %>
@@ -16,5 +16,5 @@
         <% end %>
       <% end %>
     </ul>
-  <div class="scrollDown">V</div>
+  <div class="scrollDown"><div class="arrow-down scroll-down"></div></div>
 </aside>
