@@ -505,9 +505,5 @@ $.fn.submitWithAjax = function() {
 };
 
 $(function(){
-  $('#postform input[name=commit]').bind('click', function(){
-    console.log('Caught it!');
-    //$("#chat_window").submitWithAjax();
-    $('#postform').dialog( "close" );
-  });
-})
+
+});

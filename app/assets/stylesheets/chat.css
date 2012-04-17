@@ -153,9 +153,8 @@
   display: inline;
   float: right;
   position: relative;
-  right: 80px;
-  top: 262px;
-  width: 293px;
+  vertical-align: baseline;
+  width: 70%;
 }
 
 #chatInput textarea {
@@ -181,4 +180,12 @@
   position: relative;
   top: -141px;
   width: 131px;
+}
+
+#chat_with_friends {
+  display: block;
+  float: right;
+  position: relative;
+  top: -302px;
+  width: 84%;
 }

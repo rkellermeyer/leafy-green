@@ -140,6 +140,7 @@ section {
   float: right;
   margin: -1px -221px 0 0;
   padding: 4px;
+  position: relative;
   width: 82px;
   z-index: 9999;
 }
@@ -163,8 +164,9 @@ section {
   float: right;
   padding: 2px;
   position: relative;
-  right: -220px;
-  top: 281px;
+  right: 0;
+  top: 7%;
+  width: 12px;
 }
 
 #addNewRateMyPost:hover {

@@ -18,6 +18,7 @@
 
 //= require jqGalViewII.pack
 
+//= require resize
 
 
 
@@ -49,6 +50,10 @@ $(function(){
         $('.scrollUp, .scrollDown').show();
       }
     });
+  });
+  
+  $('#addFriendsList ul').delegate('li','click', function(){
+    console.log($(this).children('img').data('user'));
   });
 });
 

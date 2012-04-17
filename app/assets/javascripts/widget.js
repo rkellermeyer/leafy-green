@@ -635,4 +635,3 @@ String.prototype.template = function (o) {
         }();
     })();
 })();
-

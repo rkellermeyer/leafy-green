@@ -99,8 +99,10 @@
 }
 
 .rm_article_list {
-  background: #ffffff;
+  background: none repeat scroll 0 0 #FFFFFF;
+  position: relative;
   width: 100%;
+  z-index: 899;
 }
 
 .rm_image {
