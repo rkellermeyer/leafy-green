@@ -1,20 +1,10 @@
 class PhotosController < ApplicationController
- 
+  respond_to :json
   # GET /photos
   # GET /photos.json
   def index
-  if !(current_user1.nil?)
- @photos = Photo.where("identity_id = :identityId" , { :identityId => current_user1.id })
-    
-puts "today ***************** date----------"+Date.current.to_s
-today=Date.current
-@photos1=@photos
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @photos1 }
-    end
-       end
+    @photos = Photo.limit(133).order('created_at desc')
+    respond_with(@photos)
   end
   
   
@@ -49,22 +39,14 @@ today=Date.current
   # POST /photos
   # POST /photos.json
   def create
+    logger.debug "Params: #{params}"
     @photo = Photo.new(params[:photo])
-
-    respond_to do |format|
-      if @photo.save
-     # puts "test----------"+params[:photo][:publishdate]
-      if (params[:photo][:publishdate].nil? || params[:photo][:publishdate] == '')
-             @photo.update_attributes(:publishdate => Date.current)
-             else
-            @photo.update_attributes(:publishdate => params[:photo][:publishdate].to_s)
-        end
-        format.html { redirect_to root_url }
-        format.json { render json: @photo, status: :created, location: @photo }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
+    @photo.image = params[:photo][3]
+    @photo.publisher = Identity.where(:id => params[:photo][:identity_id]).first.username
+    if @photo.save
+      redirect_to root_path
+    else
+      respond_with(status: 500)
     end
   end
 

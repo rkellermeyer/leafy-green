@@ -9,51 +9,13 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
-//
-
-
-//= require jquery1
-
-
-
-//= require jqGalViewII.pack
-
-//= require resize
-
-
-
-$(function(){
-  $.getScript('http://idyuh.com:8080/application.js');
-  $('.container').hide();
-  $('#add_friends').toggle();
-  //$('#bodyContent > div > div:first').hide();
-  $('.settingsTrigger').bind('click', function(){
-    $(this).parents('section').children('div.options_settings').toggle();
-  });
-  //$('#categoriesPanel').hide();
-  $('.categoryPanelSwitch').bind('click', function(){
-    $('.sign_up_right').css('width','75%').css('margin','0 auto');
-    $('#categoriesPanel').dialog({
-      width: 500,
-      modal: true
-    });
-  });
-  $('#addNewRateMyPost').show();
-  $('.add').bind('click',function(){
-    $('#postform').dialog({
-      modal: true,
-      title: "Add New Post",
-      open: function(){
-        $('.scrollUp, .scrollDown').hide();
-      },
-      close: function(){
-        $('.scrollUp, .scrollDown').show();
-      }
-    });
-  });
-  
-  $('#addFriendsList ul').delegate('li','click', function(){
-    console.log($(this).children('img').data('user'));
-  });
-});
-
+//= require gc
+//= require actions
+//= require ratemy
+//= require channels
+//= require splash
+//= require ticker
+//= require dateFormatter
+//= require facebook
+//= require cookie
+//= require lightbox.js

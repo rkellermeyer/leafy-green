@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403051436) do
+ActiveRecord::Schema.define(:version => 20120715215428) do
 
   create_table "albums", :force => true do |t|
     t.integer  "identity_id"
@@ -26,14 +26,16 @@ ActiveRecord::Schema.define(:version => 20120403051436) do
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "channels", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.integer  "receiver_id"
   end
 
   create_table "chats", :force => true do |t|
@@ -90,8 +92,20 @@ ActiveRecord::Schema.define(:version => 20120403051436) do
     t.string   "msg_body"
     t.string   "sender"
     t.string   "channel"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "receiver"
+    t.string   "sender_name"
+  end
+
+  create_table "notices", :force => true do |t|
+    t.string   "message"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.string   "notice_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "ref_id"
   end
 
   create_table "photos", :force => true do |t|
@@ -107,6 +121,13 @@ ActiveRecord::Schema.define(:version => 20120403051436) do
     t.datetime "publishdate"
     t.string   "caption"
     t.integer  "album_id"
+    t.string   "image"
+    t.integer  "category_id"
+    t.string   "publisher"
+    t.integer  "votes"
+    t.integer  "rate_up"
+    t.integer  "rate_down"
+    t.float    "score"
   end
 
   create_table "postcomments", :force => true do |t|
@@ -132,6 +153,8 @@ ActiveRecord::Schema.define(:version => 20120403051436) do
     t.datetime "updated_at",                                      :null => false
     t.string   "image"
     t.string   "remote_image_url"
+    t.string   "url"
+    t.string   "username"
   end
 
   create_table "spider_urls", :force => true do |t|
@@ -154,8 +177,10 @@ ActiveRecord::Schema.define(:version => 20120403051436) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end

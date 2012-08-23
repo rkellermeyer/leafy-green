@@ -9,9 +9,9 @@ class Identity < OmniAuth::Identity::Models::ActiveRecord
   serialize :categories
   has_many :postcomments
   
-  has_many :posts, :dependent => :destroy
-  accepts_nested_attributes_for :posts, :allow_destroy => true, :reject_if => :all_blank
-   has_many :photos
+  #has_many :posts, :dependent => :destroy
+  #accepts_nested_attributes_for :posts, :allow_destroy => true, :reject_if => :all_blank
+  #has_many :photos
    
   validates :name, :presence => true
   validates :email, :presence => true

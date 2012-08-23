@@ -1,17 +1,5 @@
 <%= form_for(@album) do |f| %>
-  <% if @album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
-
-      <ul>
-      <% @album.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%= f.hidden_field :identity_id ,:value=>current_user1.id%>
+<%= f.hidden_field :identity_id ,:value=>1%>
   
   <div class="field">
     <%= f.label :name %><br />

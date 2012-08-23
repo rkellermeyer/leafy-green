@@ -1,45 +1,28 @@
-<%= render :partial =>"albums/form1" ,:locals=>{:album=>Album.new()}%>
-
-<%= form_for photo, :html => {:multipart => true , :onsubmit => "photosFormSubmit(this);return false;"}  do |f| %>
-  <% if photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-      <ul>
-      <% photo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%= f.hidden_field :identity_id %>
-
-<%= render :partial =>"photos/albums" ,:locals=>{:album=>Album.find_all_by_identity_id(current_user1.id)}%>
-  <p>
-    
-   <%=image_tag(photo.image.url)%>
-     
-      <%= f.label :photo ,'Photo:' %>
-	  <%= f.file_field :image %>
-	   <input type="hidden" name="photo[id]" id="photo_id" value=""/>
-    </p><br />
-    
-    <p>
-    <%= f.label :caption ,'Caption:' %>
-	         <%= f.text_field :caption %>
-    </p><br />
-    
-     <div class="field">
-    <%= f.label 'Publish' %>
-   
-    <%= f.select(:visible,  Photo::CONSTANT) %>
-  </div>
-      <div class="field">
-    <%= f.label :publishdate %>(yyyy-mm-dd):<br />
-    <%= f.text_field :publishdate%>
-  </div>
+<%= render :partial => "albums/form1", :locals=>{:album=>Album.new()}%>
+<%= form_for photo, :remote => true, :html => {:multipart => true} do |f| %>
+  <%= f.hidden_field :identity_id %>
+  <% # render :partial => "photos/albums", :locals=>{:album=>Album.find_all_by_identity_id(current_user.id)}%>
+  <% #image_tag(photo.image.url)%>
+  <%= f.file_field :image %>
+  <input type="hidden" name="photo[id]" id="photo_id" value=""/>
   <br />
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.text_field :caption, :placeholder => "Image Caption" %>
+  <br />
+  <select name="category_id">
+    <% Category.all.each do |category| %>
+      <li class="photo_category_option">
+        <option value="<%= category.id %>"><%= category.name.humanize %></option>
+      </li>
+    <% end %>
+  </select>
+  <br />
+  <%= f.select(:visible,  Photo::CONSTANT) %>
+  <button type="submit">Upload Photo</button>
 <% end %>
+<script>
+  $('#new_photo button').click(function(event){
+    //var obj = $('#new_photo');
+    //event.preventDefault();
+    //GC.Photo.create(obj);
+  });
+</script>

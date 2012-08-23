@@ -27,7 +27,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      #format.html # new.html.erb
       format.json { render json: @channel }
     end
   end
@@ -41,13 +41,14 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(params[:channel])
-   
     respond_to do |format|
       if @channel.save
-        format.html { redirect_to root_url, notice: 'Channel was successfully created.' }
+        #@notice = Notice.new(:receiver_id => params[:friend_id], :sender_id => params[:user_id], :ref_id => @channel.id, :message => "Your friend wants to chat!", :notice_type => params[:notice_type])
+        #@notice.save
+        #format.html { redirect_to root_url, notice: 'Channel was successfully created.' }
         format.json { render json: @channel, status: :created, location: @channel }
       else
-        format.html { render action: "new" }
+        #format.html { render action: "new" }
         format.json { render json: @channel.errors, status: :unprocessable_entity }
       end
     end
@@ -76,7 +77,7 @@ class ChannelsController < ApplicationController
     @channel.destroy
 
     respond_to do |format|
-      format.html { redirect_to channels_url }
+      #format.html { redirect_to channels_url }
       format.json { head :no_content }
     end
   end

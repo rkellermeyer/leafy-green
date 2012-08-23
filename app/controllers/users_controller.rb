@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
   
   def index
-   @users = User.search(params[:search])
+   @users = User.all   #User.search(params[:search])
+   respond_with(@users)
   end
 
   def search

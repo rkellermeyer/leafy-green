@@ -1,5 +1,13 @@
 Ratemy::Application.routes.draw do
 
+  resources :notices
+
+  get "notification/index"
+
+  get "notification/show"
+
+  get "notification/create"
+
   resources :spider_urls
 
   resources :messages
@@ -48,8 +56,10 @@ Ratemy::Application.routes.draw do
     
   resources :categories
   
-   match "/auth/:provider/callback", to: "sessions#callback"
-  match "/auth/failure", to: "sessions#failure"
+  #match "/auth/:provider/callback", to: "sessions#callback"
+  match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: 'sessions#failure'
+  match 'signout', to: 'sessions#destroy', as: 'signout'
   
   match "/facebook/logout", to: "facebooks#destroy"
   

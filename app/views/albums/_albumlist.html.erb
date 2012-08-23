@@ -1,47 +1,11 @@
-<h2>My Albums</h2>
-
-<% albums.each do |album| %>
-    
-  Album Name:  <%= album.name %><br/>
-   Caption: <%= album.caption %><br/>
-   
-   <% if album.identity_id == current_user1.id %>
-    <%=link_to  'Edit Album','javascript:void(0);', :onclick => "javascript:document.getElementById('editalbum_#{album.id}').style.display='block';" %>
-     <div id="editalbum_<%=album.id%>" style="display:none;">
-    
- <%= form_for album, :html => {:onsubmit => "updateAlbumFormSubmit(this);return false;"}   do |f| %>
-
-<%= f.hidden_field :identity_id ,:value=>current_user1.id%>
-  
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </div>
-  <div class="field">
-    <%= f.label :visibletype %><br />
-       <%= f.select(:visibletype, Album::CONSTANT, {}, {:onchange => "updatetheuserstoselect(this.value, #{album.id}, '#{album.accessusers}')"}) %>
-  </div>
-    <script>
-    	 <% if album.visibletype == 0 %>
-    	 	setTimeout("updatetheuserstoselect(0, <%=album.id%> , '<%=album.accessusers%>')", 10000);
-    	 <% end %>
-    </script>
-  <div class="field">
-  	<div id="selectvalidusers_<%=album.id%>" style="display: none;">
-  	</div>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-     
-     </div>
-    <% end %>
-    <%= render :partial =>"albums/photosform" ,:locals=>{:photos=>Photo.find_all_by_album_id(album.id), :curr_album_id => album.id}%>
-  
-<% end %><br/>
+<ul>
+  <% Album.where(:identity_id => current_user.id).each do |album| %>
+    <li>
+      <button type="button" data-album="<%= album.id %>">
+        <img src="" />
+        <br />
+        <%= album.name %>        
+      </button>
+    </li>
+  <% end %>
+</ul>

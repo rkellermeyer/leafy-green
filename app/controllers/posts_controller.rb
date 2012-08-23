@@ -63,26 +63,10 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create 
-  
   	@post = Post.new(params[:post])
-    @post.category_id = params[:category_id]
-    @post.user_id = current_identity1.id
-    @post.image =   params[:post_image] 
-    puts "file data-------------- here v12121"
-    if (!params[:image_url].nil?)
-    	@post.remote_image_url = params[:image_url]
+    if @post.save
+      respond_with(@post, status: 200)
     end
-    logger.debug "*****************Debug values : #{params}"
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to root_url, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: root_url }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-
   end
 
   # PUT /posts/1
@@ -115,36 +99,74 @@ class PostsController < ApplicationController
   end
 
   def rate_up
-    @post = Post.find(params[:id])
-    rate_down = @post.rate_down.to_f
-    rate_up = @post.rate_up.to_f + 1
-    votes = rate_up + rate_down
-    score = (rate_up / votes)
-    respond_to do |format|
-      if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
-        #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render json: @post }
-      else
-        #format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if params[:post]  
+      @post = Post.find(params[:id])
+      rate_down = @post.rate_down.to_f
+      rate_up = @post.rate_up.to_f + 1
+      votes = rate_up + rate_down
+      score = (rate_up / votes)
+      respond_to do |format|
+        if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+          #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+          format.json { render json: @post }
+        else
+          #format.html { render action: "edit" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    elsif params[:photo]
+      @photo = Photo.find(params[:id])
+      rate_down = @photo.rate_down.to_f
+      rate_up = @photo.rate_up.to_f + 1
+      votes = rate_up + rate_down
+      score = (rate_up / votes)
+      respond_to do |format|
+        if @photo.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+          #format.html { redirect_to @post, notice: 'Photo was successfully updated.' }
+          format.json { render json: @photo }
+        else
+          #format.html { render action: "edit" }
+          format.json { render json: @photo.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      render status: :unprocessable_entity
     end
   end
 
   def rate_down
-    @post = Post.find(params[:id])
-    rate_down = @post.rate_down.to_f + 1
-    rate_up = @post.rate_up.to_f
-    votes = rate_up + rate_down
-    score = (rate_up / votes)
-    respond_to do |format|
-      if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
-        #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render json: @post }
-      else
-        #format.html { render action: "edit" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if params[:post]
+      @post = Post.find(params[:id])
+      rate_down = @post.rate_down.to_f + 1
+      rate_up = @post.rate_up.to_f
+      votes = rate_up + rate_down
+      score = (rate_up / votes)
+      respond_to do |format|
+        if @post.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+          #format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+          format.json { render json: @post }
+        else
+          #format.html { render action: "edit" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    elsif params[:photo]
+      @photo = Photo.find(params[:id])
+      rate_down = @photo.rate_down.to_f + 1
+      rate_up = @photo.rate_up.to_f
+      votes = rate_up + rate_down
+      score = (rate_up / votes)
+      respond_to do |format|
+        if @photo.update_attributes(:votes => votes, :rate_up => rate_up, :rate_down => rate_down, :score => score.round(4))
+          #format.html { redirect_to @post, notice: 'Photo was successfully updated.' }
+          format.json { render json: @photo }
+        else
+          #format.html { render action: "edit" }
+          format.json { render json: @photo.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      render status: :unprocessable_entity
     end
   end
 end

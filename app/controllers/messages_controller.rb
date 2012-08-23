@@ -1,58 +1,53 @@
 require "juggernaut"
-
 class MessagesController < ApplicationController
 
-def send_message
-	@messg = params[:msg_body]
-	@sender = params[:sender]
-	@channel= params[:channel_id]
-	puts "channel name .................."+@channel
- 	Juggernaut.publish(select_channel(@channel), parse_chat_message(params[:msg_body], params[:sender]))
- 	
- 	 message = Message.new
- 	  message.sender = current_identity1.name
- 	   message.msg_body = @messg
- 	    message.channel = @channel
-     if message.save
-	      @messages =  Message.find_all_by_channel(params[:channel_id])
-	      respond_to do |format|
-	      	format.json { render json: @messages }
-	      end
+  def send_message
+    @messg = params[:msg_body]
+    @sender = params[:sender]
+    @channel= params[:channel_id]
+    puts "channel name .................."+@channel
+    Juggernaut.publish(select_channel(@channel), parse_chat_message(params[:msg_body], params[:sender]))
+    message = Message.new
+    message.sender = current_identity1.name
+    message.msg_body = @messg
+    message.channel = @channel
+    if message.save
+      @messages =  Message.find_all_by_channel(params[:channel_id])
+      respond_to do |format|
+        format.json { render json: @messages }
+      end
     end
-    	
-
-	end
+  end
 
 	def parse_chat_message(msg, user)
-	return "#{user}: #{msg}"
+    return "#{user}: #{msg}"
 	end
 
 	def select_channel(receiver)
-	puts "#{receiver}"
-	return "/chats#{receiver}"
+    puts "#{receiver}"
+    return "/chats#{receiver}"
 	end
 	
-	 def getMessagesOnChannel
- # puts "come here messages"+params[:search]
-   @messages = Message.find_all_by_channel(params[:channel_id], :order => "created_at DESC")
-    puts @messages
+	def getMessagesOnChannel
+    # puts "come here messages"+params[:search]
+    @messages = Message.find_all_by_channel(params[:channel_id], :order => "created_at ASC")
+    #puts @messages
     respond_to do |format|
-
       format.json { render json: @messages }
     end
   end
   
   def downloadMessagesOnChannel
-  channelId = params[:channel_id]
-   @messages = Message.find_all_by_channel(channelId, :order => "created_at DESC")
-	data = channelId  + " Channel Id Conversations\n"
-	data = data + "-----------------------------------------------\n\n"
-     @messages.each do| obj|
+    channelId = params[:channel_id]
+    @messages = Message.find_all_by_channel(channelId, :order => "created_at DESC")
+    data = channelId  + " Channel Id Conversations\n"
+    data = data + "-----------------------------------------------\n\n"
+    @messages.each do| obj|
      	msg_date = obj.created_at.to_s(:rfc822) 
      	data = data + obj.sender + " : "+ obj.msg_body + "\t"+ msg_date + "\n"
-     end
-	filename = channelId+".txt"
-	send_data( data, :filename => filename )
+    end
+    filename = channelId+".txt"
+    send_data( data, :filename => filename )
   end
  
 	
@@ -60,7 +55,6 @@ def send_message
   # GET /messages.json
   def index
     @messages = Message.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @messages }
@@ -71,7 +65,6 @@ def send_message
   # GET /messages/1.json
   def show
     @message = Message.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @message }
@@ -82,7 +75,6 @@ def send_message
   # GET /messages/new.json
   def new
     @message = Message.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @message }
@@ -98,7 +90,6 @@ def send_message
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
@@ -114,7 +105,6 @@ def send_message
   # PUT /messages/1.json
   def update
     @message = Message.find(params[:id])
-
     respond_to do |format|
       if @message.update_attributes(params[:message])
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
@@ -131,7 +121,6 @@ def send_message
   def destroy
     @message = Message.find(params[:id])
     @message.destroy
-
     respond_to do |format|
       format.html { redirect_to messages_url }
       format.json { head :no_content }

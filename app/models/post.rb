@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :title, :content, :category_id
   #serialize :content
   belongs_to :user
-  belongs_to :identity
+  #belongs_to :identity
   mount_uploader :image, ImageUploader
 
   #build top 20 by category

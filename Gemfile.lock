@@ -76,6 +76,9 @@ GEM
     fb_graph (2.4.0)
       httpclient (>= 2.2.0.2)
       rack-oauth2 (>= 0.14.0)
+    gon (3.0.5)
+      actionpack (>= 2.3.0)
+      json
     groupon (0.0.1)
       hashie (>= 0.1.3)
       httparty (>= 0.1.0)
@@ -97,7 +100,7 @@ GEM
     multi_json (1.0.4)
     multi_xml (0.4.1)
     multipart-post (1.1.5)
-    mysql (2.8.1)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -207,9 +210,10 @@ DEPENDENCIES
   execjs
   faker
   fb_graph
+  gon
   groupon
   juggernaut!
-  mysql
+  mysql2
   omniauth
   omniauth-facebook
   omniauth-google-oauth2

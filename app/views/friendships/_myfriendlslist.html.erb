@@ -1,13 +1,14 @@
-
+<% if current_user %>
 <% friendslist.each do |friend| %>
     
   <% if f_type == "direct"%>
 	  <%= render :partial =>"friendships/friendname" ,:locals=>{:user=>Identity.find_by_id(friend.friend_id)}%>
-   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.friend_id, :currUserId => current_user1.id })} %>
+   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.friend_id, :currUserId => 1 })} %>
    <% else %>
    	   <%= render :partial =>"friendships/friendname" ,:locals=>{:user=>Identity.find_by_id(friend.user_id)}%>
-   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.user_id, :currUserId => current_user1.id })} %>
+   	 <%= render :partial =>"albums/albumlist" ,:locals=>{:albums=>Album.where("identity_id = :identityId and ( visibletype=1 or INSTR(accessusers, concat(',',:currUserId,',') ))" ,{ :identityId => friend.user_id, :currUserId => 1 })} %>
    <% end %>
 
 <% end %><br/>
+<% end %>
 

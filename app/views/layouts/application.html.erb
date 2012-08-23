@@ -1,846 +1,1200 @@
-<!DOCTYPE html>
-<html xmlns:fb="http://www.facebook.com/2008/fbml">
+<!DOCTYPE HTML>
+<html lang="en-US">
 <head>
-  <title>Auth</title>
-  <%= stylesheet_link_tag :application %>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
-  <%= javascript_include_tag :application %>
-  <%= stylesheet_link_tag 'base', 'layout', 'gritter', controller_name %>
+	<meta charset="UTF-8">
+	<title></title>
   <%= csrf_meta_tag %>
-  <%= javascript_include_tag :jqGalViewII %>
-  <%= stylesheet_link_tag :jqGalViewII %>
-  <%= javascript_include_tag :widget %>
-  <%= stylesheet_link_tag "chat.css" %>
-  <%= stylesheet_link_tag "reset.css" %>
-  <%= stylesheet_link_tag "splash.css" %>
-  <%= stylesheet_link_tag "signup.css" %>
-  <%= stylesheet_link_tag "gidget.css" %>  <%= javascript_include_tag :master %>  <%= javascript_include_tag :resize %>
-  <%= javascript_include_tag :getIt %>
-  <%= stylesheet_link_tag "jqui" %>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-  <%= javascript_include_tag 'rails', 'jquery.gritter' %>
-  <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-  <%= javascript_include_tag :myapp %>
-  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-    api_key: titzvdcmcaot
-    authorize: true
-  </script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
-  <script type="text/javascript">      function loadData() {
-    IN.API.Profile("me")
-        .result(function (result) {
-          $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
-          IN.parse(document.getElementById("profile"))
-        })
-  }  </script>
-  <% if current_user1 %>
-    <script type="text/javascript" src="http://localhost:3000/assets/jquery-dateformat.js"></script>
-  <% end %>
-  <%= stylesheet_link_tag :jdgallery %>
-  <%= javascript_include_tag :jdgallery %>
-  <%= javascript_include_tag :picasa1 %>
-  <script language="javascript" src="http://www.electrictoolbox.com/examples/facebox/facebox.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://www.electrictoolbox.com/examples/facebox/facebox.css"/>
-  <script type="text/javascript">
-    $(function () {
-      $("#tabs").tabs();
-      $("#tabschat").tabs();
-    });
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $.facebox.settings.opacity = 0.5
-    });
-  </script>
-  <% if current_user1 %>
-    <script type="text/javascript">
-      var current_user1 = $.parseJSON('<%= raw current_user1.to_json %>');
-      console.log(current_user1);
-    </script>
-  <% end %>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <%= javascript_include_tag :application %>
+  <style type="text/css">
+    * {
+      font-family: "Helvetica",Arial,sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+    
+    }
+    h5 {
+      margin: 0;
+      padding: 0;
+    }
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style-type: none;
+    }
+    /*.ticker {
+      background: none repeat scroll 0 0 #F0F0F0;
+      border: 1px solid #89C655;
+      border-radius: 3px 3px 3px 3px;
+      left: 12%;
+      padding: 4px;
+      position: relative;
+      top: -22px;
+    }*/
+    .slideUp, .slideDown {
+      background: none repeat scroll 0 0 #ABABAB;
+      opacity: 0;
+      position: relative;
+      text-align: center;
+      width: 65px;
+      z-index: 999;
+    }
+    .slideDown {
+      bottom: 0;
+      position: absolute;
+    }
+    .slideUp:hover, .slideDown:hover {
+      opacity: 0.4;
+    }
+    .arrowUp {
+      border-bottom: 7px solid white;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      height: 0;
+      position: relative;
+      top: -13px;
+      width: 0;
+    }
+    .arrowDown {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid white;
+      height: 0;
+      position: relative;
+      top: 12px;
+      width: 0;
+    }
+    .arrowRight {
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid white;
+    }
+    .arrowLeft {
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent; 
+      border-right: 7px solid white;
+    }
+    header.mainHeader {}
+    .userOptions {
+      border: 1px solid #333;
+      display: none;
+      height: 150px;
+      width: 100px;
+    }
+    #ajaxLoad {
+      background: #ececec;
+      left: 0;
+      opacity: .5;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    #ajaxLoad img {
+      left: 50%;
+      position: relative;
+      top: 50%;
+    }
+    #appWrapper {
+      display: none;
+    }
+    #appWrapper section {
+      border: 1px solid #333333;
+      display: inline-block;
+      margin: 0.333em;
+      overflow: hidden;
+      position: relative;
+      vertical-align: top;
+      width: 32.5%;
+    }
+    #appWrapper section #postsWrapper, #appWrapper section #postForm  {
+      height: 91%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+    #appWrapper section #postForm {
+      display: none;
+    }
+    #appWrapper section header {
+      background: none repeat scroll 0 0 #E1E1E1;
+      border-bottom: 1px solid #333333;
+      height: 1.8em;
+    }
+    #appWrapper section header ul {}
+    #appWrapper section header ul li {
+      display: inline;
+    }
+    #appWrapper section header ul li ul {}
+    #appWrapper section header ul li ul li {
+      display: block;
+    }
+    #appWrapper section header ul li ul li.max {  
+      background: url("images/icons/MaximizeHover.png") no-repeat scroll 0 0 transparent;
+    }
+    #appWrapper section header ul li ul li.min {  
+      background: url("images/icons/MinimizeHover.png") no-repeat scroll 0 0 transparent;
+    }
+    #appWrapper section header ul li ul li.sizer {
+      float: right;
+      height: 10px;
+      opacity: .5;
+      position: relative;
+      right: 2px;
+      top: 2px;
+      width: 11px;
+    }
+    #appWrapper section header ul li ul li.options img {
+      opacity: .5;
+    }
+    #appWrapper section header ul li ul li.sizer:hover, #appWrapper section header ul li ul li.options img:hover {
+      opacity: 1;
+    }
+    #appWrapper section header ul li ul li.options {
+      float: right;
+      position: relative;
+      right: -9px;
+      top: 11px;
+      width: 2.5em;
+    }
+    #appWrapper section header ul li.icon {
+      height: 20px;
+      left: 2px;
+      position: relative;
+      top: 2px;
+      width: 20px;
+    }
+    #appWrapper section header ul li ul li.title, #appWrapper section header ul li ul li.status {
+      color: #666;
+      left: 1.5em;
+      position: relative;
+      top: -1.5em;
+      width: 5em;
+    }
+    #appWrapper section header ul li ul li.status {
+      font-size: 0.6em;
+      left: 2.6em;
+      position: relative;
+      top: -3em;
+      width: 70%;
+    }
+    #appWrapper section aside.optionsShade {
+      background: none repeat scroll 0 0 #FFFFFF;
+      border: 1px solid #777777;
+      float: right;
+      font-size: 0.75em;
+      height: 6.5em;
+      overflow: hidden;
+      padding: 3px;
+      position: absolute;
+      right: -1px;
+      top: 29px;
+      width: 6.5em;
+      z-index: 999;
+    }
+    
+    /* Begin Splash CSS */
+    #splash {
+      background: #fff;
+      height: 100%;
+      width: 100%;      
+    }
+
+    #splash_header {
+      border-top: 1px solid #e6e6e6;
+      border-bottom: 1px solid #e6e6e6;
+      height: 42px;
+    }
+
+    .logo_text {
+      color: #7E8782;
+      font-family: Trebuchet MS;
+      font-size: 18pt;
+      font-weight: normal;
+      position: relative;
+      top: 20%;
+      left: 1%;
+    }
+
+    .logo_highlight {
+      color: #89C655;
+    }
+
+    .logo_1 {
+      margin: 0 5px 12px;
+    }
+
+    .logo_2 {
+      margin: 10px 0;
+    }
+
+    #splash_form {
+      margin: 20px auto;
+      padding: 5px;
+      position: relative;
+      width: 19em;
+    }
+
+    #splash_form header {
+      margin: auto;
+      width: 100%
+    }
+
+    #splash_form header > h2 {
+      font-size: 10pt;
+      margin: 3.25px;
+    }
+
+    input, button, textarea {
+      border: 1px solid #B7B7B7;
+      margin: 10px 0;
+      padding: 2px;
+    }
+
+    .button_to > button {
+      width: 75px;
+    }
+    
+    #auth_key, #password {
+      width: 22.35em;
+    }
+
+    .splash_form_login_button {
+    }
+
+    /*.splash_message_border {
+      border-bottom: 1px solid #e6e6e6;
+      margin: 5px auto;
+    } */
+    
+    #manageFriends {
+      background: none repeat scroll 0 0 #E9E9E9;
+      border: 1px solid #CCCCCC;
+      display: none;
+      font: 0.8em verdana;
+      padding: 4px;
+      position: fixed;
+      right: 7.6em;
+      text-decoration: underline;
+      top: 39px;
+      width: 13.25em;
+    }
+    
+    #manageFriends button:hover {
+      border: 1px solid green;
+    }
+    
+    #manageFriends button.friended {
+      border: 1px solid #6EBE47;
+    }
+
+    #login_button_link_panel {
+    }
+
+    .password_recovery_link {
+      display: inline;
+      float: right;
+      font-size: 8pt;
+      position: relative;
+      right: 0;
+      top: 17px;
+    }
+
+    .password_recovery_link:hover, .tos_link:hover, .create_an_account:hover {
+      color: #89C655;
+      cursor: pointer;
+    }
+
+    .new_to_greenchat, .create_an_account {
+      font-size: 10pt;
+    }
+    
+    .create_an_account {
+      float: right;
+      position: relative;
+      right: 0;
+    }
+    
+    .new_to_greenchat {
+      color: #89C655;
+      font-weight: 700;
+    }
+    
+    .sign_up_icon {
+      left: 20px;
+      position: relative;
+    }
+    /* End Splash CSS */
+
+    #rateMy article {
+      overflow: hidden;
+    }
+    #rateMy article ul {
+      width: 99%;
+    }
+    #rateMy article ul li {
+    }
+    #rateMy article ul li.post {
+      float: right;
+      padding-bottom: 15px;
+      width: 80%;
+    }
+    #rateMy article ul li.post ul li.postContent span.postReadMore {
+      float: right;
+      font-size: 0.7em;
+      position: relative;
+      right: 10px;
+      top: -2em;
+    }
+    #rateMy article ul li.postImage {
+      left: 4px;
+      position: relative;
+      width: 20%;
+    }
+    #rateMy article ul li img {
+      position: relative;
+      top: 4px;
+      width: 89%;
+    }
+    #rateMy article ul li ul {
+    }
+    #rateMy article ul li ul li {
+    }
+    #rateMy article ul li ul li.postContent p {
+      font-size: .8em;
+      position: relative;
+      top: -7px;
+    }
+    #rateMy article ul li ul li.postActions ul {}
+    #rateMy article ul li ul li.postActions ul li {
+      display: inline;
+      margin: 0 18px;
+    }
+    #rateMy article ul li ul li.postActions ul li img {
+      height: 16px;
+      width: 16px;
+    }
+    #rateMy article ul li ul li ul.postMeta {
+    }
+    #rateMy article ul li ul li ul.postMeta li {
+      display: inline;
+    }
+    #rateMy article ul li ul li ul.postMeta li.username {
+      font-weight: 700;
+      font-size: .8em;
+    }
+    #rateMy article ul li ul li ul.postMeta li.created {
+      color: #B0B0B0;
+      font-size: 0.8em;
+      left: 3em;
+      position: relative;
+    }
+    #rateMy article ul li ul li ul.postMeta li.rateUp img {
+      height: 20px;
+      position: relative;
+      right: -4.5em;
+      width: 20px;
+    }
+    #rateMy article ul li ul li ul.postMeta li.rateDown img {
+      height: 20px;
+      position: relative;
+      right: -4em;
+      width: 20px;
+    }
+    
+    #chat {}
+    #chat #channelForm {
+      box-shadow: 1px 3px 2px 1px #A3A3A3;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      top: -20px;
+      width: 10.45%;
+      z-index: 998;
+    }
+    #chat #channelForm form {}
+    #chat #channelForm form ul {
+      height: 5em;
+    }
+    #chat #channelForm form button {
+      border-radius: 3px;
+      font-size: 76%;
+      font-weight: 700;
+      line-height: 0.5em;
+      margin: 3px 2px;
+      opacity: 0.4;
+      padding: 4px 0;
+      width: 90%;
+    }
+    #chat #channelForm form button:hover {
+      border: 1px solid #89C655;
+      opacity: 1;
+    }
+    #chat #channelForm form button img {
+      position: relative;
+      top: -3px;
+      width: 75%;
+    }
+    #chat ul#channellist {}
+    #chat ul#channellist li {
+      font-size: 0.8em;
+      text-transform: uppercase;
+    }
+    #chat ul#channellist li.listHeading {
+      font-weight: 700;
+    }
+    #chatList {
+      float: right;
+      overflow: hidden;
+      position: relative;
+      right: 0;
+      top: 0;
+      width: 88%;
+    }
+    #chatList li.chatPane {
+      height: 12.75em;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+    #chatList li.chatPane ul.chatMessage {
+      /*border: 1px solid green;*/
+      margin: 4px 5px 10px;
+    }
+    #chatList li.chatPane ul.chatMessage:last-of-type {
+    }
+    #chatList li.chatPane ul.chatMessage li.messenger {
+      /*border: 1px solid orange;*/
+      font-weight: 700;
+    }
+    #chatList li.chatPane ul.chatMessage li.message {
+      /*border: 1px solid red;*/
+    }
+    #sendChat .sendChatInput {
+      background: none repeat scroll 0 0 #F9F9F9;
+      bottom: -6px;
+      height: 32px;
+      left: 15%;
+      position: absolute;
+      width: 69%;
+    }
+    #sendChat .sendChatButton {
+      border-radius: 3px 3px 3px 3px;
+      bottom: -6px;
+      float: right;
+      height: 38px;
+      position: absolute;
+      right: 5px;
+      width: 9%;
+    }
+    #friendsAlubmsTabContent {
+    
+    }
+    #friendsAlbumsTabContent ul {}
+    #friendsAlbumsTabContent ul li {
+      display: inline-block;
+    }
+    #friendsAlbumsTabContent ul li button {}
+    #friendsAlbumsTabContent ul li button img {
+      height: 75px;
+      width: 75px;
+    }
+    #alubmsTabContent {
+      height: 397px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+    #alubmsTabContent ul {
+      margin: -7px 3px 0;
+    }
+    #alubmsTabContent ul li {
+      display: inline-block;
+    }
+    #alubmsTabContent ul li button {
+      height: 5em;
+      opacity: 1;
+      width: 5em;
+    }
+    #alubmsTabContent ul li button img {
+      height: 4em;
+      width: 4em;
+    }
+    
+    /* Begin Post Form */
+    #postForm {}
+    #postForm h5 {}
+    #postForm input {}
+    #postForm input[type=checkbox] {}
+    #postForm textarea {}
+    #postForm select {}
+    #postForm button {}
+    /* End Post Form */
+    
+    #postViewPort {
+      background: none repeat scroll 0 0 #FFFFFF;
+      border: 1px solid #C6C6C6;
+      border-radius: 4px 4px 4px 4px;
+      display: none;
+      left: 10%;
+      padding: 10px 10px 30px;
+      position: fixed;
+      top: 10%;
+      width: 80%;
+    }
+    
+    #postViewPort h2 {
+      border-bottom: 1px dotted #C0C0C0;
+      font: bold 18px "Helvetica",Arial,sans-serif;
+      margin: 0;
+      padding: 0 0 3px;
+      position: relative;
+      top: -5px;
+      width: 97%;
+    }
+    
+    #postViewPort .fullURL {
+      border: 1px solid #C6C6C6;
+      min-height: 640px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      width: 100%;
+    }
+    
+    #postViewPort #postImage img {
+      width: 25%;
+    }
+    
+    #postViewPort #postMetaData {
+      font-size: 14px;
+      position: relative;
+      top: -5px;
+    }
+    
+    #postViewPort #postMetaData ul {}
+    
+    #postViewPort #postMetaData ul li {
+      display: inline;
+    }
+    
+    #postViewPort #postMetaData ul li span img {
+      position: relative;
+      top: 4px;
+    }
+    
+    #postViewPort textarea {
+      border: medium none;
+      float: right;
+      left: -15px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      padding: 10px;
+      position: relative;
+      resize: none;
+      top: -11px;
+      width: 70%;
+    }
+    
+    .closePostPort {
+      cursor: pointer;
+      float: right;
+    }
+    
+    /* Begin Photos */
+    #photoStream {
+      display: block;
+      height: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    #photoStream li {
+      display: inline-block;
+      width: 20%;
+    }
+    #photoStream li span.rateUp, #photoStream li span.rateDown {
+      left: 41%;
+      margin: 10px auto;
+      position: relative;
+    }
+    .streamPhoto {
+      border: 3px solid #E1E1E1;
+      box-shadow: 0 0 3px 2px #CCCCCC;
+      height: 6em;
+      margin: 10px 20px;
+      overflow: hidden;
+      width: 6em;
+    }
+    .streamPhoto img {
+      height: 100%;
+      position: relative;
+      width: auto;
+    }
+    .photoUser {
+      font-size: 0.8em;
+      font-weight: 700;
+      padding: 6px 5px 0 18px;
+    }
+    /* End Photos */
+    
+    #userPanel {
+      float: right;
+    }
+    #userPanel ul {
+      position: relative;
+      top: 6px;
+      width: 16em;
+    }
+    #userPanel ul li {
+      display: inline;
+    }
+    #userPanel ul li.notice {
+      border-radius: 10px 10px 10px 10px;
+      box-shadow: 0 0 1px 2px #89C655 inset;
+    }
+    #userPanel ul li.notice:hover {
+      box-shadow: 0 0 1px 2px #89C655;
+    }
+    #userPanel ul li img:hover {
+      cursor: pointer;
+    }
+    #userPanel ul li.userFriends img, #userPanel ul li.userNetwork img, #userPanel ul li.userNotifications img {
+      bottom: 0;
+      left: 0;
+      position: relative;
+      right: 0;
+      top: 5px;
+    }
+    .userNotificationList {
+      background: none repeat scroll 0 0 #E9E9E9;
+      border: 1px solid #CCCCCC;
+      color: navy;
+      display: none;
+      font: 0.8em verdana;
+      padding: 4px;
+      position: fixed;
+      right: 3.6em;
+      text-decoration: underline;
+      top: 39px;
+      width: 10.25em;
+    }
+    .userNotificationList li {
+      margin-bottom: 5px;
+    }
+    #userPanel ul li.userName span {
+      color: #777777;
+      font-size: 0.8em;
+      font-weight: 700;
+    }
+    
+    /* Begin Ticker Styles */
+    /* Ticker Styling */
+    .ticker-wrapper.has-js {
+      background-color: #F0F0F0;
+      border: 1px solid #89C655;
+      border-radius: 4px 4px 4px 4px;
+      display: inline-block;
+      font-size: 0.75em;
+      height: 32px;
+      left: 31.25%;
+      padding: 0 20px;
+      position: absolute;
+      top: 13px;
+      width: 35%;
+    }
+    .ticker {
+      width: 98%;
+      height: 23px;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background-color: #F0F0F0;
+    }
+    .ticker-title {
+      padding-top: 9px;
+      color: #89C655;
+      font-weight: bold;
+      background-color: #F0F0F0;
+      text-transform: uppercase;
+    }
+    .ticker-content {
+      margin: 0px;
+      padding-top: 9px;
+      position: absolute;
+      color: #333333;
+      font-weight: bold;
+      background-color: #F0F0F0;
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 1.2em;
+    }
+    .ticker-content:focus {
+      none;
+    }
+    .ticker-content a {
+      text-decoration: none;	
+      color: #333333;
+    }
+    .ticker-content a:hover {
+      text-decoration: underline;	
+      color: #89C655;
+    }
+    .ticker-swipe {
+      padding-top: 9px;
+      position: absolute;
+      top: 0px;
+      background-color: #F0F0F0;
+      display: block;
+      width: 800px;
+      height: 23px; 
+    }
+    .ticker-swipe span {
+      margin-left: 1px;
+      background-color: #F0F0F0;
+      border-bottom: 1px solid #1F527B;
+      height: 12px;
+      width: 7px;
+      display: block;
+    }
+    .ticker-controls {
+      padding: 8px 0px 0px 0px;
+      list-style-type: none;
+      float: left;
+    }
+    .ticker-controls li {
+      padding: 0px;
+      margin-left: 5px;
+      float: left;
+      cursor: pointer;
+      height: 16px;
+      width: 16px;
+      display: block;
+    }
+    .ticker-controls li.jnt-play-pause {
+      background-image: url('../images/controls.png');
+      background-position: 32px 16px;
+    }
+    .ticker-controls li.jnt-play-pause.over {
+      background-position: 32px 32px;
+    }
+    .ticker-controls li.jnt-play-pause.down {
+      background-position: 32px 0px;
+    }
+    .ticker-controls li.jnt-play-pause.paused {
+      background-image: url('../images/controls.png');	
+      background-position: 48px 16px;
+    }
+    .ticker-controls li.jnt-play-pause.paused.over {
+      background-position: 48px 32px;
+    }
+    .ticker-controls li.jnt-play-pause.paused.down {
+      background-position: 48px 0px;
+    }
+    .ticker-controls li.jnt-prev {
+      background-image: url('../images/controls.png');
+      background-position: 0px 16px;		
+    }
+    .ticker-controls li.jnt-prev.over {
+      background-position: 0px 32px;		
+    }
+    .ticker-controls li.jnt-prev.down {
+      background-position: 0px 0px;		
+    }
+    .ticker-controls li.jnt-next {
+      background-image: url('../images/controls.png');	
+      background-position: 16px 16px;	
+    }
+    .ticker-controls li.jnt-next.over {
+      background-position: 16px 32px;	
+    }
+    .ticker-controls li.jnt-next.down {	
+      background-position: 16px 0px;	
+    }
+    .js-hidden {
+      display: none;
+    }
+    .no-js-news {
+      padding: 10px 0px 0px 45px; 
+      color: #F0F0F0;
+    }
+    .left .ticker-swipe {
+      /*left: 80px;*/
+    }
+    .left .ticker-controls, .left .ticker-content, .left .ticker-title, .left .ticker {
+        float: left;
+    }
+    .left .ticker-controls {
+        padding-left: 6px;
+    }
+    .right .ticker-swipe {
+      /*right: 80px;*/
+    }
+    .right .ticker-controls, .right .ticker-content, .right .ticker-title, .right .ticker {
+        float: right;
+    }
+    .right .ticker-controls {
+        padding-right: 6px;
+    }
+    /* End Ticker Styles */
+    #jquery-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999999;
+	width: 100%;
+	height: 500px;
+}
+#jquery-lightbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 9999999;
+	text-align: center;
+	line-height: 0;
+}
+#jquery-lightbox a img { border: none; }
+#lightbox-container-image-box {
+	position: relative;
+	background-color: #fff;
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+}
+#lightbox-container-image { padding: 10px; }
+#lightbox-loading {
+	position: absolute;
+	top: 40%;
+	left: 0%;
+	height: 25%;
+	width: 100%;
+	text-align: center;
+	line-height: 0;
+}
+#lightbox-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+}
+#lightbox-container-image-box > #lightbox-nav { left: 0; }
+#lightbox-nav a { outline: none;}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext {
+	width: 49%;
+	height: 100%;
+	zoom: 1;
+	display: block;
+}
+#lightbox-nav-btnPrev { 
+	left: 0; 
+	float: left;
+}
+#lightbox-nav-btnNext { 
+	right: 0; 
+	float: right;
+}
+#lightbox-container-image-data-box {
+	font: 10px Verdana, Helvetica, sans-serif;
+	background-color: #fff;
+	margin: 0 auto;
+	line-height: 1.4em;
+	overflow: auto;
+	width: 100%;
+	padding: 0 10px 0;
+}
+#lightbox-container-image-data {
+	padding: 0 10px; 
+	color: #666; 
+}
+#lightbox-container-image-data #lightbox-image-details { 
+	width: 70%; 
+	float: left; 
+	text-align: left; 
+}	
+#lightbox-image-details-caption { font-weight: bold; }
+#lightbox-image-details-currentNumber {
+	display: block; 
+	clear: left; 
+	padding-bottom: 1.0em;	
+}			
+#lightbox-secNav-btnClose {
+	width: 66px; 
+	float: right;
+	padding-bottom: 0.7em;	
+}
+  </style>
 </head>
 <body>
-<header id="splash_header">
-  <img src="images/Leaf_Icon.png" class="logo_1"/><img src="images/Greenchat_Logo.png" class="logo_2"/>
-  <!--<h2 class="logo_text"><span class="logo_highlight">GREEN</span>CHAT</h2>-->
-</header>
-<div id="splash"></div>
-<div id="signup"></div>
-<div id="signform" style="<% if current_user1 %>display:none
-  <% end %>">
-  <!-- <%= link_to "Sign up", 'javascript:void(0);', :onclick => "javascript:showsignup();" %> or
-        <%= link_to "Log in", 'javascript:void(0);', :onclick => "javascript:showlogin();" %>
-        -->
-  <div id="loginForm" style="display:block;">
-    <%= render :partial => 'sessions/newform' %>
-  </div>
-  <div id="newUserForm" style="display:none;">
-    <%= render :partial => 'identities/newform' %>
-  </div>
-</div>
-<div id="bodyContent" style="<% if current_user1 %>display:block; <%else%> display:none;
-  <% end %>">
-<header id="mainHeader">
-  <aside class="headerNav">
-    <% if current_user1 %>
-      <%= current_identity1.name %> <%= current_identity1.last_name %>
-      <span onclick="clickablelogout();">
-        <%= image_tag "icons/Select_DropArrow.png", :class => "userMenuButton" %> </span>
-      <%= image_tag "icons/Friends_20x20.png" %>
-      <%= image_tag "icons/Network.png" %>
-      <%= image_tag "icons/Messages.png" %>
-      <div id="logout" style="display:none;"> <%= link_to "Log out", log_out_path %> </div>
-    <% end %>  </aside>
-</header>
-<div style="float:left;" class="sidewrap">
-  <aside class="sidebar1">
-    <div id="greenBlog">
-      <% if current_user1 %>
-        <%= render :partial => 'layouts/sidebar1' %>
-      <% end %>
-    </div>
-  </aside>
-</div>
-<div id="appWrap">
-<%= yield %>
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash#{name}" %>
-<% end %>
-<div id="green_chat">
-<div class="" id="getRateMy">
-  <% if current_user1 %>
-    <section>
-      <header>
-        <ul class="gidget_header_right">
-
-          <li>
-            <div class="arrow-up-right maximize"></div>
-          </li>
-          <li>
-            <div class="refresh_and_settings">
-              <img src="images/icons/RefreshHover.png"/>
-              <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
-            </div>
-          </li>
-        </ul>
-        <ul class="gidget_header_left">
-          <li>
-            <img src="images/icons/RateMy_Icon.png" class="gidgetIcon"/>
-          </li>
-          <li>
-            <div class="title_and_message">
-              <span class="title">Rate My</span>
-
-              <div class="sub_title">Sort By: <span>newest</span></div>
-            </div>
-          </li>
-        </ul>
-      </header>
-      <div class="options_settings">
-        <ul class="options_list">
-          <li class="conversations">Top Rated</li>
-          <li class="chat_settings">My Interests</li>
-          <li>Most Recent</li>
-          <li class="categoryPanelSwitch"><strong>+</strong> Categories
+  <div id="notice"></div>
+  <header id="splash_header">
+    <div id="userPanel">
+      <ul>
+        <li class="userImage"></li>
+        <li class="userName"></li>
+        <li class="userOptionsToggle">
+          <div class="userOptions">
             <ul>
-
+              <li>My Account</li>
+              <li>Settings</li>
+              <li>Logout</li>
+            </ul>
+          </div>
+        </li>
+        <li class="userFriends"></li>
+        <li class="userNetwork"></li>
+        <li class="userNotifications"></li>
+      <ul>
+    </div>
+    <img src="images/Leaf_Icon.png" class="logo_1"/><img src="images/Greenchat_Logo.png" class="logo_2"/>
+    <ul id="ticker" class="js-hidden">
+      <li class="news-item">Hello <% if current_user %><% Identity.where(:id => session[:user_id]).first.username %>, <% end %>Welcome To GreenChat!</li>
+      <% if Post.count > 0 %>
+      <li class="news-item"><%= Post.last.content[0,125] %></li>
+      <li class="news-item"><%= Post.first.content %></li>
+      <% end %>
+    </ul>
+  </header>
+  <div id="splash"></div>
+  <div id="signup"></div>
+  <div id="signform">
+    <div id="loginForm" style="display:block;">
+      <%= render :partial => 'sessions/newform' %>
+      <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+    </div>
+    <div id="newUserForm" style="display:none;">
+      <%= render :partial => 'identities/newform' %>
+    </div>
+  </div>
+  <div id="appWrapper">
+    <section id="rateMy">
+      <header>
+        <ul>
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/RateMy_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">RateMy</li>
+              <li class="status">Top Rated</li>
             </ul>
           </li>
         </ul>
-      </div>      
-      <ul class="rm_article_list">
-        <% if current_identity1.categories %>
-          <% current_identity1.categories.each do |category| %>
-
-            <% Post.where(:category_id => category).order("score DESC").sample(5).each do |post| %>
-              <li class="rm_article">
-                <ul class="rm_article_info">
-                  <li>
-                    <div class="rm_date"><%= post.created_at %>
-                      <%= link_to image_tag("icons/UpOpen.png"), "javascript:void(0);", 'data-source' => "identities/posts/rate_up/#{post.id}", :class => "rate_up", :onclick => "rateposts('identities/posts/rate_up/#{post.id}')" %>
-                      <%= link_to image_tag("icons/DownOpen.png"), "javascript:void(0);", :remote => true, :onclick => "rateposts('identities/posts/rate_down/#{post.id}')" %>
-                    </div>
-                    <div class="rm_author"><%= render :partial => "identities/postedbyform", :locals => {:identity => Identity.find_by_id(post.user_id)} %></div>
-                  </li>
-                  <li>
-                    <div class="rm_content">
-                      <p><%= post.title %></p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="rm_social_panel">
-                      <img src="images/icons/sharing/Share_Facebook.png" alt=""><img src="images/icons/sharing/Share_Twitter.png" alt=""><img src="images/icons/sharing/Rating_Thumb.png" alt="">
-
-                      <p class="rm_rating"><%= number_to_percentage((post.score*100), :precision => 0) %></p>
-                      <img src="images/icons/sharing/Share_AddToMy.png" alt=""><img src="images/icons/sharing/Share_Greenchat.png" alt="">
-                    </div>
-                    <div class="comment_count"><%= Postcomment.find_all_by_post_id(post.id).count %>
-                      <%= link_to 'Comments', 'javascript:void(0);', :onclick => "javascript:jQuery.facebox(document.getElementById('comment_#{post.id}').innerHTML)" %>
-                      <div id="comment_<%= post.id %>" style="display:none;">
-
-
-                        <%= render :partial => "posts/comments", :locals => {:postcomment => Postcomment.new(:post_id => post.id, :identity_id => current_identity1.id)} %>
-                        <%= render :partial => "posts/commentsshow1", :locals => {:postcomments => Postcomment.find_all_by_post_id(post.id)} %>
-
-
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <div class="rm_image">
-                  <% if !post.image.nil? %>
-                    <%= image_tag(post.image.url) %>
-                  <% end %>
-                </div>
-              </li>
-            <% end %>
-
-          <% end %>
-        <% end %>
-
-      </ul>
-      <div id="addNewRateMyPost">
-        <img src="images/icons/sharing/add.png" class="add" />
+      </header>
+      <aside class="optionsShade">
+        <span data-source="/posts">Top Rated</span><br/>
+        <span>My Interests</span><br/>
+        <span>Most Recent</span><br/>
+        <span>Categories</span><br/>
+        <span id="addPostLink">Post</span>
+      </aside>
+      <div id="postsWrapper"></div>
+      <div id="postForm">
+        <%= render :partial => 'posts/form1', :locals => {:post => Post.new} %>
       </div>
     </section>
-  <% end %>
-</div>
-<section id="chatGidget">
-  <header>
-    <ul class="gidget_header_right">
-      <li>
-        <div class="arrow-up-right maximize"></div>
-      </li>
-      <li>
-        <div class="refresh_and_settings">
-          <img src="images/icons/RefreshHover.png"/>
-          <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
-        </div>
-      </li>
-    </ul>
-    <ul class="gidget_header_left">
-      <li>
-        <img src="images/icons/Chat_Icon.png" class="gidgetIcon"/>
-      </li>
-      <li>
-        <div class="title_and_message">
-          <span class="title">GreenChat</span>
-
-          <div class="sub_title">
-            <span>6 open chats</span>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </header>
-  <div class="options_settings">
-    <ul class="options_list">
-      <li class="conversations">Conversations</li>
-      <li class="chat_settings">Settings</li>
-    </ul>
-  </div>
-  <article id="chat">
-    <div id="chatInput">
-      <% if current_user1 %>
-        <%= render :partial => "chat/sendmessage" %>
-      <% end %>
-    </div>
-    <div id="add_friends">
-      <div>
-        <div id="addFriendsList">
-          <% if current_user1 %>
-            <%= render :partial => "users/users", :locals => {:users => User.all} %>
-          <% end %>
-        </div>
-      </div>
-      <div>
-        Chat With Friends <br/>
-        <ul id="friends_list1"></ul>
-      </div>
-    </div>
-    <div id="create_chat_room">
-      <div id="createChatRoomTabContent">
-        <% if current_user1 %>
-          <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
-          <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
-        <% end %>
-      </div>
-    </div>
-  </article>
-</section>
-<section id="socialGidget">
-  <header>
-    <ul class="gidget_header_right">
-      <li>
-        <div class="arrow-up-right maximize"></div>
-      </li>
-      <li>
-        <div class="refresh_and_settings">
-          <img src="images/icons/RefreshHover.png"/>
-          <img src="images/icons/SettingsHover.png" class="settingsTrigger" />
-        </div>
-      </li>
-    </ul>
-    <ul class="gidget_header_left">
-      <li>
-        <img src="images/icons/social/linkedin.png" class="gidgetIcon" />
-        <img src="images/icons/social/twitter.png" class="gidgetIcon" />
-        <img src="images/icons/social/facebook.png" class="gidgetIcon" />
-      </li>
-      <li>
-        <div class="title_and_message">
-          <span class="title">Social</span>
-
-          <div class="sub_title">
-            <% if current_user1 %>
-              <span><%= current_user1 %></span>
-            <% end %>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </header>
-  <div class="options_settings">
-    <ul class="options_list">
-      <li class="conversations">Conversations</li>
-      <li class="chat_settings">Settings</li>
-    </ul>
-  </div>
-  <article id="chat">
-    <div id="add_friends">
-      <div>
-        <div id="addFriendsList">
-          <% if current_user1 %>
-            <%= render :partial => "users/users", :locals => {:users => User.all} %>
-          <% end %>
-        </div>
-      </div>
-      <div>
-        Chat With Friends <br/>
-        <ul id="friends_list1"></ul>
-      </div>
-    </div>
-    <div id="create_chat_room">
-      <div id="createChatRoomTabContent">
-        <% if current_user1 %>
-          <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
-          <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
-        <% end %>
-      </div>
-    </div>
-    <div id="chat_with_friends">
-      <div id="chatWithFriendsTabContent">
-        [Removed Render CHat Send Partial]
-      </div>
-    </div>
-  </article>
-</section>
-</div>
-<script type="text/javascript">    function loadUploadify() {
-<% key = Rails.application.config.session_options[:key] %>
-  var uploadify_script_data = {};
-  var csrf_param = $('meta[name=csrf-param]').attr('content');
-  var csrf_token = $('meta[name=csrf-token]').attr('content');
-  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
-  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
-  var JQry = jQuery.noConflict();
-<% session_key_name = Rails.application.config.session_options[:key] %>
-  JQry('#post_image').click(function (event) {
-    event.preventDefault();
-  });
-  JQry('#post_image').uploadify({
-    uploader:'/uploadify.swf',
-    script:'/postimage',
-    cancelImg:'assets/images/cancel.png',
-    auto:true,
-    fileExt:'*.png;*.jpg;*.gif',
-    multi:false,
-    scriptData:{
-      '_http_accept':'application/javascript',
-      'format':'json',
-      '_method':'post',
-      'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-    },
-    onProgress:function (event, queueID, fileObj, data) {
-      $('#post_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
-    },
-
-    onComplete:function (a, b, c, response) {
-      console.log(response);
-      var dat = eval('(' + response + ')');
-      $('#post_id').val(dat.id);
-      $('#method_type').val('PUT');
-      JQry.getScript(dat.upload);
-      document.getElementById('hiddenld').value = '';
-    }        });
-  JQry('#post_image').click(function (event) {
-    event.preventDefault();
-    JQry('#post_image').uploadifyUpload();
-  });
-}
-
-function loadUploadifyForPhotos() {
-<% key = Rails.application.config.session_options[:key] %>
-  var uploadify_script_data = {};
-  var csrf_param = $('meta[name=csrf-param]').attr('content');
-  var csrf_token = $('meta[name=csrf-token]').attr('content');
-  uploadify_script_data[csrf_param] = encodeURI(encodeURIComponent(csrf_token));
-  uploadify_script_data['<%= key %>'] = '<%= cookies[key] %>';
-  var JQry = jQuery.noConflict();
-<% session_key_name = Rails.application.config.session_options[:key] %>
-  JQry('#photo_image').click(function (event) {
-    event.preventDefault();
-  });
-  JQry('#photo_image').uploadify({
-    uploader:'/uploadify.swf',
-    script:'/photosimage',
-    cancelImg:'assets/images/cancel.png',
-    auto:true,
-    fileExt:'*.png;*.jpg;*.gif',
-    multi:false,
-    scriptData:{
-      '_http_accept':'application/javascript',
-      'format':'json',
-      '_method':'post',
-      'user_id':<% if current_user1 %><%= current_identity1.id %><% else %>loggedInUserId<% end %>,
-    },
-    onProgress:function (event, queueID, fileObj, data) {
-      $('#photo_imageQueue').html(fileObj.name + " - " + data.percentage + '%')
-    },
-
-    onComplete:function (a, b, c, response) {
-      console.log(response);
-      var dat = eval('(' + response + ')');
-      $('#photo_id').val(dat.id);
-      JQry.getScript(dat.upload);
-    }
-
-  });
-  JQry('#photo_image').click(function (event) {
-    event.preventDefault();
-    JQry('#photo_image').uploadifyUpload();
-  });
-
-}
-</script>
-<section class="gidget mini" data-source="" style="display:none;">
-<header class="gidgetHeader"><%= image_tag "icons/Deals_Icon.png", :class => "gidgetIcon" %>
-  <span class="gidgetTitle">Deals</span></header>
-<div class="">
-  <script type='text/javascript'>
-    function groupon() {
-      var city = document.getElementById('city_select').value;
-      myGrouponWidget.destroy();
-      myGrouponWidget.opts.city = city;
-      myGrouponWidget.render();
-      document.getElementById('groupon_widget').style.display = "block";
-    }
-    //var myGrouponWidget = new GRPN.Widget({"referral_code":"uu40729091", "city":"chicago"}).render();
-    document.getElementById('groupon_widget').style.display = "none";
-  </script>
-  <div class="field">
-    <label for="city" class="city-select-label">
-      Show the Groupon daily deal for
-    </label>
-    <select name="city" id="city_select" onchange="javascript:groupon();">
-      <option value="abbotsford">Abbotsford</option>
-      <option value="abilene">Abilene, TX</option>
-      <option value="akron-canton">Akron / Canton</option>
-      <option value="albany-capital-region">Albany / Capital Region</option>
-      <option value="albuquerque">Albuquerque</option>
-      <option value="allentown-reading">Allentown / Reading</option>
-      <option value="amarillo">Amarillo</option>
-      <option value="anchorage">Anchorage</option>
-      <option value="ann-arbor">Ann Arbor</option>
-      <option value="asheville">Asheville</option>
-      <option value="athens-ga">Athens, GA</option>
-      <option value="atlanta">Atlanta</option>
-      <option value="augusta">Augusta</option>
-      <option value="austin">Austin</option>
-      <option value="bakersfield">Bakersfield</option>
-      <option value="baltimore">Baltimore</option>
-      <option value="barrie">Barrie</option>
-      <option value="baton-rouge">Baton Rouge</option>
-      <option value="beaumont">Beaumont, TX</option>
-      <option value="billings">Billings / Bozeman</option>
-      <option value="birmingham">Birmingham</option>
-      <option value="bloomington-in">Bloomington, IN</option>
-      <option value="boise">Boise</option>
-      <option value="boston">Boston</option>
-      <option value="buffalo">Buffalo</option>
-      <option value="calgary">Calgary</option>
-      <option value="cape-breton">Cape Breton</option>
-      <option value="cedar-rapids-iowa-city">Cedar Rapids / Iowa City</option>
-      <option value="central-jersey">Central Jersey</option>
-      <option value="charleston">Charleston</option>
-      <option value="charlotte">Charlotte</option>
-      <option value="chattanooga">Chattanooga</option>
-      <option value="chicago">Chicago</option>
-      <option value="cincinnati">Cincinnati</option>
-      <option value="cleveland">Cleveland</option>
-      <option value="colorado-springs">Colorado Springs</option>
-      <option value="columbia">Columbia</option>
-      <option value="columbia-mo">Columbia, MO</option>
-      <option value="columbus">Columbus</option>
-      <option value="columbus-ga">Columbus GA</option>
-      <option value="corpus-christi">Corpus Christi</option>
-      <option value="dallas">Dallas</option>
-      <option value="dayton">Dayton</option>
-      <option value="daytona-beach">Daytona Beach</option>
-      <option value="denver">Denver</option>
-      <option value="des-moines">Des Moines</option>
-      <option value="detroit">Detroit</option>
-      <option value="edmonton">Edmonton</option>
-      <option value="el-paso">El Paso</option>
-      <option value="erie">Erie</option>
-      <option value="eugene">Eugene</option>
-      <option value="evansville">Evansville</option>
-      <option value="fairfield-county">Fairfield County</option>
-      <option value="fort-lauderdale">Fort Lauderdale</option>
-      <option value="fort-myers-cape-coral">Fort Myers / Cape Coral</option>
-      <option value="fort-wayne">Fort Wayne</option>
-      <option value="fort-worth">Fort Worth</option>
-      <option value="appleton">Fox Cities</option>
-      <option value="fresno">Fresno</option>
-      <option value="gaiesville">Gainesville</option>
-      <option value="grand-rapids">Grand Rapids</option>
-      <option value="green-bay">Green Bay</option>
-      <option value="greenville">Greenville</option>
-      <option value="halifax">Halifax</option>
-      <option value="hampton-roads">Hampton Roads</option>
-      <option value="harrisburg">Harrisburg / Lancaster</option>
-      <option value="hartford">Hartford</option>
-      <option value="honolulu">Honolulu</option>
-      <option value="houston">Houston</option>
-      <option value="huntsville">Huntsville</option>
-      <option value="indianapolis">Indianapolis</option>
-      <option value="inland-empire">Inland Empire</option>
-      <option value="jackson">Jackson</option>
-      <option value="jacksonville">Jacksonville</option>
-      <option value="kalamazoo">Kalamazoo</option>
-      <option value="kansas-city">Kansas City</option>
-      <option value="kelowna">Kelowna</option>
-      <option value="kingston">Kingston / Belleville</option>
-      <option value="kitchener-waterloo">Kitchener - Waterloo</option>
-      <option value="knoxville">Knoxville</option>
-      <option value="lakeland">Lakeland</option>
-      <option value="lansing">Lansing</option>
-      <option value="las-vegas">Las Vegas</option>
-      <option value="lexington">Lexington</option>
-      <option value="lincoln">Lincoln</option>
-      <option value="little-rock">Little Rock</option>
-      <option value="london">London, ON</option>
-      <option value="long-island">Long Island</option>
-      <option value="los-angeles">Los Angeles</option>
-      <option value="louisville">Louisville</option>
-      <option value="lubbock">Lubbock</option>
-      <option value="macon">Macon</option>
-      <option value="madison">Madison</option>
-      <option value="memphis">Memphis</option>
-      <option value="miami">Miami</option>
-      <option value="midland-odessa">Midland / Odessa</option>
-      <option value="milwaukee">Milwaukee</option>
-      <option value="mineapolis-stpaul">Minneapolis / St Paul</option>
-      <option value="mobile-baldwin-county">Mobile / Baldwin County</option>
-      <option value="modesto">Modesto</option>
-      <option value="montgomery">Montgomery</option>
-      <option value="napa-sonoma">Napa / Sonoma</option>
-      <option value="naples">Naples</option>
-      <option value="nashville">Nashville</option>
-      <option value="new-orleans">New Orleans</option>
-      <option value="new-york">New York City</option>
-      <option value="north-jersey">North Jersey</option>
-      <option value="ocala">Ocala</option>
-      <option value="ogden">Ogden</option>
-      <option value="oklahoma-city">Oklahoma City</option>
-      <option value="omaha">Omaha</option>
-      <option value="orange-county">Orange County</option>
-      <option value="orlando">Orlando</option>
-      <option value="ottawa">Ottawa</option>
-      <option value="palm-beach">Palm Beach</option>
-      <option value="pensacola">Pensacola / Emerald Coast</option>
-      <option value="philadelphia">Philadelphia</option>
-      <option value="phoenix">Phoenix</option>
-      <option value="piedmont-triad">Piedmont Triad</option>
-      <option value="pittsburgh">Pittsburgh</option>
-      <option value="portland">Portland</option>
-      <option value="portland-me">Portland, ME</option>
-      <option value="providence">Providence</option>
-      <option value="raleigh-durham">Raleigh / Durham</option>
-      <option value="regina">Regina</option>
-      <option value="reno">Reno</option>
-      <option value="richmond">Richmond</option>
-      <option value="rio-grande-valley">Rio Grande Valley</option>
-      <option value="roanoke">Roanoke</option>
-      <option value="rochester">Rochester</option>
-      <option value="rockford">Rockford</option>
-      <option value="sacramento">Sacramento</option>
-      <option value="salem-or">Salem OR</option>
-      <option value="salt-lake-city">Salt Lake City</option>
-      <option value="san-angelo">San Angelo</option>
-      <option value="san-antonio">San Antonio</option>
-      <option value="san-diego">San Diego</option>
-      <option value="san-francisco">San Francisco</option>
-      <option value="san-jose">San Jose</option>
-      <option value="santa-barbara">Santa Barbara</option>
-      <option value="santa-clarita">Santa Clarita</option>
-      <option value="santa-cruz">Santa Cruz / Monterey</option>
-      <option value="saskatoon">Saskatoon</option>
-      <option value="savannah-hilton-head">Savannah / Hilton Head</option>
-      <option value="seattle">Seattle</option>
-      <option value="shreveport-bossier">Shreveport / Bossier</option>
-      <option value="sioux-falls">Sioux Falls</option>
-      <option value="south-bend">South Bend</option>
-      <option value="albany-ga">Southern Georgia</option>
-      <option value="spokane-coeur-dalene">Spokane / Coeur d'Alene</option>
-      <option value="springfield-mo">Springfield MO</option>
-      <option value="springfield-ma">Springfield, MA</option>
-      <option value="stcatharines-niagara">St Catharines-Niagara</option>
-      <option value="st-johns">St John's</option>
-      <option value="stlouis">St Louis</option>
-      <option value="stockton">Stockton</option>
-      <option value="sudbury">Sudbury / North Bay</option>
-      <option value="syracuse">Syracuse</option>
-      <option value="tallahassee">Tallahassee</option>
-      <option value="tampa-bay-area">Tampa Bay Area</option>
-      <option value="toledo">Toledo</option>
-      <option value="topeka-lawrence">Topeka / Lawrence</option>
-      <option value="greater-toronto-area">Toronto (GTA)</option>
-      <option value="tucson">Tucson</option>
-      <option value="tulsa">Tulsa</option>
-      <option value="vancouver">Vancouver</option>
-      <option value="ventura-county">Ventura County</option>
-      <option value="victoria">Victoria</option>
-      <option value="washington-dc">Washington DC</option>
-      <option value="westchester-county">Westchester County</option>
-      <option value="wichita">Wichita</option>
-      <option value="wilmington-newark">Wilmington-Newark</option>
-      <option value="windsor">Windsor</option>
-      <option value="winnipeg">Winnipeg</option>
-      <option value="worcester">Worcester</option>
-      <option value="youngstown">Youngstown</option>
-    </select>
-  </div>
-</div>
-<div>
-  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('adbf0508-33e0-492d-a5a7-1e54a18e342e');</script>
-</div>
-<br/>
-
-<div>
-  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('638a0d94-9bee-4242-baf9-096aa5810f61');</script>
-</div>
-<br/>
-
-<div>
-  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-  <script type="text/javascript">if (WIDGETBOX) WIDGETBOX.renderWidget('613c43ed-30e6-4dd5-be3f-2701ac40cc3d');</script>
-</div>
-<br/>
-
-<div class="">
-  <script type='text/javascript'>
-    function coupscout() {
-      var city_coupscout = document.getElementById('city_coupscout_select').value;
-      WIDGETBOX.renderWidgetInElement(city_coupscout, 'widgetbox_widget_parent_3')
-    }
-  </script>
-  <div class="field">
-    <label for="city1" class="city-select-label">
-      Show the Coupscout daily deal for
-    </label>
-    <select name="city_coupscout" id="city_coupscout_select" onchange="javascript:coupscout();">
-      <option value="2882f12e-b7e5-4840-b5f6-2d43a57aa1e9">Atlanta</option>
-      <option value="9e134ea2-7430-4ac8-9b7f-77f0c57b0770">Baltimore</option>
-      <option value="9376cc8b-9608-4960-ab47-af7c83332bed">Boston</option>
-      <option value="667bd686-6a22-4a23-888c-974b9c036a53">Brooklyn</option>
-      <option value="b9f284bb-705d-41ea-85ef-f649b1c72898">Chicago</option>
-      <option value="ffcf101d-54ea-4224-9ae4-886c15a302dd">Cleveland</option>
-      <option value="08fa21b7-7549-44d3-976b-15b02de1b303">Detroit</option>
-      <option value="fc74125a-af75-44f5-b6f1-d811688583f8">Fort Lauderdale</option>
-      <option value="64d9f52a-79fe-4b29-a81c-09f60b846da8">Hampton Roads</option>
-      <option value="15b64519-3995-4dbc-a1c4-1444a6772c65">Hartford</option>
-      <option value="29cddfda-4d12-4372-90b1-9ee9ea13103a">Honolulu</option>
-      <option value="378d55e3-3895-4411-bd62-059fd04b5ed4">Houston</option>
-      <option value="2747cd0b-710e-4d03-b035-9633d8717a73">Los Angeles</option>
-      <option value="6edf5154-e9c8-4164-90dc-0db1527056f8">Minneapolis St Paul</option>
-      <option value="4cfd569a-da65-49c3-b6f9-a6d33ef46fe7">New York</option>
-      <option value="2e20b779-cc3f-49bb-926d-141438d62cde">Philadelphia</option>
-      <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
-      <option value="45b082f4-195b-40e7-965b-0a7c9af4b086">Raleigh Durham</option>
-      <option value="82a54576-161e-43d1-96b9-283a73f80423">San Diego</option>
-      <option value="72e50efb-c9bf-4c3c-b45a-c4a9b53697c5">San Francisco</option>
-      <option value="d4b50374-e76e-45dc-b72a-05be7d67b940">Scottsdale</option>
-      <option value="adca3926-5b6c-4ab2-b71f-99ad5358d784">Queens</option>
-    </select>
-  </div>
-</div>
-<div>
-  <script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script>
-  <script type="text/javascript">
-    var myCoupScoutWidget = null;
-    if (WIDGETBOX)
-      myCoupScoutWidget = WIDGETBOX.renderWidget('2882f12e-b7e5-4840-b5f6-2d43a57aa1e9');
-  </script>
-</div>
-</section>
-<section class="gidget mini" data-source="" style="display:none;">
-  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Photos</span></header>
-  <br/>
-  <%= render :partial => 'picasa/form' %>
-  <div id="myGallery"></div>
-  <%= render :partial => 'flickr/form' %>
-  <div id="flickr" style="display:none;"></div>
-</section>
-<section class="gidget mini" data-source="">
-  <header class="gidgetHeader"><%= image_tag "icons/Photos_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Albums</span></header>
-  <div style="width: 570px;height:300px;">
-    <div class="demo">
-
-      <div id="tabs">
+    <section id="chat">
+      <header>
         <ul>
-          <li><a href="#tabs-1">My Photos</a></li>
-          <li><a href="#tabs-2">Upload Photos</a></li>
-          <li><a href="#tabs-4">My Albums</a></li>
-          <li><a href="#tabs-5">Friends Albums</a></li>
-
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/Chat_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">Chat</li>
+              <li class="status">status</li>
+            </ul>
+          </li>
         </ul>
-        <div id="tabs-1">
-
-          <div id="photosTabContent">
-            <% if current_user1 %>
-              <%= render :partial => "photos/photoslist", :locals => {:photos1 => Photo.find_all_by_identity_id(current_user1.uid)} %>
-            <% end %>
-          </div>
-
-          <div id="Photo" style="margin-left:150px;padding:2px;width:300px;margin-top:-50px;"></div>
-        </div>
-        <div id="tabs-2">
-          <div id="uploadPhotosTabContent">
-            <% if current_user1 %>
-              <%= render :partial => "photos/form", :locals => {:photo => Photo.new(:identity_id => current_user1.uid)} %>
-            <% end %>
-          </div>
-        </div>
-
-        <div id="tabs-4">
-          <div id="alubmsTabContent">
-            <% if current_user1 %>
-              <%= render :partial => "albums/albumlist", :locals => {:albums => Album.find_all_by_identity_id(current_user1.uid)} %>
-            <% end %>
-          </div>
-        </div>
-
-        <div id="tabs-5">
-          <h2>My Friends Albums</h2>
-
-          <div id="friendsAlbumsTabContent">
-            <% if current_user1 %>
-              <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_user_id(current_user1.id), :f_type => 'direct'} %>
-              <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_friend_id(current_user1.id), :f_type => 'inverse'} %>
-            <% end %>
-          </div>
+      </header>
+      <aside class="optionsShade">
+        <span class="conversationToggle">Conversations</span><br/>
+        <span>Settings</span>
+      </aside>
+      <ul id="chatList">
+      </ul>
+      <div id="sendChat">
+        <button type="button" class="sendChatButton" data-chat="andrew"><img src="images/icons/chat_bubble.png" /></button>
+        <input type="text" name="" id="" class="sendChatInput" />
+      </div>
+      <div id="channelList">
+        <%= render :partial => "channels/channels", :locals => {:channels => Channel.all} %>
+      </div>
+      <div class="slideUp"><span class="arrowUp"></span></div>
+      <div id="channelForm">
+        <%= render :partial => "channels/channelform", :locals => {:channel => Channel.new} %>
+      </div>
+      <div class="slideDown"><span class="arrowDown"></span></div>
+    </section>
+    <section id="photos">
+      <header>
+        <ul>
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/Photos_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">Photos</li>
+              <li class="status">status</li>
+            </ul>
+          </li>
+        </ul>
+      </header>
+      <aside class="optionsShade">
+        <span class="showStream">Photo Stream</span><br/>
+        <span class="showFlickr">Flickr</span><br/>
+        <span class="showPicasa">Picasa</span><br/>
+        <span class="addPhoto">Add Photo</span>
+        <span class="addAlbum">Add Album</span>
+      </aside>
+      <ul id="photoStream">
+      
+      </ul>
+      <div id="photo-2">
+        <div id="uploadPhotosTabContent">
+          <% if current_user %>        
+          <%= render :partial => "photos/form", :locals => {:photo => Photo.new(:identity_id => current_user.id)} %>
+          <% end %>
         </div>
       </div>
-
+      <div id="photo-4">
+        <div id="alubmsTabContent">
+          <% if current_user %>
+          <%= render :partial => "albums/albumlist", :locals => {:albums => Album.find_all_by_identity_id(current_user.id)} %>
+          <% end %>
+        </div>
+      </div>
+      <div id="photo-5">
+        <div id="friendsAlbumsTabContent">
+          <% if current_user %>
+          <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_user_id(current_user.id), :f_type => 'direct'} %>
+          <%= render :partial => "friendships/myfriendlslist", :locals => {:friendslist => Friendship.find_all_by_friend_id(current_user.id), :f_type => 'inverse'} %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <section id="social">
+      <header>
+        <ul>
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/Social_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">Social</li>
+              <li class="status">status</li>
+            </ul>
+          </li>
+        </ul>
+      </header>
+      <aside class="optionsShade">
+      </aside>
+    </section>
+    <section id="blog">
+      <header>
+        <ul>
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/Blog_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">Blog</li>
+              <li class="status">status</li>
+            </ul>
+          </li>
+        </ul>
+      </header>
+      <aside class="optionsShade">
+        <span>My Interests</span><br/>
+        <span>Categories</span><br/>
+        <span>+ Add</span>
+      </aside>
+      <div id="blogPostForm">
+      </div>
+    </section>
+    <section id="deals">
+      <header>
+        <ul>
+          <li>
+            <ul>
+              <li class="sizer max"></li>
+              <li class="options">
+                <img src="images/icons/RefreshHover.png" alt=""/>
+                <img src="images/icons/SettingsHover.png" alt=""/>
+              </li>
+            </ul>
+          </li>
+          <li class="icon"><img src="images/icons/Deals_Icon.png" class="gidgetIcon" /></li>
+          <li>
+            <ul>
+              <li class="title">Deals</li>
+              <li class="status">status</li>
+            </ul>
+          </li>
+        </ul>
+      </header>
+      <aside class="optionsShade">
+      </aside>
+    </section>
+  </div>
+  <ul class="userNotificationList"></ul>
+  <div id="ajaxLoad"><img src="images/icons/gc_ajaxPL.gif" /></div>
+  <div id="manageFriends">
+    <input type="text" name="searchUsers" value="" placeholder="Search Users ..." /><br />
+    <ul class="manageFriendsUserList"></ul>
+  </div>
+  <div id="postViewPort">
+    <span class="closePostPort">Close</span>
+    <h2>Title</h2>
+    <div id="postMetaData">
+      <ul>
+        <li><b>Users That Like This:</b></li>
+        <li class="postScore">33%</li>
+        <li><span class="rateUp"></span><span class="rateDown"></span></li>
+      </ul>
     </div>
+    <!--<textarea name="postViewContent" id="postViewContent"></textarea>
+    <div id="postImage">
+    </div>-->
   </div>
-</section>
-<section class="gidget mini" data-source="" style="display:none;">
-  <header class="gidgetHeader"><%= image_tag "icons/Social_Icon.png", :class => "gidgetIcon" %>
-    <span class="gidgetTitle">Social</span></header>
-  <br/><br/>
-
-  <div class="">
-    <div id="profile" style="width: 400px;"></div>
-    <script type="IN/Login" data-onAuth="loadData"></script>
-    <div id="fb-root"></div>
-    FaceBook Details <br/>
-    <aside class="sidebar">
-      <%= render :partial => 'layouts/sidebar' %>
-    </aside>
-    <div id="user_nav1" style="padding-bottom:20px;margin-left:20px;font-size:14px;">
-      <% if current_user1 %>
-        <script src="http://connect.facebook.net/en_US/all.js"></script>
-        <script>
-          //FB.init({
-          //  appId:"<%= Facebook.config[:client_id] %>",
-          //  cookie:true,
-          //  oauth:true,
-          //  xfbml:true
-          //});
-          //FB.Canvas.setAutoGrow();
-        </script>
-      <% end %>
-    </div>
-  </div>
-  <%= render :partial => 'twitter/form' %>
-  <iframe allowtransparency="true" frameborder="0" scrolling="no"
-          src="http://platform.twitter.com/widgets/tweet_button.html"
-          style="width:130px; height:20px;">
-  </iframe>
-  <br/>
-
-  <div id="twiter1" style="display:none;">
-    My Tweets <br/>
-    <script>
-      MyTwitterWidget = new TWTR.Widget({
-        version:2,
-        type:'profile',
-        rpp:4,
-        interval:30000,
-        width:250,
-        height:300,
-        theme:{
-          shell:{
-            background:'#333333',
-            color:'#ffffff'
-          },
-          tweets:{
-            background:'#000000',
-            color:'#ffffff',
-            links:'#4aed05'
-          }
-        },
-        features:{
-          scrollbar:false,
-          loop:false,
-          live:false,
-          behavior:'all'
-        }
-      }).render().setUser('twitter').start();
-      function twitter() {
-        var user = document.getElementById('username').value;
-        if (!user.match(/^[@@]?([a-zA-Z0-9_]{1,20})$/)) {
-          alert(_("Not a valid username"));
-          return false;
-        }
-        MyTwitterWidget
-            .destroy()
-            .setUser(user).render().start();
-        document.getElementById('twiter1').style.display = "block";
-      }    </script>
-  </div>
-</section>
-<% if current_user1 %>
-  <script type="text/javascript" src="http://localhost:3000/assets/chat.js?body=1"></script>
-<% end %>
-<%= javascript_include_tag :easySlider %>
-<%= javascript_include_tag :swfobject %>
-<%= javascript_include_tag :uploadify %>
-<% if current_user1 %>
-<div id="categoriesPanel">
-<%= render :partial => 'categories/panel' %>
-</div>
-<div id="postform" style="display:none;">
-  <%= render :partial => 'posts/form1', :locals => {:post => Post.new} %>
-</div>
-<% end %>
+  <input type="hidden" name="userId" value="" />
 </body>
 </html>

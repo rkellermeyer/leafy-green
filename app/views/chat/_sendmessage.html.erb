@@ -1,13 +1,14 @@
-<div id="mesg"></div>
-<%= form_tag('/messages/send', :id => 'chat_window') do %>
-  <%= button_tag '', :remote => true, :type => "button" %><%= text_area_tag 'msg_body', '' %>
-  <div id="channelIdsWithRadio">
-    <% Channel.all.each do |channel| %>   
-      <%= radio_button_tag 'channel_id', channel.name , false , :onchange => "getMessages2('#{channel.name}', '#{channel.name}');"%>
-      <%= label_tag(channel.name) %>
-    <% end %>
-  </div>
-  <%= hidden_field_tag 'sender', current_identity1.name %>
+<script type="text/javascript">
+$(function(){
+  $("#friendsColumn").delegate('click','.scrollDown',function () {
+    var animationOffset = $('#friendsColumn ul').css('top').replace('px','')*4;
+    $('#friendsColumn ul').animate({ "top": animationOffset + "px" }, "fast");
+  });
+});
+</script>
+<%= form_tag('/messages/send', :class => 'chat_window') do %>
+  <%= button_tag '', :remote => true, :type => "button", :class => "submitMessage" %>
+  <%= text_area_tag 'msg_body', "", :id => "" %>
+  <input type="text" name="" id="" placeholder="Enter Message ..." />
+  <%= hidden_field_tag 'sender', "Test", :id => "", :class => "sender" %>
 <% end %>
-
-<div id="messages2"></div>

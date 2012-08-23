@@ -8,9 +8,7 @@ body {
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px;
-  margin: 0;
-  padding: 0;}
+  line-height: 18px; }
 
 pre {
   background-color: #eee;
@@ -22,7 +20,8 @@ a {
   &:visited {
     color: #666; }
   &:hover {
-    color: #666666;} }
+    color: #fff;
+    background-color: #000; } }
 
 div {
   &.field, &.actions {

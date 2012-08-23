@@ -1,21 +1,11 @@
-<%= form_for channel , :html => {:onSubmit =>"channelFormSubmit(this);return false;" } do |f| %>
-  <% if channel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(channel.errors.count, "error") %> prohibited this channel from being saved:</h2>
-
-      <ul>
-      <% channel.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<% if current_user %>
+<% friends = Friendship.where(:user_id => current_user.id) %>
+<form id="new_channel" action="/channels">
+  <ul>
+  <% friends.each do |friend| %>
+    <% fImage = Identity.find(friend.user_id).image %>
+    <li><button id="<%= friend.friend_id %>"><% if !fImage.nil? %><%= fImage %><% else %><%= image_tag("noImage.png") %><% end %><%= friend.name %></button></li>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </ul>
+</form>
 <% end %>

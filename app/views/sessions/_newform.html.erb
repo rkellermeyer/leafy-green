@@ -1,20 +1,51 @@
-<div id="splash_form" xmlns="http://www.w3.org/1999/html">
+<div id="splash_form">
   <header>
     <h2>GreenChat is your online life, all in one place.</h2>
   </header>
   <hr class="splash_message_border" />
-  
   <%= form_tag('/auth/identity/callback', :id => 'login_form' , :remote => "true") do %>
-	   
-	     
-	      <%= text_field_tag :auth_key %>
-	    
-	     
-	      <%= password_field_tag :password %>
-	   <div id="login_button_link_panel">
-	   <%= submit_tag "Login" , :class => "splash_form_login_button" %>
-	   <span class="password_recovery_link">Forgot your password?</span><br />
-  </div>
-  <span class="new_to_greenchat">New To GreenChat?</span> <img src="images/icons/Login_leaf.png" class="sign_up_icon" /><%= link_to "Create an account.", 'javascript:void(0);'  , :onclick => "javascript:showsignup();" , :class =>"create_an_account"%> 
+    <%= text_field_tag :auth_key %><br />
+	  <%= password_field_tag :password %>
+	  <div id="login_button_link_panel">
+      <%= submit_tag "Login" , :class => "splash_form_login_button" %>
+      <span class="password_recovery_link">Forgot your password?</span><br />
+    </div>
+    <span class="new_to_greenchat">New To GreenChat?</span> <img src="images/icons/Login_leaf.png" class="sign_up_icon" /><%= link_to "Create an account.", "", :class =>"create_an_account" %>
 </div>
-	  <% end %>
+<% end %>
+<script>
+$(function(){
+  $('.splash_form_login_button').bind('click', function(event){
+    event.preventDefault();
+    var obj = $('#login_form');
+    //console.log(obj);
+    $.ajax({
+      type: "POST",
+      url: obj[0].action,
+      data: $(obj[0]).serialize(),
+      dataType: 'json',
+      success: function(identity) {
+        $('#splash, #signup, #signform').slideUp('slow').remove();
+        $.getJSON('identities/' + identity.uid, function(data){
+          $.cookie('user_logged_in', data.id, { expires: 1});
+          GC.create(data);
+          $('#splash, #signup, #signform').remove();
+          $('.userImage').append('<img src="' + data.image + '" />');
+          $('.userName').append("<span>" + data.name + " " + data.last_name + "</span>");
+          $('.userOptionsToggle').append('<img src="images/icons/Select_DropArrow.png" />');
+          $('.userFriends').append('<img src="images/icons/Friends_20x20.png" />');
+          $('.userNetwork').append('<img src="images/icons/Network.png" />');
+          $('.userNotifications').append('<img src="images/icons/Messages.png" />');
+          GC.Notice.show($.User.id);
+          setInterval("GC.Notice.show('" + $.User.id + "')",25000);
+          $.RateMy('index');
+          $('body input[name=userId]').val($.User.id);
+        });
+        $('#appWrapper').slideDown('slow');
+        $('.optionsShade').slideUp('slow');
+      },
+      error: function(){alert("User not logged in!");}
+    });
+  });
+});
+</script>

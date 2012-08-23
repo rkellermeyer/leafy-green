@@ -66,75 +66,64 @@ layout "test"
   end
   
   def getPopulatePostContent
-  		puts "%%%%%%%%%%%%%%%%% here in nokogiri Crawling"
-  		spiderUrl = params[:spiderUrl]
+  	puts "%%%%%%%%%%%%%%%%% here in nokogiri Crawling"
+  	spiderUrl = params[:spiderUrl]
 		doc = Nokogiri::HTML(open(spiderUrl))
 		#puts "body tag==================="+doc.at_css("body").text  
 		#img_srcs = doc.css('img').each do |i|
 		#puts "iiiiiiiiiiii----------"+ i['src'] 
 		#end
-		 url = URI.parse(spiderUrl)
-		 #puts "host-----------------"+url.host.to_s
-		 @src1="http://"+url.host.to_s
-		 @width = 0
-		 @height = 0
-
-
-
-
-
-doc.xpath("//p").each do |header|
- 
-puts header.text
-end
-
-	puts "titile-------"+doc.css('title').to_s
-			 
+		url = URI.parse(spiderUrl)
+		#puts "host-----------------"+url.host.to_s
+		@src1="http://"+url.host.to_s
+		@width = 0
+		@height = 0
+    doc.xpath("//p").each do |header|
+      puts header.text
+    end
+    puts "title-------"+doc.css('title').to_s
 		doc.xpath("//img").each do |img| 
-		    puts "img tag **************"+img.to_s
-		    
-		    # and !img['width'].nil? and img['width'].to_i > @width
-		    # ( (!img['title'].nil? and !img['title'].blank?) or ( !img['alt'].nil? and !img['alt'].blank? ) ) and
-		    if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and !img['width'].nil? and img['width'].to_i > @width and !img['height'].nil? and img['height'].to_i > @height  )
-		    	puts "########## image contents are -------- "+ img.to_s
-		    	#puts "first letter---------"+img['src'][0,1] 
-		    	#puts "image next contents are -------- "+ img.parent.child.inner_text
-		    	if (!img['title'].nil?)
-		    		@title = img['title']
-		    		@content = img['title']
-		    	else
-		    		@title = img['alt']
-		    		@content = img['alt']
-		    	end
-			    if (!img['data-src'].nil?)
-			    	if (img['data-src'][0,1] == '/')
-			    		@src=@src1+img['data-src']
-			    	else
-			    		@src = img['data-src']
-			    	end
-			    else
-			    	if (img['src'][0,1] == '/')
-			    		@src=@src1+img['src']
-			    	else
-			    		@src = img['src']
-			    	end
-			    end
-		    	@width = img['width'].to_i
-		    	@height = img['height'].to_i
-		    end
+		puts "img tag **************"+img.to_s    
+		# and !img['width'].nil? and img['width'].to_i > @width
+		# ( (!img['title'].nil? and !img['title'].blank?) or ( !img['alt'].nil? and !img['alt'].blank? ) ) and
+		if (!img.nil? and ( !img['src'].nil? or !img['data-src'].nil? ) and !img['width'].nil? and img['width'].to_i > @width and !img['height'].nil? and img['height'].to_i > @height  )
+		 	puts "########## image contents are -------- "+ img.to_s
+		 	#puts "first letter---------"+img['src'][0,1] 
+		 	#puts "image next contents are -------- "+ img.parent.child.inner_text
+		 	if (!img['title'].nil?)
+				@title = img['title']
+		 		@content = img['title']
+		 	else
+		 		@title = img['alt']
+		 		@content = img['alt']
+		 	end
+		  if (!img['data-src'].nil?)
+		  	if (img['data-src'][0,1] == '/')
+		   		@src=@src1+img['data-src']
+		   	else
+		   		@src = img['data-src']
+		   	end
+		  else
+		   	if (img['src'][0,1] == '/')
+		   		@src=@src1+img['src']
+		   	else
+		   		@src = img['src']
+		   	end
+		  end
+		 	@width = img['width'].to_i
+		 	@height = img['height'].to_i
 		end
-		puts "%%%%%%%%%%%%%%%%% here end nokogiri Crawling"
+	end
+	puts "%%%%%%%%%%%%%%%%% here end nokogiri Crawling"
 	@title1 =doc.css('title').text.to_s
 	@content1 =doc.css('p')[0].text.to_s
-	
-	doc.xpath("//meta[@name='description']/@content").each do |attr|
-	  puts "^^^^^^^^^^^^^^ META DESC = "+attr.value
-	  @content1 = attr.value
-	end
-	
-        respond_to do |format|
-         	format.json { render json:  { title: @title1 , src: @src ,content: @content1} }
-      	end  
+    doc.xpath("//meta[@name='description']/@content").each do |attr|
+      puts "^^^^^^^^^^^^^^ META DESC = "+attr.value
+      @content1 = attr.value
+    end
+    respond_to do |format|
+      format.json { render json:  { title: @title1 , src: @src ,content: @content1, url: params[:spiderUrl]} }
+    end  
   end
   
   def storeSpiderUrlsAnemone
@@ -220,9 +209,6 @@ end
   
   def show
     @identity = Identity.find(params[:id])
-    respond_to do |format|
-      format.html 
-      format.json { render json: @identity }
-    end
+    respond_with(@identity, :success => :success)
   end  
 end

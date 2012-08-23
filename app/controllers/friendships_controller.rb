@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
- 
+ respond_to :json
 
  before_filter :get_friend
  
@@ -20,6 +20,14 @@ class FriendshipsController < ApplicationController
       end
 end
 
+  def create
+   @friendship = Friendship.new(params[:friendship])
+   if @friendship.save
+    respond_with(@friendship)
+   else
+    respond_with(500)
+   end
+  end
  
   
  def friend_photos
@@ -97,18 +105,24 @@ puts "******** all albums -----------------------------------------------------"
  end
   
 def add_friend
-   @friendship = current_user1.friendships.build(:friend_id => @friend.id) unless @friend.nil? and current_user1.friendships.nil?
-   user = User.find(@friend)
-   session[:friend_id] = user.id
-   @friendship.name = user.name
- 
-   if !@friendship.nil? and @friendship.save
-      flash[:notice] = "Added friend"
-     else
-       flash[:error] = "Error occurred when adding friend."
+   @friendship = Friendship.new(params[:friendship])
+   if @friendship.save
+    respond_with(@friendship, 200)
+   else
+    respond_with(500)
    end
-   redirect_to root_url
- end
+   #@friendship = current_user1.friendships.build(:friend_id => @friend.id) unless @friend.nil? and current_user1.friendships.nil?
+   #user = User.find(@friend)
+   #session[:friend_id] = user.id
+   #@friendship.name = user.name
+ 
+   #if !@friendship.nil? and @friendship.save
+   #   flash[:notice] = "Added friend"
+   #  else
+   #    flash[:error] = "Error occurred when adding friend."
+   #end
+   #redirect_to root_url
+end
  
 def save_friend
 

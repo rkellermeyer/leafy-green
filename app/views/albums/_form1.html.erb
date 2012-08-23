@@ -1,25 +1,15 @@
- <%= form_for album, :html => {:onsubmit => "createAlbumFormSubmit(this);return false;"}   do |f| %>
-<%= f.hidden_field :identity_id ,:value=>current_user1.id%>
-  
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </div>
-      <div class="field">
-    <%= f.label :visibletype %><br />
-       <%= f.select(:visibletype, Album::CONSTANT, {}, {:onchange => 'showuserstoselect(this.value)'}) %>
-  </div>
-    
-  <div class="field">
-  	<div id="selectvalidusers" style="display: none;">
-  	</div>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_for album do |f| %>
+  <%= f.hidden_field :identity_id ,:value=> 1%>
+  <%= f.text_field :name, :placeholder => "Trip Destination" %><br />
+  <%= f.text_field :caption, :placeholder => "Caption" %><br />
+  <%= f.select(:visibletype, Album::CONSTANT, {}, {:onchange => 'showuserstoselect(this.value)'}) %>
+  <div id="selectvalidusers" style="display: none;"></div>
+  <button type="button">Create Album</button>
 <% end %>
+<script>
+  $('#new_album button').click(function(event){
+    var obj = $('#new_album');
+    event.preventDefault();
+    GC.Album.create(obj);
+  });
+</script>

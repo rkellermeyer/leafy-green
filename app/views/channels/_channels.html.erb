@@ -1,15 +1,6 @@
-Channels<hr/>
-
-
 <ul id="channellist">
-<% channels.each do |channel| %>
-
-<li><%= channel.name %></li>
- 
- 
-  
-<% end %>
+  <li class="listHeading">Conversations</li>
+  <% channels.each do |channel| %>
+    <li><%= channel.name %></li>
+  <% end %>
 </ul>
-
-<br />
-
